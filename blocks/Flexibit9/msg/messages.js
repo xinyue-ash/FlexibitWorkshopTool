@@ -17,7 +17,7 @@ goog.require('Blockly.Msg.en');
  */
 
 /// Toolbox category name
-Blockly.Msg.BLOCKS_PRESETS_CATEGORY = 'PreSets';
+Blockly.Msg.BLOCKS_Flexibit9_CATEGORY = 'Flexibit9';
 
 Blockly.Msg.BREATHING_SPD = "Breathing Speed";
 Blockly.Msg.BREATHING_SPD_TOOLTIP = "Sets the breathing speed.";

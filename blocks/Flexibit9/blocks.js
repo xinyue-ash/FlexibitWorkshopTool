@@ -6,34 +6,12 @@
 /**
  * @fileoverview Ardublockly JavaScript for the Blockly resources and bindings.
  */
-// 'use strict';
 
-// goog.provide('Blockly.Blocks.presets');
-
-// goog.require('Blockly.Blocks');
-
-
-// Blockly.Blocks.presets.HUE = 60;
-
-
-
-// Blockly.Blocks['breathing_spd'] = {
-//   /**
-//    * Block for writing an angle value into a servo pin.
-//    * @this Blockly.Block
-//    */
-//   init: function () {
-//     this.setHelpUrl('http://arduino.cc/en/Reference/ServoWrite');
-//     this.setColour(Blockly.Blocks.presets.HUE);
-//     this.appendDummyInput()
-//       .appendField("hello")
-
-//   }
-// }
 
 goog.provide('Blockly.Constants.servo');
 
 goog.require('Blockly.Blocks');
+goog.require('Blockly.Types');
 goog.require('Blockly');
 
 var servoMediaFolder = "./blocklyduino/blocks/servo/";
@@ -55,7 +33,7 @@ var pinDropdownOptions = [
 //       .appendField(Blockly.Msg.SERVO_PIN)
 //       .appendField(new Blockly.FieldDropdown(pinDropdownOptions), "PIN");
 //     this.appendValueInput("DEGREE")
-//       .setCheck(intCompatibility)
+      // .setCheck(intCompatibility)
 //       .setAlign(Blockly.ALIGN_RIGHT)
 //       .appendField(Blockly.Msg.SERVO_MOVE_DEGREE);
 //     this.setPreviousStatement(true, null);
@@ -84,26 +62,35 @@ var pinDropdownOptions = [
 Blockly.Blocks['breathing_spd'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(Blockly.Msg.SERVO_PIN)
-      .appendField(new Blockly.FieldDropdown(pinDropdownOptions), "PIN");
+      .appendField("Flexibit-9")
+      // .appendField(new Blockly.FieldDropdown(pinDropdownOptions), "PIN");
     this.appendDummyInput()
-      .appendField("Breathing")
-      .appendField("Speed")
+      .appendField("Breathes")
       .appendField(new Blockly.FieldDropdown([
         ["slow", "SLOW"],
         ["fast", "FAST"]
       ]), "SPEED");
+    this.setInputsInline(false);
     this.appendDummyInput()
-      .appendField("Breathing")
-      .appendField("Amplitude")
+      .appendField("and")
       .appendField(new Blockly.FieldDropdown([
         ["deep", "DEEP"],
         ["shallow", "SHALLOW"]
       ]), "AMP");
+    this.setInputsInline(false);
+    
+    this.appendValueInput('DURATION')
+      .appendField("For")
+      .setCheck(Blockly.Types.NUMBER.checkList);
+    this.setInputsInline(true);
+    this.appendDummyInput()
+      .appendField("seconds");
+    
+
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip();
-    this.setHelpUrl();
+    // this.setTooltip();
+    // this.setHelpUrl();
     
   }
 };
