@@ -58,24 +58,29 @@ Ardublockly.bindActionFunctions = function() {
     Ardublockly.openSettings();
     $('.button-collapse').sideNav('hide');
   });
-  Ardublockly.bindClick_('menu_example_1', function() {
-    Ardublockly.loadServerXmlFile('../examples/blink.xml');
-    $('.button-collapse').sideNav('hide');
-  });
-  Ardublockly.bindClick_('menu_example_2', function() {
-    Ardublockly.loadServerXmlFile('../examples/serial_print_ascii.xml');
-    $('.button-collapse').sideNav('hide');
-  });
-  Ardublockly.bindClick_('menu_example_3', function() {
-    Ardublockly.loadServerXmlFile('../examples/serial_repeat_game.xml');
-    $('.button-collapse').sideNav('hide');
-  });
-  Ardublockly.bindClick_('menu_example_4', function() {
-    Ardublockly.loadServerXmlFile('../examples/servo_knob.xml');
-    $('.button-collapse').sideNav('hide');
-  });
-  Ardublockly.bindClick_('menu_example_5', function() {
-    Ardublockly.loadServerXmlFile('../examples/stepper_knob.xml');
+  // Ardublockly.bindClick_('menu_example_1', function() {
+  //   Ardublockly.loadServerXmlFile('../examples/blink.xml');
+  //   $('.button-collapse').sideNav('hide');
+  // });
+  // Ardublockly.bindClick_('menu_example_2', function() {
+  //   Ardublockly.loadServerXmlFile('../examples/serial_print_ascii.xml');
+  //   $('.button-collapse').sideNav('hide');
+  // });
+  // Ardublockly.bindClick_('menu_example_3', function() {
+  //   Ardublockly.loadServerXmlFile('../examples/serial_repeat_game.xml');
+  //   $('.button-collapse').sideNav('hide');
+  // });
+  // Ardublockly.bindClick_('menu_example_4', function() {
+  //   Ardublockly.loadServerXmlFile('../examples/servo_knob.xml');
+  //   $('.button-collapse').sideNav('hide');
+  // });
+  // Ardublockly.bindClick_('menu_example_5', function() {
+  //   Ardublockly.loadServerXmlFile('../examples/stepper_knob.xml');
+  //   $('.button-collapse').sideNav('hide');
+  // });
+
+  Ardublockly.bindClick_('menu_example_1', function () {
+    Ardublockly.loadServerXmlFile('../examples/slow1fast5.xml');
     $('.button-collapse').sideNav('hide');
   });
 

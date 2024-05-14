@@ -221,12 +221,12 @@ var getExamplesMenuData = function() {
         label: 'Examples',
         submenu: [
             {
-                label: 'Blinky',
+                label: 'slow1fast5',
                 click: function() {
                      BrowserWindow.getFocusedWindow().webContents
                         .executeJavaScript(
                             'Ardublockly.loadServerXmlFile("../examples/' +
-                            'blink.xml");');
+                            'slow1fast5.xml");');
                 }
             }, {
                 label: 'Serial Print',

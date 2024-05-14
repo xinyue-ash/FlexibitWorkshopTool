@@ -1,0 +1,22 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="breathing_spd" id="+qK%59~vY}mB7N,`bi!y" x="85" y="97">
+    <field name="SPEED">SLOW</field>
+    <field name="AMP">DEEP</field>
+    <value name="DURATION">
+      <block type="math_number" id="bq=-ZuaX[,[Z4t)U`c#7">
+        <field name="NUM">10</field>
+      </block>
+    </value>
+    <next>
+      <block type="breathing_spd" id="Ck_%Rkg[aG`s-A/tu%XM">
+        <field name="SPEED">FAST</field>
+        <field name="AMP">SHALLOW</field>
+        <value name="DURATION">
+          <block type="math_number" id="7NFf*7D[LXcZ4.[L]j#J">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>
