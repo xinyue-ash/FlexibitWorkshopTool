@@ -1,5 +1,5 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="breathing_spd" id="+qK%59~vY}mB7N,`bi!y" x="85" y="97">
+  <block type="breathing_spd_angle" id="+qK%59~vY}mB7N,`bi!y" x="85" y="97">
     <field name="SPEED">SLOW</field>
     <field name="AMP">DEEP</field>
     <value name="DURATION">
@@ -8,7 +8,7 @@
       </block>
     </value>
     <next>
-      <block type="breathing_spd" id="Ck_%Rkg[aG`s-A/tu%XM">
+      <block type="breathing_spd_angle" id="Ck_%Rkg[aG`s-A/tu%XM">
         <field name="SPEED">FAST</field>
         <field name="AMP">SHALLOW</field>
         <value name="DURATION">

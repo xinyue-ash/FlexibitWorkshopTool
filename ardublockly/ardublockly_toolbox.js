@@ -232,14 +232,42 @@ Ardublockly.TOOLBOX_XML =
     // '    <block type="spi_transfer_return"></block>' +
     // '  </category>' +
     +
-    '<category id="Flexibit9" name="Flexibit9">' +
-    '   <block type=\"breathing_spd\">'+
+'<category id="Flexibit9" name="Flexibit9">' +
+    
+    '   <block type =\"breathing_spd_angle\">' +
     '      <value name="DURATION">' +
     '        <block type="math_number">' +
     '          <field name="NUM">60</field>' +
     '        </block>' +
     '      </value>' +
+    '   </block > ' +
     
-    '</block > ' +
+    '   <block type=\"breathing_spd_angle_cycle\">' +
+    '      <value name="CYCLES">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">5</field>' +
+    '        </block>' +
+    '      </value>' +
+'   </block > ' +
+    
+    '   <block type="breathing_interval_angle_cycle">' +
+    '      <value name="INTERVAL">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">5</field>' +
+    '        </block>' +
+    '      </value>' +
+    '      <value name="DEGREE">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">90</field>' +
+    '        </block>' +
+    '      </value>' +
+    '      <value name="CYCLES">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">5</field>' +
+    '        </block>' +
+    '      </value>' +
+
+    '   </block > ' +
+
     '</category>' +
     '</xml>';

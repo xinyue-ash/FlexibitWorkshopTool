@@ -58,13 +58,40 @@
             "toolboxName": "Flexibit9",
             "toolbox": [
                 "<category id=\"Flexibit9\" name=\"Flexibit9\">",
-                "   <block type=\"breathing_spd\">",
+
+                "   <block type=\"breathing_spd_angle_angle\">",
                 "       <value name=\"DURATION\">",
                 "             <block type=\"math_number\">",
                 "               <field name=\"NUM\">60</field> ",
                 "            </block>",
                 "       </value>",
                 "   </block>",
+
+                "   <block type=\"breathing_spd_angle_cycle\">",
+                "       <value name=\"DURATION\">",
+                "             <block type=\"math_number\">",
+                "               <field name=\"NUM\">60</field> ",
+                "            </block>",
+                "       </value>",
+                "</block>",
+
+                " <block type=\"breathing_interval_angle_cycle\">",
+                "       <value name=\"INTERVAL\">",
+                "             <block type=\"math_number\">",
+                "               <field name=\"NUM\">5</field> ",
+                "            </block>",
+                "       </value>",
+                "       <value name=\"DEGREE\">",
+                "             <block type=\"math_number\">",
+                "               <field name=\"NUM\">90</field> ",
+                "            </block>",
+                "       </value>",
+                "       <value name=\"CYCLES\">",
+                "             <block type=\"math_number\">",
+                "               <field name=\"NUM\">5</field> ",
+                "            </block>",
+                "       </value>",
+                "</block>",
                 "</category>"
             ]
         }
