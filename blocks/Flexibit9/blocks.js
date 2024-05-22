@@ -173,3 +173,26 @@ Blockly.Blocks['breathing_interval_angle_cycle'] = {
 
   }
 };
+
+
+Blockly.Blocks['shake'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("Flexibit-9 Shake");
+    
+    
+    this.input
+    this.appendValueInput('CYCLES')
+      .appendField("For")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+
+      .setAlign(Blockly.ALIGN_RIGHT);
+
+    this.appendDummyInput().appendField("times").setAlign(Blockly.ALIGN_RIGHT);
+    this.setPreviousStatement(true, null); // able to attech to a block before
+    this.setNextStatement(true, null); // able to attech a block after 
+    // this.setTooltip();
+    // this.setHelpUrl();
+
+  }
+};

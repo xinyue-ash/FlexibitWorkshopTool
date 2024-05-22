@@ -116,3 +116,37 @@ Blockly.Arduino['breathing_interval_angle_cycle'] = function (block) {
 
 };
 
+
+Blockly.Arduino['shake'] = function (block) {
+  // var dropdown_pin = block.getFieldValue('PIN');
+  // var delayTime = Blockly.Arduino.valueToCode(
+  //   block, 'INTERVAL', Blockly.Arduino.ORDER_ATOMIC) || '5';
+  // var angle = Blockly.Arduino.valueToCode(
+  //   block, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC) || '90';
+  var cycles = Blockly.Arduino.valueToCode(
+    block, 'CYCLES', Blockly.Arduino.ORDER_ATOMIC) || '5'
+
+  // set up servo
+  Blockly.Arduino.includes_['includes_servo'] = '#include <Servo.h>';
+  Blockly.Arduino.definitions_['var_servo' + dropdown_pin] = 'Servo servo_' + dropdown_pin + ';';
+  Blockly.Arduino.setups_['setup_servo_' + dropdown_pin] = 'servo_' + dropdown_pin + '.attach(' + dropdown_pin + ');\n' + 'servo_' + dropdown_pin + '.write(90);' + 'delay(2000);';
+  
+
+
+  //in loop()
+  var code = 'for (int c = 0; c < ' + cycles + '; c++) {\n' +
+    '  for (int pos = 0; pos <=  30 ; pos++) { ' + 
+    '    servo_' + dropdown_pin + '.write(pos);\n' +
+    '    delay(3);\n' +
+    '  }\n' +
+    '  for (int pos = 30;pos >= 0; pos--) { \n' +
+    '    servo_' + dropdown_pin + '.write(pos);\n' +
+    '    delay(3);\n' +
+    '  }\n' +
+    
+    '}\n' +
+    'servo_' + dropdown_pin +'.detach();\n' 
+  return code;
+
+};
+

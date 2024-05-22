@@ -35,7 +35,15 @@
         "               <field name=\"NUM\">90</field> ",
         "            </block>",
         "       </value>",
-        
+
+        "       <value name=\"CYCLES\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">5</field> ",
+        "            </block>",
+        "       </value>",
+        "</block>",
+
+        "<block type=\"shake\">",
         "       <value name=\"CYCLES\">",
         "             <block type=\"math_number\">",
         "               <field name=\"NUM\">5</field> ",

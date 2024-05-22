@@ -267,7 +267,15 @@ Ardublockly.TOOLBOX_XML =
     '        </block>' +
     '      </value>' +
 
-    '   </block > ' +
+'   </block > ' +
+'   <block type="shake">' +
+'      <value name="CYCLES">' +
+'        <block type="math_number">' +
+'          <field name="NUM">5</field>' +
+'        </block>' +
+'      </value>' +
+
+'   </block > ' +
 
     '</category>' +
     '</xml>';
