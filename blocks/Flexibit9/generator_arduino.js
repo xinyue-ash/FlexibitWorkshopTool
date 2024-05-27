@@ -51,3 +51,13 @@ Blockly.Arduino['breathing_spd'] = function (block) {
 
 };
 
+Blockly.Arduino['time_delay'] = function(block) {
+  var delayTime = Blockly.Arduino.valueToCode(
+      block, 'DELAY_TIME_MILI', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var code = 'delay(' + delayTime + ');\n';
+  return code;
+};
+
+Blockly.Arduino['infinite_loop'] = function(block) {
+  return 'while(true);\n';
+};
