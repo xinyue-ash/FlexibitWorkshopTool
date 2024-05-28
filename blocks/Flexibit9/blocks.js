@@ -176,18 +176,18 @@ Blockly.Blocks['asymmetric'] = {
 
     this.appendValueInput("INTERVAL")
       .appendField("Interval [fast (5) ~ slow (120)]: ")
-      .setCheck(Blockly.Types.NUMBER.checkList);
+      .setCheck(Blockly.Types.NUMBER.checkList).setAlign(Blockly.ALIGN_RIGHT);
 
 
     this.appendValueInput('DEGREELR')
       .appendField("left to right angle : from 0 to ")
-      .setCheck(Blockly.Types.NUMBER.checkList);
-    this.appendDummyInput().appendField("degrees").setAlign(Blockly.ALIGN_RIGHT);
+      .setCheck(Blockly.Types.NUMBER.checkList).setAlign(Blockly.ALIGN_RIGHT);
+    this.appendDummyInput().appendField("degrees (max 180)").setAlign(Blockly.ALIGN_RIGHT);
     
     this.appendValueInput('DEGREERL')
       .appendField("then move right to left for")
-      .setCheck(Blockly.Types.NUMBER.checkList);
-    this.appendDummyInput().appendField("degrees").setAlign(Blockly.ALIGN_RIGHT);
+      .setCheck(Blockly.Types.NUMBER.checkList).setAlign(Blockly.ALIGN_RIGHT);
+    this.appendDummyInput().appendField("degrees (max: your input for left to right)").setAlign(Blockly.ALIGN_RIGHT);
     // this.setInputsInline(true);
 
 
