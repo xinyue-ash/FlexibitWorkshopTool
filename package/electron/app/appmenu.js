@@ -221,6 +221,15 @@ var getExamplesMenuData = function() {
         label: 'Examples',
         submenu: [
             {
+                label: 'Dance',
+                click: function () {
+                    BrowserWindow.getFocusedWindow().webContents
+                        .executeJavaScript(
+                            'Ardublockly.loadServerXmlFile("../examples/' +
+                            'Dance.xml");');
+                }
+            }
+            {
                 label: 'slow1fast5',
                 click: function() {
                      BrowserWindow.getFocusedWindow().webContents

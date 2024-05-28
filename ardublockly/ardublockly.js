@@ -84,6 +84,11 @@ Ardublockly.bindActionFunctions = function() {
     $('.button-collapse').sideNav('hide');
   });
 
+  Ardublockly.bindClick_('menu_example_2', function() {
+    Ardublockly.loadServerXmlFile('../examples/Dance.xml');
+    $('.button-collapse').sideNav('hide');
+  });
+
   // Floating buttons
   Ardublockly.bindClick_('button_ide_large', function() {
     Ardublockly.ideButtonLargeAction();

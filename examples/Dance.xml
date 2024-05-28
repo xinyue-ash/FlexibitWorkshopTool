@@ -1,0 +1,79 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="breathing_interval_angle_cycle" id="gsfweiSqeL~~@l.ERdQ," x="91" y="41">
+    <value name="INTERVAL">
+      <block type="math_number" id=")iTJnQ2s_pScYFoK7oI+">
+        <field name="NUM">5</field>
+      </block>
+    </value>
+    <value name="DEGREE">
+      <block type="math_number" id="OPxUjWEK8#sEbI21:%Y{">
+        <field name="NUM">90</field>
+      </block>
+    </value>
+    <value name="CYCLES">
+      <block type="math_number" id="Q5cP#!@^Aq9K[DX7cq@o">
+        <field name="NUM">3</field>
+      </block>
+    </value>
+    <next>
+      <block type="asymmetric" id="0Xza*[j)[?QtdLx`.qJf">
+        <value name="INTERVAL">
+          <block type="math_number" id="bE/59D%i,|jrh:ikEN_u">
+            <field name="NUM">9</field>
+          </block>
+        </value>
+        <value name="DEGREELR">
+          <block type="math_number" id="VkHh!~f~k/Fk=1y]9}S5">
+            <field name="NUM">120</field>
+          </block>
+        </value>
+        <value name="DEGREERL">
+          <block type="math_number" id="H68s9c{ZblEzP#kZfI6f">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+        <value name="CYCLES">
+          <block type="math_number" id="mB[l*]_titE0%nl-3?f`">
+            <field name="NUM">3</field>
+          </block>
+        </value>
+        <next>
+          <block type="time_delay" id="j!9xTC(lxijfw[,7xffI">
+            <value name="DELAY_TIME_MILI">
+              <block type="math_number" id="*p8`-?_U5RIDm,kY7I!X">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+            <next>
+              <block type="asymmetric" id=")Eh4`_c::{br(DOwYC}M">
+                <value name="INTERVAL">
+                  <block type="math_number" id="E(TqfrwF7,31!3dgrp@n">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+                <value name="DEGREELR">
+                  <block type="math_number" id="@5SwD;mfr3B#hm[{iM2=">
+                    <field name="NUM">30</field>
+                  </block>
+                </value>
+                <value name="DEGREERL">
+                  <block type="math_number" id="Vvzju*|]B4*,PFl`|dZP">
+                    <field name="NUM">10</field>
+                  </block>
+                </value>
+                <value name="CYCLES">
+                  <block type="math_number" id="Zz5+yY{j7D-J|/|+P2Q[">
+                    <field name="NUM">4</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="infinite_loop" id="VUksU.8huaK}6^KR2Gta"></block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
