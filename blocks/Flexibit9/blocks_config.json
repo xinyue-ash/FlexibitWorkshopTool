@@ -1,6 +1,6 @@
 {
     "categoryName": "Flexibit9",
-    "description": "Test blocks to demonstrate this feature.",
+    "description": "Behavior blocks for Flexibit connect to pin9",
     "languages": [
         "en"
     ],
@@ -50,15 +50,30 @@
         "            </block>",
         "       </value>",
         "</block>",
-        "<block type=\"time_delay\">",
-        "   <value name=\"DELAY_TIME_MILLI\">",
-        "       <block type=\"math_number\">",
-        "           <field name=\"NUM\">1000</field>",
-        "       </block",
-        "   </value>",
+
+        " <block type=\"asymmetric\">",
+        "       <value name=\"INTERVAL\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">5</field> ",
+        "            </block>",
+        "       </value>",
+        "       <value name=\"DEGREELR\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">90</field> ",
+        "            </block>",
+        "       </value>",
+        "       <value name=\"DEGREERL\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">30</field> ",
+        "            </block>",
+        "       </value>",
+        "       <value name=\"CYCLES\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">5</field> ",
+        "            </block>",
+        "       </value>",
         "</block>",
-        "<block type=\"infinite_loop\">",
-        "</block>",
+
 
 
         "</category>"
