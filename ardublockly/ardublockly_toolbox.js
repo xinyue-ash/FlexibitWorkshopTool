@@ -4,7 +4,7 @@
  *
  * @fileoverview XML toolbox embedded into a JavaScript text string.
  */
-'use strict';
+"use strict";
 
 /** Create a namespace for the application. */
 var Ardublockly = Ardublockly || {};
@@ -231,9 +231,8 @@ Ardublockly.TOOLBOX_XML =
     // '    <block type="spi_transfer"></block>' +
     // '    <block type="spi_transfer_return"></block>' +
     // '  </category>' +
-    +
 '<category id="Flexibit9" name="Flexibit9">' +
-    
+
     '   <block type =\"breathing_spd_angle\">' +
     '      <value name="DURATION">' +
     '        <block type="math_number">' +
@@ -241,15 +240,15 @@ Ardublockly.TOOLBOX_XML =
     '        </block>' +
     '      </value>' +
     '   </block > ' +
-    
+
     '   <block type=\"breathing_spd_angle_cycle\">' +
     '      <value name="CYCLES">' +
     '        <block type="math_number">' +
     '          <field name="NUM">5</field>' +
     '        </block>' +
     '      </value>' +
-'   </block > ' +
-    
+    '   </block > ' +
+
     '   <block type="breathing_interval_angle_cycle">' +
     '      <value name="INTERVAL">' +
     '        <block type="math_number">' +
@@ -267,15 +266,21 @@ Ardublockly.TOOLBOX_XML =
     '        </block>' +
     '      </value>' +
 
-'   </block > ' +
-'   <block type="shake">' +
-'      <value name="CYCLES">' +
-'        <block type="math_number">' +
-'          <field name="NUM">5</field>' +
-'        </block>' +
-'      </value>' +
+    '   </block > ' +
+    '   <block type="shake">' +
+    '      <value name="CYCLES">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">5</field>' +
+    '        </block>' +
+    '      </value>' +
 
-'   </block > ' +
-
-    '</category>' +
+    '   </block > ' +
+    '<block type="time_delay">' +
+    '      <value name="DELAY_TIME_MILI">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">1000</field>' +
+    '        </block>' +
+    '      </value>' +
+    '    </block>' +
+    '    <block type="infinite_loop"></block>' +
     '</xml>';
