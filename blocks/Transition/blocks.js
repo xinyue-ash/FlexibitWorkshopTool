@@ -32,7 +32,6 @@ Blockly.Blocks['time_delay'] = {
 Blockly.Blocks['infinite_loop'] = {
   /**
    * Waits forever, end of program.
-   * @this Blockly.Block
    */
   init: function() {
     this.appendDummyInput()
@@ -43,19 +42,14 @@ Blockly.Blocks['infinite_loop'] = {
   }
 };
 
-// Blockly.Blocks['resting_state'] = {
-//   init: function() {
-//     this.appendDummyInput()
-//         .appendField("Rest for");
-//     this.appendDummyInput()
-//         .appendField(new Blockly.FieldNumber(30, 0, 120), "DURATION");
-//     this.appendDummyInput()
-//         .appendField("seconds");
-//     this.setInputsInline(true);
-//     this.setPreviousStatement(true, null);
-//     this.setNextStatement(true, null);
-//     this.setColour(210);
-//  this.setTooltip("No behavior, flexibit is idle");
-//  this.setHelpUrl("");
-//   }
-// };
+Blockly.Blocks['repeat_loop'] = {
+  /**
+   * Empty block to indicate loop cycling
+   */
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Repeat loop infinitely");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+  }
+};

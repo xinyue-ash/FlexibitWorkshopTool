@@ -17,7 +17,8 @@
         "</block>",
         "<block type=\"infinite_loop\">",
         "</block>",
-
+        "<block type=\"repeat_loop\">",
+        "</block>",
 
         "</category>"
     ]

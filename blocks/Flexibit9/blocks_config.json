@@ -73,6 +73,14 @@
         "            </block>",
         "       </value>",
         "</block>",
+        
+        "   <block type=\"heartbeat\">",
+        "       <value name=\"DURATION\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">10</field> ",
+        "            </block>",
+        "       </value>",
+        "</block>",
 
 
 

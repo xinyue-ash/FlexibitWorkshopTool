@@ -23,3 +23,7 @@ Blockly.Arduino['time_delay'] = function(block) {
 Blockly.Arduino['infinite_loop'] = function(block) {
   return 'while(true);\n';
 };
+
+Blockly.Arduino['repeat_loop'] = function(block) {
+  return;
+};

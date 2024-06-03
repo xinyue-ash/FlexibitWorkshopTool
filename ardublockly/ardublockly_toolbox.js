@@ -298,7 +298,14 @@ Ardublockly.TOOLBOX_XML =
 '        </block>' +
 '      </value>' +
 '   </block > ' +
-'  </category>' +
+'   <block type ="heartbeat">' +
+    '      <value name="DURATION">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">10</field>' +
+    '        </block>' +
+    '      </value>' +
+    '   </block > ' +
+    '  </category>' +
     
 '   <category id="Transition" name="Transition">' +
 '       <block type="time_delay">' +
@@ -308,6 +315,6 @@ Ardublockly.TOOLBOX_XML =
 '               </block>' +
 '           </value>' +
 '       </block>' +
-'       <block type="infinite_loop"></block>' +
+'       <block type="infinite_loop"/>' +
 '   </category > ' +
     '</xml>';
