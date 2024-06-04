@@ -202,7 +202,7 @@ Blockly.Blocks['asymmetric'] = {
       .appendField("Asymmetric Servo Movement");
 
     this.appendValueInput("INTERVAL")
-      .appendField("Speed (1-10):")
+      .appendField("Speed (fast 1 - slow 10): ")
       .setCheck(Blockly.Types.NUMBER.checkList)
       .setAlign(Blockly.ALIGN_RIGHT);
     this.setTooltip("Choose a speed level from 1 (fast) to 10 (slow).");
