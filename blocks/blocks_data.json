@@ -89,6 +89,7 @@
         "            </block>",
         "       </value>",
         "</block>",
+        
         "   <block type=\"heartbeat\">",
         "       <value name=\"DURATION\">",
         "             <block type=\"math_number\">",

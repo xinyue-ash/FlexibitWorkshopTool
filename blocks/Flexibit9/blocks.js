@@ -151,49 +151,99 @@ Blockly.Blocks["shake"] = {
   },
 };
 
-Blockly.Blocks["asymmetric"] = {
+// Blockly.Blocks["asymmetric"] = {
+//   init: function () {
+//     this.appendDummyInput().appendField("Flexibit-9 asymmetric movement");
+
+//     this.setInputsInline(false);
+
+//     this.appendDummyInput().appendField(" ");
+
+//     this.appendValueInput("INTERVAL")
+//       .appendField("Interval [fast (5) ~ slow (120)]: ")
+//       .setCheck(Blockly.Types.NUMBER.checkList)
+//       .setAlign(Blockly.ALIGN_RIGHT);
+
+//     this.appendValueInput("DEGREELR")
+//       .appendField("left to right angle : from 0 to ")
+//       .setCheck(Blockly.Types.NUMBER.checkList)
+//       .setAlign(Blockly.ALIGN_RIGHT);
+//     this.appendDummyInput()
+//       .appendField("degrees (max 180)")
+//       .setAlign(Blockly.ALIGN_RIGHT);
+
+//     this.appendValueInput("DEGREERL")
+//       .appendField("then move right to left for")
+//       .setCheck(Blockly.Types.NUMBER.checkList)
+//       .setAlign(Blockly.ALIGN_RIGHT);
+//     this.appendDummyInput()
+//       .appendField("degrees (max: your input for left to right)")
+//       .setAlign(Blockly.ALIGN_RIGHT);
+//     // this.setInputsInline(true);
+
+//     this.appendValueInput("CYCLES")
+//       .appendField("For")
+//       .setCheck(Blockly.Types.NUMBER.checkList)
+
+//       .setAlign(Blockly.ALIGN_RIGHT);
+
+//     this.appendDummyInput().appendField("times").setAlign(Blockly.ALIGN_RIGHT);
+
+//     this.setPreviousStatement(true, null); // able to attech to a block before
+//     this.setNextStatement(true, null); // able to attech a block after
+//     // this.setTooltip();
+//     // this.setHelpUrl();
+//   },
+// };
+
+Blockly.Blocks['asymmetric'] = {
   init: function () {
-    this.appendDummyInput().appendField("Flexibit-9 asymmetric movement");
-
-    this.setInputsInline(false);
-
-    this.appendDummyInput().appendField(" ");
+    this.appendDummyInput()
+      .appendField("Asymmetric Servo Movement");
 
     this.appendValueInput("INTERVAL")
-      .appendField("Interval [fast (5) ~ slow (120)]: ")
+      .appendField("Speed (1-10):")
       .setCheck(Blockly.Types.NUMBER.checkList)
       .setAlign(Blockly.ALIGN_RIGHT);
+    this.setTooltip("Choose a speed level from 1 (fast) to 10 (slow).");
 
-    this.appendValueInput("DEGREELR")
-      .appendField("left to right angle : from 0 to ")
+    this.appendValueInput("START_LR")
+      .appendField("Start angle left to right (0-180):")
       .setCheck(Blockly.Types.NUMBER.checkList)
       .setAlign(Blockly.ALIGN_RIGHT);
-    this.appendDummyInput()
-      .appendField("degrees (max 180)")
-      .setAlign(Blockly.ALIGN_RIGHT);
+    this.setTooltip("Set the start angle for left to right movement.");
 
-    this.appendValueInput("DEGREERL")
-      .appendField("then move right to left for")
+    this.appendValueInput("END_LR")
+      .appendField("End angle left to right (0-180):")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .setAlign(Blockly.ALIGN_RIGHT)
+    this.setTooltip("Set the end angle for left to right movement.");
+
+    this.appendValueInput("START_RL")
+      .appendField("Start angle right to left (0-180):")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .setAlign(Blockly.ALIGN_RIGHT)
+    this.setTooltip("Set the start angle for right to left movement.");
+
+    this.appendValueInput("END_RL")
+      .appendField("End angle right to left (0-180):")
       .setCheck(Blockly.Types.NUMBER.checkList)
       .setAlign(Blockly.ALIGN_RIGHT);
-    this.appendDummyInput()
-      .appendField("degrees (max: your input for left to right)")
-      .setAlign(Blockly.ALIGN_RIGHT);
-    // this.setInputsInline(true);
+    this.setTooltip("Set the end angle for right to left movement.");
 
     this.appendValueInput("CYCLES")
-      .appendField("For")
+      .appendField("Number of cycles:")
       .setCheck(Blockly.Types.NUMBER.checkList)
-
       .setAlign(Blockly.ALIGN_RIGHT);
+    this
+      .setTooltip("Number of times to repeat the movement.");
 
-    this.appendDummyInput().appendField("times").setAlign(Blockly.ALIGN_RIGHT);
-
-    this.setPreviousStatement(true, null); // able to attech to a block before
-    this.setNextStatement(true, null); // able to attech a block after
-    // this.setTooltip();
-    // this.setHelpUrl();
-  },
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("Configures the servo for asymmetric movement.");
+    this.setHelpUrl("");
+  }
 };
 
 Blockly.Blocks["heartbeat"] = {
@@ -237,5 +287,6 @@ Blockly.Blocks['heartbeat_servo'] = {
     this.setTooltip("");
     this.setHelpUrl("");
   }
+  
 };
 

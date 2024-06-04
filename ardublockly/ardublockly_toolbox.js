@@ -276,18 +276,28 @@ Ardublockly.TOOLBOX_XML =
     '      </value>' +
 
 '   </block > ' +
-'   <block type="asymmetric">' +
+'    <block type="asymmetric">' +
 '      <value name="INTERVAL">' +
 '        <block type="math_number">' +
 '          <field name="NUM">5</field>' +
 '        </block>' +
 '      </value>' +
-'      <value name="DEGREELR">' +
+'      <value name="START_LR">' +
+'        <block type="math_number">' +
+'          <field name="NUM">0</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="END_LR">' +
 '        <block type="math_number">' +
 '          <field name="NUM">90</field>' +
 '        </block>' +
 '      </value>' +
-'      <value name="DEGREERL">' +
+'      <value name="START_RL">' +
+'        <block type="math_number">' +
+'          <field name="NUM">90</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="END_RL">' +
 '        <block type="math_number">' +
 '          <field name="NUM">30</field>' +
 '        </block>' +
@@ -297,7 +307,8 @@ Ardublockly.TOOLBOX_XML =
 '          <field name="NUM">5</field>' +
 '        </block>' +
 '      </value>' +
-'   </block > ' +
+'    </block>' +
+
 '   <block type ="heartbeat">' +
     '      <value name="DURATION">' +
     '        <block type="math_number">' +
