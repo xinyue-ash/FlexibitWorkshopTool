@@ -239,75 +239,119 @@ Blockly.Arduino["shake"] = function (block) {
   return code;
 };
 
-Blockly.Arduino["asymmetric"] = function (block) {
-  // var dropdown_pin = block.getFieldValue('PIN');
-  var delayTime =
-    Blockly.Arduino.valueToCode(
-      block,
-      "INTERVAL",
-      Blockly.Arduino.ORDER_ATOMIC
-    ) || "5";
+// Blockly.Arduino["asymmetric"] = function (block) {
+//   // var dropdown_pin = block.getFieldValue('PIN');
+//   var delayTime =
+//     Blockly.Arduino.valueToCode(
+//       block,
+//       "INTERVAL",
+//       Blockly.Arduino.ORDER_ATOMIC
+//     ) || "5";
 
-  var angle_lr =
-    Blockly.Arduino.valueToCode(
-      block,
-      "DEGREELR",
-      Blockly.Arduino.ORDER_ATOMIC
-    ) || "90"; // angle left to right
+//   var angle_lr =
+//     Blockly.Arduino.valueToCode(
+//       block,
+//       "DEGREELR",
+//       Blockly.Arduino.ORDER_ATOMIC
+//     ) || "90"; // angle left to right
 
-  var angle_rl =
-    Blockly.Arduino.valueToCode(
-      block,
-      "DEGREERL",
-      Blockly.Arduino.ORDER_ATOMIC
-    ) || "0"; // angle right to left
+//   var angle_rl =
+//     Blockly.Arduino.valueToCode(
+//       block,
+//       "DEGREERL",
+//       Blockly.Arduino.ORDER_ATOMIC
+//     ) || "0"; // angle right to left
 
-  var angle_diff = angle_lr - angle_rl;
+//   var angle_diff = angle_lr - angle_rl;
 
-  var cycles =
-    Blockly.Arduino.valueToCode(
-      block,
-      "CYCLES",
-      Blockly.Arduino.ORDER_ATOMIC
-    ) || "5";
+//   var cycles =
+//     Blockly.Arduino.valueToCode(
+//       block,
+//       "CYCLES",
+//       Blockly.Arduino.ORDER_ATOMIC
+//     ) || "5";
 
-  // set up servo
-  Blockly.Arduino.includes_["includes_servo"] = "#include <Servo.h>";
-  Blockly.Arduino.definitions_["var_servo" + dropdown_pin] =
-    "Servo servo_" + dropdown_pin + ";";
+//   // set up servo
+//   Blockly.Arduino.includes_["includes_servo"] = "#include <Servo.h>";
+//   Blockly.Arduino.definitions_["var_servo" + dropdown_pin] =
+//     "Servo servo_" + dropdown_pin + ";";
+//   Blockly.Arduino.setups_["setup_servo_" + dropdown_pin] =
+//     "servo_" + dropdown_pin + ".attach(" + dropdown_pin + ");";
+
+//   //in loop()
+//   var code =
+//     "for (int c = 0; c < " +
+//     cycles +
+//     "; c++) {\n" +
+//     "  for (int pos = 0; pos <= " +
+//     angle_lr +
+//     "; pos++) { // goes from 0 degrees to " +
+//     angle_lr +
+//     " degrees\n" +
+//     "    servo_" +
+//     dropdown_pin +
+//     ".write(pos);\n" +
+//     "    delay(" +
+//     delayTime +
+//     "); // Slow or fast depending on the selection\n" +
+//     "  }\n" +
+//     "  for (int pos = " +
+//     angle_lr +
+//     "; pos >=" +
+//     angle_diff +
+//     "; pos--) { " +
+//     "    servo_" +
+//     dropdown_pin +
+//     ".write(pos);\n" +
+//     "    delay(" +
+//     delayTime +
+//     "); // Slow or fast depending on the selection\n" +
+//     "  }\n" +
+//     "}\n";
+//   return code;
+// };
+
+Blockly.Arduino['asymmetric'] = function (block) {
+  var interval = Blockly.Arduino.valueToCode(block, 'INTERVAL', Blockly.Arduino.ORDER_ATOMIC) || '5';
+  var startLR = Blockly.Arduino.valueToCode(block, 'START_LR', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var endLR = Blockly.Arduino.valueToCode(block, 'END_LR', Blockly.Arduino.ORDER_ATOMIC) || '90';
+  var startRL = Blockly.Arduino.valueToCode(block, 'START_RL', Blockly.Arduino.ORDER_ATOMIC) || '90';
+  var endRL = Blockly.Arduino.valueToCode(block, 'END_RL', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var cycles = Blockly.Arduino.valueToCode(block, 'CYCLES', Blockly.Arduino.ORDER_ATOMIC) || '5';
+
+  interval = Math.min(Math.max(parseInt(interval), 1), 10); // Clamp interval between 1 and 10
+  startLR = Math.min(Math.max(parseInt(startLR), 0), 180); // Clamp startLR between 0 and 180
+  endLR = Math.min(Math.max(parseInt(endLR), 0), 180); // Clamp endLR between 0 and 180
+  startRL = Math.min(Math.max(parseInt(startRL), 0), 180); // Clamp startRL between 0 and 180
+  endRL = Math.min(Math.max(parseInt(endRL), 0), 180); // Clamp endRL between 0 and 180
+
+  Blockly.Arduino.includes_['include_servo'] = '#include <Servo.h>';
+  Blockly.Arduino.definitions_['var_servo'] = 'Servo servo;';
+  // Blockly.Arduino.setups_['setup_servo'] = 'servo.attach(9);';
+
   Blockly.Arduino.setups_["setup_servo_" + dropdown_pin] =
     "servo_" + dropdown_pin + ".attach(" + dropdown_pin + ");";
 
-  //in loop()
-  var code =
-    "for (int c = 0; c < " +
-    cycles +
-    "; c++) {\n" +
-    "  for (int pos = 0; pos <= " +
-    angle_lr +
-    "; pos++) { // goes from 0 degrees to " +
-    angle_lr +
-    " degrees\n" +
-    "    servo_" +
-    dropdown_pin +
-    ".write(pos);\n" +
-    "    delay(" +
-    delayTime +
-    "); // Slow or fast depending on the selection\n" +
-    "  }\n" +
-    "  for (int pos = " +
-    angle_lr +
-    "; pos >=" +
-    angle_diff +
-    "; pos--) { " +
-    "    servo_" +
-    dropdown_pin +
-    ".write(pos);\n" +
-    "    delay(" +
-    delayTime +
-    "); // Slow or fast depending on the selection\n" +
-    "  }\n" +
-    "}\n";
+  var code = '';
+  code += 'for (int c = 0; c < ' + cycles + '; c++) {\n';
+  code += '  for (int pos = ' + startLR + '; pos <= ' + endLR + '; pos++) {\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
+  code += '    delay(' + (interval * 100) + ');\n';
+  code += '  }\n';
+  code += '  for (int pos = ' + endLR + '; pos >= ' + startLR + '; pos--) {\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
+  code += '    delay(' + (interval * 100) + ');\n';
+  code += '  }\n';
+  code += '  for (int pos = ' + startRL + '; pos <= ' + endRL + '; pos++) {\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
+  code += '    delay(' + (interval * 100) + ');\n';
+  code += '  }\n';
+  code += '  for (int pos = ' + endRL + '; pos >= ' + startRL + '; pos--) {\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
+  code += '    delay(' + (interval * 100) + ');\n';
+  code += '  }\n';
+  code += '}\n';
+
   return code;
 };
 
