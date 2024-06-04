@@ -327,24 +327,27 @@ Blockly.Arduino['asymmetric'] = function (block) {
 
   Blockly.Arduino.includes_['include_servo'] = '#include <Servo.h>';
   Blockly.Arduino.definitions_['var_servo'] = 'Servo servo;';
-  Blockly.Arduino.setups_['setup_servo'] = 'servo.attach(9);';
+  // Blockly.Arduino.setups_['setup_servo'] = 'servo.attach(9);';
+
+  Blockly.Arduino.setups_["setup_servo_" + dropdown_pin] =
+    "servo_" + dropdown_pin + ".attach(" + dropdown_pin + ");";
 
   var code = '';
   code += 'for (int c = 0; c < ' + cycles + '; c++) {\n';
   code += '  for (int pos = ' + startLR + '; pos <= ' + endLR + '; pos++) {\n';
-  code += '    servo.write(pos);\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
   code += '    delay(' + (interval * 100) + ');\n';
   code += '  }\n';
   code += '  for (int pos = ' + endLR + '; pos >= ' + startLR + '; pos--) {\n';
-  code += '    servo.write(pos);\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
   code += '    delay(' + (interval * 100) + ');\n';
   code += '  }\n';
   code += '  for (int pos = ' + startRL + '; pos <= ' + endRL + '; pos++) {\n';
-  code += '    servo.write(pos);\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
   code += '    delay(' + (interval * 100) + ');\n';
   code += '  }\n';
   code += '  for (int pos = ' + endRL + '; pos >= ' + startRL + '; pos--) {\n';
-  code += '    servo.write(pos);\n';
+  code += "    servo_" + dropdown_pin + ".write(pos);\n";
   code += '    delay(' + (interval * 100) + ');\n';
   code += '  }\n';
   code += '}\n';
