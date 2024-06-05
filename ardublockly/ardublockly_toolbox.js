@@ -327,5 +327,6 @@ Ardublockly.TOOLBOX_XML =
 '           </value>' +
 '       </block>' +
 '       <block type="infinite_loop"/>' +
+'       <block type="repeat_loop"/>' +
 '   </category > ' +
     '</xml>';
