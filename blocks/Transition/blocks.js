@@ -8,7 +8,6 @@
  */
 
 
-goog.provide('Blockly.Constants.servo');
 
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');

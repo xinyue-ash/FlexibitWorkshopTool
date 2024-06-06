@@ -318,7 +318,7 @@ Ardublockly.TOOLBOX_XML =
     '   </block > ' +
     '  </category>' +
     
-'   <category id="Transition" name="Transition">' +
+'<category id="Transition" name="Transition">' +
 '       <block type="time_delay">' +
 '           <value name="DELAY_TIME_MILI">' +
 '               <block type="math_number">' +
@@ -328,5 +328,5 @@ Ardublockly.TOOLBOX_XML =
 '       </block>' +
 '       <block type="infinite_loop"/>' +
 '       <block type="repeat_loop"/>' +
-'   </category > ' +
+'</category > ' +
     '</xml>';

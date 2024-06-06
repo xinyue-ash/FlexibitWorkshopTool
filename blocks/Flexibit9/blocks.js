@@ -16,13 +16,38 @@ goog.require("Blockly");
 
 var servoMediaFolder = "./blocklyduino/blocks/servo/";
 
-// var pinDropdownOptions = [
-//   ["PIN 1", "1"], ["PIN 2", "2"], ["PIN 3", "3"], ["PIN 4", "4"], ["PIN 5", "5"],
-//   ["PIN 6", "6"], ["PIN 7", "7"], ["PIN 8", "8"], ["PIN 9", "9"], ["PIN 10", "10"],
-//   ["PIN 11", "11"], ["PIN 12", "12"], ["PIN 13", "13"],
-//   ["PIN A0", "A0"], ["PIN A1", "A1"], ["PIN A2", "A2"],
-//   ["PIN A3", "A3"], ["PIN A4", "A4"], ["PIN A5", "A5"]
-// ];
+// Blockly.Blocks["flexibit_select"] = {
+//   init: function () {
+//     this.appendDummyInput()
+//       .appendField("Select Flexibit")
+//       .appendField(
+//         new Blockly.FieldDropdown([
+//           ["Flexibit 1", "1"],
+//           ["Flexibit 2", "2"],
+//           ["Flexibit 3", "3"],
+//           ["Flexibit 4", "4"],
+//           ["Flexibit 5", "5"],
+//           ["Flexibit 6", "6"],
+//           ["Flexibit 7", "7"],
+//           ["Flexibit 8", "8"],
+//           ["Flexibit 9", "9"],
+//           ["Flexibit 10", "10"],
+//           ["Flexibit 11", "11"],
+//           ["Flexibit 12", "12"],
+//           ["Flexibit 13", "13"],
+//         ]),
+//         "FLEXIBIT"
+//       );
+//     this.appendDummyInput().appendField("Action");
+//     this.appendStatementInput("ACTION").setCheck(null);
+//     this.setInputsInline(true);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour(160);
+//     this.setTooltip("Select a Flexibit and define its actions.");
+//     this.setHelpUrl("");
+//   },
+// };
 
 Blockly.Blocks["breathing_spd_angle"] = {
   init: function () {
@@ -151,50 +176,7 @@ Blockly.Blocks["shake"] = {
   },
 };
 
-// Blockly.Blocks["asymmetric"] = {
-//   init: function () {
-//     this.appendDummyInput().appendField("Flexibit-9 asymmetric movement");
 
-//     this.setInputsInline(false);
-
-//     this.appendDummyInput().appendField(" ");
-
-//     this.appendValueInput("INTERVAL")
-//       .appendField("Interval [fast (5) ~ slow (120)]: ")
-//       .setCheck(Blockly.Types.NUMBER.checkList)
-//       .setAlign(Blockly.ALIGN_RIGHT);
-
-//     this.appendValueInput("DEGREELR")
-//       .appendField("left to right angle : from 0 to ")
-//       .setCheck(Blockly.Types.NUMBER.checkList)
-//       .setAlign(Blockly.ALIGN_RIGHT);
-//     this.appendDummyInput()
-//       .appendField("degrees (max 180)")
-//       .setAlign(Blockly.ALIGN_RIGHT);
-
-//     this.appendValueInput("DEGREERL")
-//       .appendField("then move right to left for")
-//       .setCheck(Blockly.Types.NUMBER.checkList)
-//       .setAlign(Blockly.ALIGN_RIGHT);
-//     this.appendDummyInput()
-//       .appendField("degrees (max: your input for left to right)")
-//       .setAlign(Blockly.ALIGN_RIGHT);
-//     // this.setInputsInline(true);
-
-//     this.appendValueInput("CYCLES")
-//       .appendField("For")
-//       .setCheck(Blockly.Types.NUMBER.checkList)
-
-//       .setAlign(Blockly.ALIGN_RIGHT);
-
-//     this.appendDummyInput().appendField("times").setAlign(Blockly.ALIGN_RIGHT);
-
-//     this.setPreviousStatement(true, null); // able to attech to a block before
-//     this.setNextStatement(true, null); // able to attech a block after
-//     // this.setTooltip();
-//     // this.setHelpUrl();
-//   },
-// };
 
 Blockly.Blocks['asymmetric'] = {
   init: function () {

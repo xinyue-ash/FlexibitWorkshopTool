@@ -97,8 +97,19 @@
         "            </block>",
         "       </value>",
         "</block>",
-        "</category>",
-
+        "</category>"
+    
+      ]
+    },
+    "Transition": {
+      "categoryName": "Transition",
+      "description": "Transition between block behavior",
+      "languages": [
+        "en"
+      ],
+      "toolboxName": "Transition",
+      "toolbox": [
+        
         "<category id=\"Transition\" name=\"Transition\">",
         "<block type=\"time_delay\">",
         "   <value name=\"DELAY_TIME_MILLI\">",

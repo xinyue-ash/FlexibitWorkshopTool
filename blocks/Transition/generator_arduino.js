@@ -9,8 +9,6 @@
 'use strict';
 
 goog.provide('Blockly.Arduino.Transition');
-goog.require('Blockly.Arduino.servo');
-
 goog.require('Blockly.Arduino');
 
 Blockly.Arduino['time_delay'] = function(block) {
