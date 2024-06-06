@@ -23,5 +23,5 @@ Blockly.Arduino['infinite_loop'] = function(block) {
 };
 
 Blockly.Arduino['repeat_loop'] = function(block) {
-  return;
+  return '\n';
 };
