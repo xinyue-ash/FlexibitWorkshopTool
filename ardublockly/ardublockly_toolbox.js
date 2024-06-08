@@ -327,6 +327,8 @@ Ardublockly.TOOLBOX_XML =
 '           </value>' +
 '       </block>' +
 '       <block type="infinite_loop"/>' +
+'  <block type=\"multi_servo_control\">' +
+'</block>'+
     
     '</category > ' +
 

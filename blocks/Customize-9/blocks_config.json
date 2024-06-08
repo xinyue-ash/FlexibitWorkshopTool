@@ -19,6 +19,8 @@
         "            </block>",
         "       </value>",
         "   </block>",
+        "  <block type=\"multi_servo_control\">",
+        "  </block>",
         "</category>"
     ]
 }
