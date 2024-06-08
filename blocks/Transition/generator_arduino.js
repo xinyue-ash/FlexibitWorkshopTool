@@ -9,8 +9,6 @@
 'use strict';
 
 goog.provide('Blockly.Arduino.Transition');
-goog.require('Blockly.Arduino.servo');
-
 goog.require('Blockly.Arduino');
 
 Blockly.Arduino['time_delay'] = function(block) {
@@ -25,5 +23,5 @@ Blockly.Arduino['infinite_loop'] = function(block) {
 };
 
 Blockly.Arduino['repeat_loop'] = function(block) {
-  return "/n";
+  return '\n';
 };
