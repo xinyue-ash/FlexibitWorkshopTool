@@ -15,7 +15,7 @@ goog.require("Blockly.Arduino");
 
 var dropdown_pin = 9; // for now 
 
-var currentAngle = 90;
+var currentAngle = 0;
 
 
 // angle + speed block
@@ -31,14 +31,14 @@ Blockly.Arduino["set_servo_angle_speed"] = function (block) {
     "servo_" + dropdown_pin + ".attach(" + dropdown_pin + ");";
 
   Blockly.Arduino.addFunction('setServoPosition', ` void setServoPosition(int angle, int speed) {
-  int increment = (angle > currentAngle) ? 1 : -1;
+  int increment = (angle > ` + currentAngle + `) ? 1 : -1;
   int delayTime = 1000 / speed; 
 
-  for (int pos = currentAngle; pos != angle; pos += increment) {
+  for (int pos = ` + currentAngle + `; pos != angle; pos += increment) {
     servo_` + dropdown_pin + `.write(pos);
     delay(delayTime);
   }
-  currentAngle = angle; // Update the current angle to the target angle}`);
+  ` + currentAngle + ` = angle; // Update the current angle to the target angle}`);
 
   var code = 'setServoPosition(' + angle + ', ' + speed + ');\n';
   return code;
