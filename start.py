@@ -18,6 +18,18 @@ import webbrowser
 
 import ardublocklyserver.server
 import ardublocklyserver.compilersettings
+from flask import Flask, send_from_directory
+
+app = Flask(__name__, static_folder='build')
+
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def static_proxy(path):
+    # Serve the static files from the build directory
+    return send_from_directory(app.static_folder, path)
 
 # Server IP and PORT settings
 SERVER_IP = 'localhost'
@@ -179,6 +191,11 @@ def main():
     ardublocklyserver.server.launch_server(
             ip=SERVER_IP, port=SERVER_PORT, document_root_=server_root)
 
+def start_flask():
+    app.run(host='0.0.0.0', port=8000)
 
 if __name__ == '__main__':
     main()
+    # start flask server
+    start_flask()
+
