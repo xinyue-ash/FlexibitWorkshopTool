@@ -134,7 +134,7 @@ class ServerTestCase(unittest.TestCase):
     #
     def test_static_ardublockly(self):
         """Test the files in /ardublockly can be accessed."""
-        self.helper_test_static_file('build', 'index.html')
+        self.helper_test_static_file('ardublockly', 'index.html')
 
     def test_static_blockly(self):
         """Test the files in /blockly can be accessed."""
@@ -162,7 +162,7 @@ class ServerTestCase(unittest.TestCase):
     def test_index_redirect(self):
         """Test the root of the server redirects to ardublockly/index.html."""
         # Create ardublockly/index.html
-        ardublockly_folder = os.path.join(self.temp_folder, 'build')
+        ardublockly_folder = os.path.join(self.temp_folder, 'ardublockly')
         os.makedirs(ardublockly_folder)
         open(os.path.join(ardublockly_folder, 'index.html'), 'w').close()
 
@@ -194,7 +194,7 @@ class ServerTestCase(unittest.TestCase):
         self.assertTrue(response.history[0].is_redirect)
         self.assertEqual(response.history[0].status_code, 303)
         self.assertEqual(response.history[0].url.rstrip('/'),
-                         self.SERVER_URL + '/build')
+                         self.SERVER_URL + '/ardublockly')
         self.assertEqual(response.headers['content-type'],
                          'text/html; charset=UTF-8')
 

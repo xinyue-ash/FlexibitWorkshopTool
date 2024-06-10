@@ -103,8 +103,8 @@ ardublockly_run.*
 package/ardublocklydocs/site
 
 # Materialize uncompress source
-/build/materialize/materialize_uncompressed.css
-/build/materialize/materialize_uncompressed.js
+/ardublockly/materialize/materialize_uncompressed.css
+/ardublockly/materialize/materialize_uncompressed.js
 
 # The electron package needs the build folder (to be changed in the near future)
 !/package/electron/tasks/build/

@@ -15,7 +15,7 @@ sys.path.insert(0, project_root)
 sys.path.insert(0, local_packages)
 
 # Import required modules, ensures PyInstaller fails if it cannot find them
-import build
+import ardublockly
 import six, configparser, serial, waitress, bottle
 
 
