@@ -1,7 +1,1 @@
 Flask=2.2.5
-mkdocs>=0.15.3
-pyinstaller>=3.2.1
-coverage>=4.3.4
-requests>=2.13.0
-flake8>=3.3.0
-mock>=2.0.0
