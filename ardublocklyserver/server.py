@@ -66,10 +66,10 @@ def set_header_no_cache():
 @app.route('/ardublockly')
 def index_redirect():
     """Redirect the server entry point to the Ardublockly front end."""
-    redirect('/ardublockly/index.html')
+    redirect('/build/index.html')
 
 
-@app.route('/ardublockly/<file_path:path>')
+@app.route('/build/<file_path:path>')
 def static_ardublockly(file_path):
     """Serve the 'ardublockly' folder static files.
 
@@ -77,7 +77,7 @@ def static_ardublockly(file_path):
     :return: Full HTTPResponse for the static file.
     """
     return static_file(file_path,
-                       root=os.path.join(document_root, 'ardublockly'))
+                       root=os.path.join(document_root, 'build'))
 
 
 @app.route('/blockly/<file_path:path>')
