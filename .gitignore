@@ -110,3 +110,4 @@ package/ardublocklydocs/site
 
 !build/blockly/
 !build/blocks/
+!build/js/
