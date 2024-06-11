@@ -297,8 +297,6 @@ Ardublockly.TOOLBOX_XML =
     '       <block type="infinite_loop"/>' +
     '       <block type="repeat_loop"/>' +
 '</category > ' +
-
-
     '   <category id="Customize-9" name="Customize-9">' +
     '      <block type="set_servo_angle_speed">' +
     '       <value name="ANGLE">' +
