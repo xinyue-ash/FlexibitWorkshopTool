@@ -1,0 +1,26 @@
+{
+    "categoryName": "Customization",
+    "description": "Customization blocks, allow seting angle, speed, cycle and asymmetric behavior",
+    "languages": [
+        "en"
+    ],
+    "toolboxName": "Customization",
+    "toolbox": [
+        "<category id=\"Customization\" name=\"Customization\">",
+        "   <block type=\"set_servo_angle_speed\">",
+        "       <value name=\"ANGLE\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">60</field> ",
+        "            </block>",
+        "       </value>",
+        "       <value name=\"SPEED\">",
+        "             <block type=\"math_number\">",
+        "               <field name=\"NUM\">1</field> ",
+        "            </block>",
+        "       </value>",
+        "   </block>",
+        "  <block type=\"multi_servo_control\">",
+        "  </block>",
+        "</category>"
+    ]
+}
