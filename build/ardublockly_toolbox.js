@@ -232,7 +232,7 @@ Ardublockly.TOOLBOX_XML =
     // '    <block type="spi_transfer_return"></block>' +
     // '  </category>' +
     +
-    '<category id="Flexibit9" name="Flexibit9">' +
+    '<category id="Preset Behaviors" name="Preset Behaviors">' +
 
     '   <block type =\"breathing_spd_angle\">' +
     '      <value name="DURATION">' +
@@ -286,7 +286,7 @@ Ardublockly.TOOLBOX_XML =
     '   </block > ' +
     '  </category>' +
 
-    '<category id="Transition" name="Transition">' +
+    '<category id="Transitions" name="Transitions">' +
     '       <block type="time_delay">' +
     '           <value name="DELAY_TIME_MILI">' +
     '               <block type="math_number">' +
@@ -296,36 +296,39 @@ Ardublockly.TOOLBOX_XML =
     '       </block>' +
     '       <block type="infinite_loop"/>' +
     '       <block type="repeat_loop"/>' +
-'</category > ' +
-    '   <category id="Customize-9" name="Customize-9">' +
+    '</category > ' +
+    '   <category id="Customization" name="Customization">' +
     '      <block type="set_servo_angle_speed">' +
     '       <value name="ANGLE">' +
     '             <block type="math_number">' +
     '               <field name="NUM">60</field> ' +
     '            </block>' +
     '       </value>' +
-    '       <value name="SPEED">' + 
+    '       <value name="SPEED">' +
     '             <block type="math_number">' +
     '               <field name="NUM">1</field> ' +
     '            </block>' +
     '       </value>' +
-'   </block>' +
-'    <block type="controls_repeat_ext">' +
-'      <value name="TIMES">' +
-'        <block type="math_number">' +
-'          <field name="NUM">10</field>' +
-'        </block>' +
-'      </value>' +
-'    </block>' +
-'       <block type="time_delay">' +
-'           <value name="DELAY_TIME_MILI">' +
-'               <block type="math_number">' +
-'                   <field name="NUM">5</field>' +
-'               </block>' +
-'           </value>' +
-'       </block>' +
+    '   </block>' +
+    '    <block type="controls_repeat_ext">' +
+    '      <value name="TIMES">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">10</field>' +
+    '        </block>' +
+    '      </value>' +
+    '    </block>' +
+    '       <block type="time_delay">' +
+    '           <value name="DELAY_TIME_MILI">' +
+    '               <block type="math_number">' +
+    '                   <field name="NUM">5</field>' +
+    '               </block>' +
+    '           </value>' +
+    '       </block>' +
 '       <block type="infinite_loop"/>' +
-    
+'       <block type="repeat_loop"/>' +
+    // '   <block type=\"multi_servo_control\">' +
+    // '   </block>' +
+
     '</category > ' +
 
     '</xml>';

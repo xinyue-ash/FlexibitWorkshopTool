@@ -1,12 +1,12 @@
 {
-    "categoryName": "Transition",
+    "categoryName": "Transitions",
     "description": "Transition between block behavior ",
     "languages": [
         "en"
     ],
-    "toolboxName": "Transition",
+    "toolboxName": "Transitions",
     "toolbox": [
-        "<category id=\"Transition\" name=\"Transition\">",
+        "<category id=\"Transitions\" name=\"Transitions\">",
         
         "<block type=\"time_delay\">",
         "   <value name=\"DELAY_TIME_MILLI\">",

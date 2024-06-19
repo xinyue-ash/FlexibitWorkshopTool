@@ -34,7 +34,7 @@ Blockly.Blocks['infinite_loop'] = {
    */
   init: function() {
     this.appendDummyInput()
-        .appendField(Blockly.Msg.ARD_TIME_INF);
+        .appendField("End Whole Program");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setTooltip(Blockly.Msg.ARD_TIME_INF_TIP);
@@ -47,7 +47,7 @@ Blockly.Blocks['repeat_loop'] = {
    */
   init: function() {
     this.appendDummyInput()
-      .appendField("Repeat loop infinitely");
+      .appendField("Repeat previous behavior(s) infinitely");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
   }

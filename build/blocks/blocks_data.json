@@ -1,14 +1,14 @@
 {
   "categories": {
-    
-    "Flexibit9": {
-      "categoryName": "Flexibit9",
+    "Preset Behaviors": {
+      "categoryName": "Preset Behaviors",
       "description": "Test blocks to demonstrate this feature.",
-      "languages": ["en"],
-      "toolboxName": "Flexibit9",
+      "languages": [
+        "en"
+      ],
+      "toolboxName": "Preset Behaviors",
       "toolbox": [
-        "<category id=\"Flexibit9\" name=\"Flexibit9\">",
-
+        "<category id=\"Preset Behaviors\" name=\"Preset Behaviors\">",
         "   <block type=\"breathing_spd_angle_angle\">",
         "       <value name=\"DURATION\">",
         "             <block type=\"math_number\">",
@@ -16,7 +16,6 @@
         "            </block>",
         "       </value>",
         "   </block>",
-
         "   <block type=\"breathing_spd_angle_cycle\">",
         "       <value name=\"DURATION\">",
         "             <block type=\"math_number\">",
@@ -24,7 +23,6 @@
         "            </block>",
         "       </value>",
         "</block>",
-
         " <block type=\"breathing_interval_angle_cycle\">",
         "       <value name=\"INTERVAL\">",
         "             <block type=\"math_number\">",
@@ -49,7 +47,6 @@
         "            </block>",
         "       </value>",
         "</block>",
-        
         "   <block type=\"heartbeat\">",
         "       <value name=\"DURATION\">",
         "             <block type=\"math_number\">",
@@ -60,16 +57,15 @@
         "</category>"
       ]
     },
-
-    "Transition" : {
-      "categoryName": "Transition",
-      "description": "Transition between block behavior ",
+    "Transitions": {
+      "categoryName": "Transitions",
+      "description": "Transitions between block behavior ",
       "languages": [
         "en"
       ],
-      "toolboxName": "Transition",
+      "toolboxName": "Transitions",
       "toolbox": [
-        "<category id=\"Transition\" name=\"Transition\">",
+        "<category id=\"Transitions\" name=\"Transitions\">",
         "<block type=\"time_delay\">",
         "   <value name=\"DELAY_TIME_MILLI\">",
         "       <block type=\"math_number\">",
@@ -83,16 +79,16 @@
         "</block>",
         "</category>"
       ]
-    }, 
-    "Customize-9" : {
-      "categoryName": "Customize-9",
-      "description": "Customaization blocks, allow seting angle, speed, cycle and asymmetric behavior",
+    },
+    "Customization": {
+      "categoryName": "Customization",
+      "description": "Customization blocks, allow seting angle, speed, cycle and asymmetric behavior",
       "languages": [
         "en"
       ],
-      "toolboxName": "Customize-9",
+      "toolboxName": "Customization",
       "toolbox": [
-        "<category id=\"Customize-9\" name=\"Customize-9\">",
+        "<category id=\"Customization\" name=\"Customization\">",
         "   <block type=\"set_servo_angle_speed\">",
         "       <value name=\"ANGLE\">",
         "             <block type=\"math_number\">",
@@ -105,6 +101,8 @@
         "            </block>",
         "       </value>",
         "   </block>",
+        "  <block type=\"multi_servo_control\">",
+        "  </block>",
         "</category>"
       ]
     }

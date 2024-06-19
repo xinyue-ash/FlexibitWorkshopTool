@@ -30,4 +30,29 @@ Blockly.Blocks['set_servo_angle_speed'] = {
   }
 };
 
+Blockly.Blocks['multi_servo_control'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("Multi Servo Control");
+
+    this.appendStatementInput("FB1")
+      .setCheck(null)
+      .appendField("Flexibit 1");
+
+    this.appendStatementInput("FB2")
+      .setCheck(null)
+      .appendField("Flexibit 2");
+
+    this.appendStatementInput("FB3")
+      .setCheck(null)
+      .appendField("Flexibit 3");
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("Control multiple servos with separate blocks for each servo.");
+    this.setHelpUrl("");
+  }
+};
+
 
