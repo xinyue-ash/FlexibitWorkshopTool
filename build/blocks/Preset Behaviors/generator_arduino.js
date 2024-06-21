@@ -53,10 +53,10 @@ Blockly.Arduino["breathing_spd_angle"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(pos);\n" +
-    "time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime +
     ") {\n" +
-    "}\n" +
+    "    }\n" +
     "  }\n" +
     "  for (int pos = " +
     angle +
@@ -66,10 +66,10 @@ Blockly.Arduino["breathing_spd_angle"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(pos);\n" +
-    "time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime +
     ") {\n" +
-    "}\n" +
+    "    }\n" +
     "  }\n" +
     "}\n";
   return code;
@@ -114,10 +114,10 @@ Blockly.Arduino["breathing_spd_angle_cycle"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(pos);\n" +
-    "time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime +
     ") {\n" +
-    "}\n" +
+    "    }\n" +
     "  }\n" +
     "  for (int pos = " +
     angle +
@@ -127,10 +127,10 @@ Blockly.Arduino["breathing_spd_angle_cycle"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(pos);\n" +
-    "time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime +
     ") {\n" +
-    "}\n" +
+    "    }\n" +
     "  }\n" +
     "}\n";
   return code;
@@ -179,10 +179,10 @@ Blockly.Arduino["breathing_interval_angle_cycle"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(pos);\n" +
-    "time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime +
     ") {\n" +
-    "}\n" +
+    "    }\n" +
     "  }\n" +
     "  for (int pos = " +
     angle +
@@ -192,10 +192,10 @@ Blockly.Arduino["breathing_interval_angle_cycle"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(pos);\n" +
-    "time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime +
     ") {\n" +
-    "}\n" +
+    "    }\n" +
     "  }\n" +
     "}\n";
   return code;
@@ -240,8 +240,8 @@ Blockly.Arduino["shake"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(pos);\n" +
-    "time_now = millis()\n\nwhile(millis() < time_now + 3) {\n}\n" +
-    "  }\n" +
+    "    time_now = millis()\n\n    while(millis() < time_now + 3) {\n}\n" +
+    "    }\n" +
     "  for (int pos = 30;pos >= 0; pos--) { \n" +
     "    servo_" +
     dropdown_pin +
@@ -354,16 +354,16 @@ Blockly.Arduino["heartbeat"] = function (block) {
     "    servo_" +
     dropdown_pin +
     ".write(180);\n" +
-    "    time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime +
-    "    ) {\n" +
+    ") {\n" +
     "    }\n" +
     "    servo_" +
     dropdown_pin +
     ".write(0);\n" +
-    "    time_now = millis()\n\nwhile(millis() < time_now + " +
+    "    time_now = millis()\n\n    while(millis() < time_now + " +
     delayTime / 2 +
-    "    ) {\n" +
+    ") {\n" +
     "    }\n" +
     "}\n";
   return code;
