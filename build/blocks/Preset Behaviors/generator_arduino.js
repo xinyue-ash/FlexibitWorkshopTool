@@ -13,66 +13,43 @@ goog.require("Blockly.Arduino.servo");
 
 goog.require("Blockly.Arduino");
 
-var dropdown_pin = 9;
+Blockly.Arduino.addReservedWords('Sweeper');
+
+
+Blockly.Arduino.addCode = function (code) {
+  return Blockly.Arduino.INCLUDE_SWEEPER_CLASS + code;
+};
+
+// var dropdown_pin = 9;
 
 Blockly.Arduino["breathing_spd_angle"] = function (block) {
-  // var dropdown_pin = block.getFieldValue('PIN');
-  var speed = block.getFieldValue("SPEED");
-  var apm = block.getFieldValue("AMP");
-  // var duration = block.getFieldValue('DURATION');
 
-  var duration =
-    Blockly.Arduino.valueToCode(
-      block,
-      "DURATION",
-      Blockly.Arduino.ORDER_ATOMIC
-    ) || "90";
+  
+  var speed = block.getFieldValue('SPEED');
+  var amplitude = block.getFieldValue('AMP');
+  var duration = Blockly.Arduino.valueToCode(block, "DURATION", Blockly.Arduino.ORDER_ATOMIC) || "90";
 
-  var delayTime = speed === "SLOW" ? 20 : 5; // 20 milliseconds for slow, 5 milliseconds for fast, this is the millisecond per degree step
-  var angle = apm == "DEEP" ? 170 : 90;
-  var cycles = Math.floor((duration * 1000) / (2 * angle * delayTime)); // delay time is the
-  console.log(cycles);
+  var delayTime = speed === "SLOW" ? 20 : 5; // 20 milliseconds for slow, 5 milliseconds for fast
+  var angle = amplitude == "DEEP" ? 170 : 90;
+  var cycles = Math.floor((duration * 1000) / (2 * angle * delayTime)); // calculate number of cycles
 
-  Blockly.Arduino.includes_["includes_servo"] = "#include <Servo.h>";
-  Blockly.Arduino.definitions_["var_servo" + dropdown_pin] =
-    "Servo servo_" + dropdown_pin + ";";
-  Blockly.Arduino.setups_["setup_servo_" + dropdown_pin] =
-    "servo_" + dropdown_pin + ".attach(" + dropdown_pin + ");";
-
-  var time_now = 0; 
-    
-  var code =
-    "for (int c = 0; c < " +
-    cycles +
-    "; c++) {\n" +
-    "  for (int pos = 0; pos <= " +
-    angle +
-    "; pos++) { // goes from 0 degrees to " +
-    angle +
-    " degrees\n" +
-    "    servo_" +
-    dropdown_pin +
-    ".write(pos);\n" +
-    "    time_now = millis()\n\n    while(millis() < time_now + " +
-    delayTime +
-    ") {\n" +
-    "    }\n" +
-    "  }\n" +
-    "  for (int pos = " +
-    angle +
-    "; pos >= 0; pos--) { // goes from " +
-    angle +
-    " degrees back to 0 degrees\n" +
-    "    servo_" +
-    dropdown_pin +
-    ".write(pos);\n" +
-    "    time_now = millis()\n\n    while(millis() < time_now + " +
-    delayTime +
-    ") {\n" +
-    "    }\n" +
-    "  }\n" +
-    "}\n";
+  // Use the servoPin placeholder directly
+  var code = `
+    static unsigned long breathStart__SERVO_PIN__ = millis();
+    static int breathCycle__SERVO_PIN__ = 0;
+    if (millis() - breathStart__SERVO_PIN__ >= ${delayTime}) {
+      if (breathCycle__SERVO_PIN__ % 2 == 0) {
+        sweeper___SERVO_PIN__.SetTarget(${angle}, 1);
+      } else {
+        sweeper___SERVO_PIN__.SetTarget(0, 1);
+      }
+      breathCycle__SERVO_PIN__++;
+      breathStart__SERVO_PIN__ = millis();
+    }
+    sweeper___SERVO_PIN__.Update();
+  `;
   return code;
+  
 };
 
 Blockly.Arduino["breathing_spd_angle_cycle"] = function (block) {
