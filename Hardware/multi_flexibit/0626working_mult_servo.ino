@@ -1,19 +1,5 @@
-/**
- * @license Licensed under the Apache License, Version 2.0 (the "License"):
- *          http://www.apache.org/licenses/LICENSE-2.0
- */
-
-/**
- * @fileoverview Code generator for blocks that controls flexibit that conneted to board pin 9.
- */
-"use strict";
-
-goog.provide("Blockly.Arduino.Customize9");
-goog.require("Blockly.Arduino.servo");
-goog.require("Blockly.Arduino");
-
-var setUpServoControlClass = `
 #include <Servo.h>
+
 #define MAX_SEQUENCES 10
 #define QUEUE_SIZE 100
 
@@ -39,18 +25,20 @@ class ServoController {
   int currentSequenceIndex; // index of the current sequence being executed
   int sequenceCount;
   int repeatCount; // current repetition count for the current sequence
-
+  
 public:
   ServoController() : pos(0), lastUpdate(0), currentSequenceIndex(0), sequenceCount(0), repeatCount(0) {
     for (int i = 0; i < MAX_SEQUENCES; i++) {
       sequences[i] = {0, 0, 0, 0, 0};
     }
   }
+
   void Attach(int pin) {
     servo.attach(pin);
     pos = 0;
     servo.write(pos);
   }
+
   void Update() {
     if (currentSequenceIndex < sequenceCount && sequences[currentSequenceIndex].remainingSteps > 0) {
       Sequence& sequence = sequences[currentSequenceIndex];
@@ -69,23 +57,36 @@ public:
           // Move to the next angle/speed in the sequence
           sequence.front = (sequence.front + 1) % QUEUE_SIZE; // Wrap around the front pointer
           sequence.remainingSteps--;
+          // Serial.print("Remaining steps: ");
+          // Serial.println(sequence.remainingSteps);
+          // Serial.print("For sequence ");
+          // Serial.println(currentSequenceIndex);
+
           if (sequence.remainingSteps == 0) { // Sequence completed
+            // Serial.print("Sequence ");
+            // Serial.print(currentSequenceIndex);
+            // Serial.println(" completed.");
             repeatCount++;
             if (repeatCount < sequence.maxRepeats) {
+              // Serial.print("Repeating sequence ");
+              // Serial.println(currentSequenceIndex);
               ResetSequence(currentSequenceIndex); // repeat the sequence
             } else if (currentSequenceIndex < sequenceCount - 1) {
               currentSequenceIndex++; // move to the next sequence
               repeatCount = 0; // reset repeat count for the new sequence
+              // Serial.print("Moving to next sequence: ");
+              // Serial.println(currentSequenceIndex);
               ResetSequence(currentSequenceIndex); // initialize the next sequence
             } else {
               Serial.println("All sequences completed.");
-              /// not sure of detach is needed
+              /// not sure of detach is needed 
             }
           }
         }
       }
     }
   }
+
   void StartNewSequence() {
     if (sequenceCount < MAX_SEQUENCES) {
       Serial.print("Starting new sequence: ");
@@ -112,6 +113,13 @@ public:
     queue[sequence.rear] = {angle, speed};
     sequence.totalSteps++;
     sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
+
+    // Serial.print("Added angle: ");
+    // Serial.print(angle);
+    // Serial.print(" speed: ");
+    // Serial.print(speed);
+    // Serial.print(" to sequence ");
+    // Serial.println(sequenceIndex);
   }
 
   void SetRepeats(int repeats) {
@@ -119,67 +127,58 @@ public:
     int sequenceIndex = sequenceCount - 1; // Current sequence index
     if (sequenceIndex >= MAX_SEQUENCES) return;
     sequences[sequenceIndex].maxRepeats = repeats;
+
+    // Serial.print("Set repeats: ");
+    // Serial.print(repeats);
+    // Serial.print(" for sequence ");
+    // Serial.println(sequenceIndex);
   }
 
   void ResetSequence(int sequenceIndex) {
     Sequence& sequence = sequences[sequenceIndex];
     sequence.front = (sequence.rear - sequence.totalSteps + QUEUE_SIZE + 1) % QUEUE_SIZE;
     sequence.remainingSteps = sequence.totalSteps;
+
+    // Serial.print("Resetting sequence ");
+    // Serial.print(sequenceIndex);
+    // Serial.println(" for repeat or initialization.");
   }
 };
-`;
 
-// angle + speed block
-Blockly.Arduino["set_servo_angle_speed"] = function (block) {
+ServoController servo2;
+ServoController servo3;
 
-  var angle = Blockly.Arduino.valueToCode(block, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
-  var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_ATOMIC);
+void setup() {
+  Serial.begin(9600);
+  Serial.println("millisServoV2");
 
-  // TODO:  change the spped range (or define a convertion method)
-  // TODO:  might introduct a set repeat wrapper
-  var code =
-  'servo___SERVO_PIN__.StartNewSequence(); \n' + 'servo___SERVO_PIN__' + '.setAngleSpeed(' + angle + ', ' + speed + '); \n' + 'servo___SERVO_PIN__.SetRepeats(1);'
-  return code;
-};
+  // Attach servos to their pins
+  // servo2.Attach(9);
+  servo3.Attach(9);
 
+  // Shake sequence for servo3
+  servo3.StartNewSequence();
+  servo3.setAngleSpeed(0, 5);   // Move to 0 degrees with speed 30
+  servo3.setAngleSpeed(50, 5); // Move to 50 degrees with speed 30
+  servo3.SetRepeats(5);         // Perform the sequence 10 times
 
+  // Breathe sequence for servo3
+  servo3.StartNewSequence();
+  servo3.setAngleSpeed(0, 30);   // Move to 0 degrees with speed 30
+  servo3.setAngleSpeed(50, 10);  // Move to 50 degrees with speed 10
+  servo3.setAngleSpeed(180, 30); // Move to 180 degrees with speed 30
+  servo3.setAngleSpeed(50, 10);  // Move to 50 degrees with speed 10
+  servo3.SetRepeats(3);          // Perform the sequence 1 time
 
-// wrapper for multiple servo controll
-Blockly.Arduino['multi_servo_control'] = function (block) {
-  var statements_flexibit1 = Blockly.Arduino.statementToCode(block, 'FB1');
-  var statements_flexibit2 = Blockly.Arduino.statementToCode(block, 'FB2');
-  var statements_flexibit3 = Blockly.Arduino.statementToCode(block, 'FB3');
+  servo3.StartNewSequence();
+  servo3.setAngleSpeed(90, 10);   // Move to 0 degrees with speed 30
+  servo3.setAngleSpeed(100, 10);  // Move to 50 degrees with speed 10
+  servo3.setAngleSpeed(90, 10); // Move to 180 degrees with speed 30
+  servo3.setAngleSpeed(100, 10);  // Move to 50 degrees with speed 10
+  servo3.SetRepeats(3);          // Perform the sequence 1 time
+}
 
-  Blockly.Arduino.definitions_['setUpServoControlClass'] = setUpServoControlClass;
-
-  Blockly.Arduino.definitions_['servo_9'] = 'ServoController servo_9(20);';
-  Blockly.Arduino.definitions_['servo_10'] = 'ServoController servo_10(20);';
-  Blockly.Arduino.definitions_['servo_11'] = 'ServoController servo_11(20);';
-
-  Blockly.Arduino.setups_['setup_servo_9'] = 'servo_9.Attach(9);';
-  Blockly.Arduino.setups_['setup_servo_10'] = 'servo_10.Attach(10);';
-  Blockly.Arduino.setups_['setup_servo_11'] = 'servo_11.Attach(11);';
-
-  Blockly.Arduino.setups_['sevo_9_behabior'] = statements_flexibit1.replace(/__SERVO_PIN__/g, '9');
-  Blockly.Arduino.setups_['sevo_10_behabior'] = statements_flexibit2.replace(/__SERVO_PIN__/g, '10');
-  Blockly.Arduino.setups_['sevo_11_behabior'] = statements_flexibit3.replace(/__SERVO_PIN__/g, '11');
-  // need to change into only the block that is attached can be genreated by update
-  var code = `
-    servo_9.Update();
-    servo_10.Update();
-    servo_11.Update();
-  `;
-  return code;
-};
-
-
-
-
-
-
-
-
-
-
-
-
+void loop() {
+  // servo2.Update();
+  servo3.Update();
+}

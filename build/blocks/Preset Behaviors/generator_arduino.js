@@ -29,24 +29,13 @@ Blockly.Arduino["breathing_spd_angle"] = function (block) {
   var amplitude = block.getFieldValue('AMP');
   var duration = Blockly.Arduino.valueToCode(block, "DURATION", Blockly.Arduino.ORDER_ATOMIC) || "90";
 
-  var delayTime = speed === "SLOW" ? 20 : 5; // 20 milliseconds for slow, 5 milliseconds for fast
+  var delayTime = speed === "SLOW" ? 60 : 30; // 60 ms for slow, 30 ms for fast
   var angle = amplitude == "DEEP" ? 170 : 90;
-  var cycles = Math.floor((duration * 1000) / (2 * angle * delayTime)); // calculate number of cycles
+  // var cycles = Math.floor((duration * 1000) / (2 * angle * delayTime)); // calculate number of cycles
 
   // Use the servoPin placeholder directly
   var code = `
-    static unsigned long breathStart__SERVO_PIN__ = millis();
-    static int breathCycle__SERVO_PIN__ = 0;
-    if (millis() - breathStart__SERVO_PIN__ >= ${delayTime}) {
-      if (breathCycle__SERVO_PIN__ % 2 == 0) {
-        sweeper___SERVO_PIN__.SetTarget(${angle}, 1);
-      } else {
-        sweeper___SERVO_PIN__.SetTarget(0, 1);
-      }
-      breathCycle__SERVO_PIN__++;
-      breathStart__SERVO_PIN__ = millis();
-    }
-    sweeper___SERVO_PIN__.Update();
+    
   `;
   return code;
   
@@ -210,23 +199,9 @@ Blockly.Arduino["shake"] = function (block) {
 
   //in loop()
   var code =
-    "for (int c = 0; c < " +
-    cycles +
-    "; c++) {\n" +
-    "  for (int pos = 0; pos <=  30 ; pos++) { " +
-    "    servo_" +
-    dropdown_pin +
-    ".write(pos);\n" +
-    "    time_now = millis()\n\n    while(millis() < time_now + 3) {\n}\n" +
-    "    }\n" +
-    "  for (int pos = 30;pos >= 0; pos--) { \n" +
-    "    servo_" +
-    dropdown_pin +
-    ".write(pos);\n" +
-    "    time_now = millis()\n\n" +
-    "    while(millis() < time_now + 3) {\n}\n" +
-    "    }\n" +
-    "}\n";
+    "setTager()
+  
+  ";
 
   return code;
 };
