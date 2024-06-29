@@ -30,6 +30,24 @@ Blockly.Blocks['set_servo_angle_speed'] = {
   }
 };
 
+Blockly.Blocks['start_sequence_repeat'] = {
+  init: function () {
+      
+    this.appendValueInput("REPEATS")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .appendField("Start new sequence, repeat for");
+    
+    this.appendStatementInput("DO")
+      .setCheck(null)
+      .appendField("do");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['multi_servo_control'] = {
   init: function () {
     this.appendDummyInput()

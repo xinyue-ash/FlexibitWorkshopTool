@@ -286,17 +286,19 @@ Ardublockly.TOOLBOX_XML =
     '   </block > ' +
     '  </category>' +
 
-    '<category id="Transitions" name="Transitions">' +
-    '       <block type="time_delay">' +
-    '           <value name="DELAY_TIME_MILI">' +
-    '               <block type="math_number">' +
-    '                   <field name="NUM">5</field>' +
-    '               </block>' +
-    '           </value>' +
-    '       </block>' +
-    '       <block type="infinite_loop"/>' +
-    '       <block type="repeat_loop"/>' +
-    '</category > ' +
+//     '<category id="Transitions" name="Transitions">' +
+//     '       <block type="time_delay">' +
+//     '           <value name="DELAY_TIME_MILI">' +
+//     '               <block type="math_number">' +
+//     '                   <field name="NUM">5</field>' +
+//     '               </block>' +
+//     '           </value>' +
+//     '       </block>' +
+//     '       <block type="infinite_loop"/>' +
+//     '       <block type="repeat_loop"/>' +
+// '</category > ' +
+    
+    // customization
     '   <category id="Customization" name="Customization">' +
     '      <block type="set_servo_angle_speed">' +
     '       <value name="ANGLE">' +
@@ -309,23 +311,22 @@ Ardublockly.TOOLBOX_XML =
     '               <field name="NUM">1</field> ' +
     '            </block>' +
     '       </value>' +
-    '   </block>' +
-    '    <block type="controls_repeat_ext">' +
-    '      <value name="TIMES">' +
+'   </block>' +
+    
+    '   <block type=\"start_sequence_repeat\">' +
+    '      <value name="REPEATS">' +
     '        <block type="math_number">' +
-    '          <field name="NUM">10</field>' +
+    '          <field name="NUM">1</field>' +
     '        </block>' +
-    '      </value>' +
-    '    </block>' +
-    '       <block type="time_delay">' +
-    '           <value name="DELAY_TIME_MILI">' +
-    '               <block type="math_number">' +
-    '                   <field name="NUM">5</field>' +
-    '               </block>' +
-    '           </value>' +
-    '       </block>' +
-'       <block type="infinite_loop"/>' +
-'       <block type="repeat_loop"/>' +
+    '       </value>' +
+    '  </block>' +
+    // '       <block type="time_delay">' +
+    // '           <value name="DELAY_TIME_MILI">' +
+    // '               <block type="math_number">' +
+    // '                   <field name="NUM">5</field>' +
+    // '               </block>' +
+    // '           </value>' +
+    // '       </block>' +
     '   <block type=\"multi_servo_control\">' +
     '   </block>' +
 

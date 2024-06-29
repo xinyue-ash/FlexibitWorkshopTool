@@ -137,8 +137,18 @@ Blockly.Arduino["set_servo_angle_speed"] = function (block) {
 
   // TODO:  change the spped range (or define a convertion method)
   // TODO:  might introduct a set repeat wrapper
-  var code =
-  'servo___SERVO_PIN__.StartNewSequence(); \n' + 'servo___SERVO_PIN__' + '.setAngleSpeed(' + angle + ', ' + speed + '); \n' + 'servo___SERVO_PIN__.SetRepeats(1);'
+  var code = 'servo___SERVO_PIN__.setAngleSpeed(' + angle + ', ' + speed + '); \n';
+  return code;
+};
+
+
+Blockly.Arduino['start_sequence_repeat'] = function (block) {
+  var number_repeats = Blockly.Arduino.valueToCode(block, 'REPEATS',Blockly.Arduino.ORDER_ATOMIC);
+  var statements_do = Blockly.Arduino.statementToCode(block, 'DO');
+  var code = 'servo___SERVO_PIN__.StartNewSequence();\n';
+  code += statements_do;
+
+  code += '   servo___SERVO_PIN__.SetRepeats(' + number_repeats + ');\n';
   return code;
 };
 

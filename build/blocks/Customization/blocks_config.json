@@ -19,6 +19,13 @@
         "            </block>",
         "       </value>",
         "   </block>",
+        "  <block type=\"start_sequence_repeat\">" ,
+        "      <value name=\"REPEATS\">" ,
+        "       <block type=\"math_number\">" ,
+        "          <field name=\"NUM\">1</field>" ,
+        "        </block>" ,
+        "      </value>" ,
+        "  </block>" ,
         "  <block type=\"multi_servo_control\">",
         "  </block>",
         "</category>"
