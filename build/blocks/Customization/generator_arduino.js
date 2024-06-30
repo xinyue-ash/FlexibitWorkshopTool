@@ -107,11 +107,13 @@ public:
     int sequenceIndex = sequenceCount - 1; // Current sequence index
     if (sequenceIndex >= MAX_SEQUENCES || sequences[sequenceIndex].rear >= QUEUE_SIZE - 1) return;
 
+    int speed = map(userSpeed, 1, 10, 1000, 10); // map user speed 1-10 to 1000ms to 10ms
     Sequence& sequence = sequences[sequenceIndex];
     sequence.rear = (sequence.rear + 1) % QUEUE_SIZE; // Increment rear pointer
     queue[sequence.rear] = {angle, speed};
     sequence.totalSteps++;
     sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
+
   }
 
   void SetRepeats(int repeats) {
@@ -135,8 +137,6 @@ Blockly.Arduino["set_servo_angle_speed"] = function (block) {
   var angle = Blockly.Arduino.valueToCode(block, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
   var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_ATOMIC);
 
-  // TODO:  change the spped range (or define a convertion method)
-  // TODO:  might introduct a set repeat wrapper
   var code = 'servo___SERVO_PIN__.setAngleSpeed(' + angle + ', ' + speed + '); \n';
   return code;
 };
