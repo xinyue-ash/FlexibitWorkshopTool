@@ -107,7 +107,7 @@ public:
     int sequenceIndex = sequenceCount - 1; // Current sequence index
     if (sequenceIndex >= MAX_SEQUENCES || sequences[sequenceIndex].rear >= QUEUE_SIZE - 1) return;
 
-    int speed = map(userSpeed, 1, 10, 1000, 10); // map user speed 1-10 to 1000ms to 10ms
+    int speed = map(userSpeed, 1, 10, 1000, 100); // map user speed 1-10 to 1000ms to 100ms
     Sequence& sequence = sequences[sequenceIndex];
     sequence.rear = (sequence.rear + 1) % QUEUE_SIZE; // Increment rear pointer
     queue[sequence.rear] = {angle, speed};

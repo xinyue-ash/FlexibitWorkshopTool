@@ -20,7 +20,6 @@ var servoMediaFolder = "./blocklyduino/blocks/servo/";
 Blockly.Blocks["breathing_spd_angle"] = {
   init: function () {
     this.appendDummyInput().appendField("Flexibit-9");
-    // .appendField(new Blockly.FieldDropdown(pinDropdownOptions), "PIN");
     this.appendDummyInput()
       .appendField("Breathes")
       .appendField(
@@ -102,7 +101,7 @@ Blockly.Blocks["breathing_interval_angle_cycle"] = {
     this.appendDummyInput().appendField(" ");
 
     this.appendValueInput("INTERVAL")
-      .appendField("Interval [fast (5) ~ slow (120)]: ")
+      .appendField("Interval [slow (1) ~ fast (10)]: ")
       .setCheck(Blockly.Types.NUMBER.checkList);
 
     this.appendValueInput("DEGREE")
@@ -173,8 +172,6 @@ Blockly.Blocks['heartbeat_servo'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("mimic heartbeat with servo")
-        .appendField("pin#")
-        .appendField(new Blockly.FieldNumber(9, 0, 13), "PIN")
         .appendField("BPM")
         .appendField(new Blockly.FieldNumber(60, 1, 300), "BPM")
         .appendField("duration (ms)")
