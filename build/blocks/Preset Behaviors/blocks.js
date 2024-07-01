@@ -154,35 +154,33 @@ Blockly.Blocks["heartbeat"] = {
       "heartrate"
     )
     .appendField("heartbeat");
-    
-
     this.setInputsInline(false);
 
     this.appendValueInput("DURATION")
       .appendField("for")
       .setCheck(Blockly.Types.NUMBER.checkList);
     this.setInputsInline(true);
-    this.appendDummyInput().appendField("seconds");
+    this.appendDummyInput().appendField("times");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
   },
 };
 
-Blockly.Blocks['heartbeat_servo'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("mimic heartbeat with servo")
-        .appendField("BPM")
-        .appendField(new Blockly.FieldNumber(60, 1, 300), "BPM")
-        .appendField("duration (ms)")
-        .appendField(new Blockly.FieldNumber(30000, 1000, 60000), "DURATION");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  }
+// Blockly.Blocks['heartbeat_servo'] = {
+//   init: function() {
+//     this.appendDummyInput()
+//         .appendField("mimic heartbeat with servo")
+//         .appendField("BPM")
+//         .appendField(new Blockly.FieldNumber(60, 1, 300), "BPM")
+//         .appendField("duration (ms)")
+//         .appendField(new Blockly.FieldNumber(30000, 1000, 60000), "DURATION");
+//     this.setInputsInline(true);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour(230);
+//     this.setTooltip("");
+//     this.setHelpUrl("");
+//   }
   
-};
+// };
 

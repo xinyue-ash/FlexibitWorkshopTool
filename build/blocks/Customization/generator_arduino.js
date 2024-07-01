@@ -102,12 +102,12 @@ public:
     }
   }
 
-  void setAngleSpeed(int angle, int speed) {
+  void setAngleSpeed(int angle, int userSpeed) {
     if (sequenceCount == 0) return; // No sequence started
     int sequenceIndex = sequenceCount - 1; // Current sequence index
     if (sequenceIndex >= MAX_SEQUENCES || sequences[sequenceIndex].rear >= QUEUE_SIZE - 1) return;
 
-    int speed = map(userSpeed, 1, 10, 1000, 100); // map user speed 1-10 to 1000ms to 100ms
+    int speed = map(userSpeed, 1, 10, 50, 5); // map user speed 1-10 to 500ms to 5ms
     Sequence& sequence = sequences[sequenceIndex];
     sequence.rear = (sequence.rear + 1) % QUEUE_SIZE; // Increment rear pointer
     queue[sequence.rear] = {angle, speed};
@@ -162,9 +162,9 @@ Blockly.Arduino['multi_servo_control'] = function (block) {
 
   Blockly.Arduino.definitions_['setUpServoControlClass'] = setUpServoControlClass;
 
-  Blockly.Arduino.definitions_['servo_9'] = 'ServoController servo_9(20);';
-  Blockly.Arduino.definitions_['servo_10'] = 'ServoController servo_10(20);';
-  Blockly.Arduino.definitions_['servo_11'] = 'ServoController servo_11(20);';
+  Blockly.Arduino.definitions_['servo_9'] = 'ServoController servo_9;';
+  Blockly.Arduino.definitions_['servo_10'] = 'ServoController servo_10;';
+  Blockly.Arduino.definitions_['servo_11'] = 'ServoController servo_11;';
 
   Blockly.Arduino.setups_['setup_servo_9'] = 'servo_9.Attach(9);';
   Blockly.Arduino.setups_['setup_servo_10'] = 'servo_10.Attach(10);';

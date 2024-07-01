@@ -103,24 +103,20 @@ public:
     }
   }
 
-  void setAngleSpeed(int angle, int userSpeed){
-    if (sequenceCount == 0) return; // No sequence started
+  void setAngleSpeed(int angle, int userSpeed)
+  {
+    if (sequenceCount == 0)
+      return;                              // No sequence started
     int sequenceIndex = sequenceCount - 1; // Current sequence index
-    if (sequenceIndex >= MAX_SEQUENCES || sequences[sequenceIndex].rear >= QUEUE_SIZE - 1) return;
+    if (sequenceIndex >= MAX_SEQUENCES || sequences[sequenceIndex].rear >= QUEUE_SIZE - 1)
+      return;
 
-    int speed = map(userSpeed, 1, 10, 1000, 10); // map user speed 1-10 to 1000ms to 10ms 
-    Sequence& sequence = sequences[sequenceIndex];
+    int speed = map(userSpeed, 1, 10, 50, 5); // map user speed 1-10 to 500ms to 5ms
+    Sequence &sequence = sequences[sequenceIndex];
     sequence.rear = (sequence.rear + 1) % QUEUE_SIZE; // Increment rear pointer
     queue[sequence.rear] = {angle, speed};
     sequence.totalSteps++;
     sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
-
-    // Serial.print("Added angle: ");
-    // Serial.print(angle);
-    // Serial.print(" speed: ");
-    // Serial.print(speed);
-    // Serial.print(" to sequence ");
-    // Serial.println(sequenceIndex);
   }
 
   void SetRepeats(int repeats) {
