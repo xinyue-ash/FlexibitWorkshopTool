@@ -14,14 +14,11 @@ goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 goog.require("Blockly");
 
-var servoMediaFolder = "./blocklyduino/blocks/servo/";
-
 
 Blockly.Blocks["breathing_spd_angle"] = {
   init: function () {
-    this.appendDummyInput().appendField("Flexibit-9");
     this.appendDummyInput()
-      .appendField("Breathes")
+      .appendField("Breath")
       .appendField(
         new Blockly.FieldDropdown([
           ["slow", "SLOW"],
@@ -56,10 +53,9 @@ Blockly.Blocks["breathing_spd_angle"] = {
 
 Blockly.Blocks["breathing_spd_angle_cycle"] = {
   init: function () {
-    this.appendDummyInput().appendField("Flexibit-9");
     // .appendField(new Blockly.FieldDropdown(pinDropdownOptions), "PIN");
     this.appendDummyInput()
-      .appendField("Breathes")
+      .appendField("Breath")
       .appendField(
         new Blockly.FieldDropdown([
           ["slow", "SLOW"],
@@ -94,7 +90,7 @@ Blockly.Blocks["breathing_spd_angle_cycle"] = {
 
 Blockly.Blocks["breathing_interval_angle_cycle"] = {
   init: function () {
-    this.appendDummyInput().appendField("Flexibit-9 Breathing");
+    this.appendDummyInput().appendField("Breath");
 
     this.setInputsInline(false);
 
@@ -126,7 +122,7 @@ Blockly.Blocks["breathing_interval_angle_cycle"] = {
 
 Blockly.Blocks["shake"] = {
   init: function () {
-    this.appendDummyInput().appendField("Flexibit-9 Shake");
+    this.appendDummyInput().appendField("Shake");
 
     this.input;
     this.appendValueInput("CYCLES")
@@ -153,7 +149,7 @@ Blockly.Blocks["heartbeat"] = {
       ]),
       "heartrate"
     )
-    .appendField("heartbeat");
+    .appendField("Heartbeat");
     this.setInputsInline(false);
 
     this.appendValueInput("DURATION")

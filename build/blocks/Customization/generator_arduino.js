@@ -79,7 +79,7 @@ public:
               ResetSequence(currentSequenceIndex); // initialize the next sequence
             } else {
               Serial.println("All sequences completed.");
-              /// not sure of detach is needed
+              servo.detach();
             }
           }
         }
