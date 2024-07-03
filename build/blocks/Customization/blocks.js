@@ -22,9 +22,10 @@ Blockly.Blocks['set_servo_angle_speed'] = {
     this.appendValueInput("SPEED")
       .setCheck(Blockly.Types.NUMBER.checkList)
       .appendField("with speed (slow 1 - fast 10):");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(600);
+    
+    this.setPreviousStatement(true, 'Custom');
+    this.setNextStatement(true, 'Custom');
+    this.setColour(120);
     this.setTooltip("Move the servo to the specified angle at the specified speed.");
     this.setHelpUrl("");
   }
@@ -32,18 +33,19 @@ Blockly.Blocks['set_servo_angle_speed'] = {
 
 Blockly.Blocks['start_sequence_repeat'] = {
   init: function () {
-      
-    this.appendValueInput("REPEATS")
-      .setCheck(Blockly.Types.NUMBER.checkList)
-      .appendField("Start new sequence, repeat for");
+    this.appendDummyInput().appendField("Custom Behavior: ");
+
     
     this.appendStatementInput("DO")
-      .setCheck(null)
-      .appendField("do");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
-    this.setTooltip("");
+      .setCheck('Custom')
+      .appendField("DO");
+    
+    this.appendValueInput("REPEATS")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .appendField("repeat for");
+    this.setPreviousStatement(true, 'Behavior');
+    this.setNextStatement(true, 'Behavior');
+    this.setTooltip("Insert speed/angle configuration to customize a behavior");
     this.setHelpUrl("");
   }
 };
@@ -51,22 +53,21 @@ Blockly.Blocks['start_sequence_repeat'] = {
 Blockly.Blocks['multi_servo_control'] = {
   init: function () {
     this.appendDummyInput()
-      .appendField("Multi Servo Control");
+      .appendField("Multi Flexibit Control");
 
     this.appendStatementInput("FB1")
-      .setCheck(null)
+      .setCheck('Behavior')
       .appendField("Flexibit 1");
 
     this.appendStatementInput("FB2")
-      .setCheck(null)
+      .setCheck('Behavior')
       .appendField("Flexibit 2");
 
     this.appendStatementInput("FB3")
-      .setCheck(null)
+      .setCheck('Behavior')
       .appendField("Flexibit 3");
 
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+
     this.setColour(230);
     this.setTooltip("Control multiple servos with separate blocks for each servo.");
     this.setHelpUrl("");
