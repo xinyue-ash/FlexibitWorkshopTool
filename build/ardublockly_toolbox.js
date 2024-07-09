@@ -267,9 +267,27 @@ Ardublockly.TOOLBOX_XML =
     '        <block type="math_number">' +
     '          <field name="NUM">5</field>' +
     '        </block>' +
-    '      </value>' +
+'      </value>' +
+'   </block > ' +
+    
+    ' <block type="breathing_preiod_angle_cycle">' +
+    '       <value name="PERIOD">' +
+    '             <block type="math_number">' +
+    '               <field name="NUM">5</field> ' +
+    '            </block>' +
+    '       </value>' +
+    '       <value name="DEGREE">' +
+    '             <block type="math_number">' +
+    '               <field name="NUM">90</field> ' +
+    '            </block>' +
+    '       </value>' +
+    '       <value name="CYCLES">' +
+    '             <block type="math_number">' +
+    '               <field name="NUM">5</field> ' +
+    '            </block>' +
+    '       </value>' +
+    '</block>' +
 
-    '   </block > ' +
     '   <block type="shake">' +
     '      <value name="CYCLES">' +
     '        <block type="math_number">' +
@@ -331,7 +349,21 @@ Ardublockly.TOOLBOX_XML =
     '               <field name="NUM">1</field> ' +
     '            </block>' +
     '       </value>' +
-    '   </block>' +
+'   </block>' +
+    
+    '   <block type="set_servo_angle_time">' +
+    '       <value name="ANGLE">' +
+    '             <block type="math_number">' +
+    '               <field name="NUM">60</field> ' +
+    '            </block>' +
+    '       </value>' +
+    '       <value name="TIME">' +
+    '             <block type="math_number">' +
+    '               <field name="NUM">2</field> ' +
+    '            </block>' +
+    '       </value>' +
+    '   </block>'
+
     '</category > ' +
 
     '</xml>';

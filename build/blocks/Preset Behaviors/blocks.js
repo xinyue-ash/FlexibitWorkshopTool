@@ -51,6 +51,9 @@ Blockly.Blocks["breathing_spd_angle"] = {
   },
 };
 
+
+
+
 Blockly.Blocks["breathing_spd_angle_cycle"] = {
   init: function () {
     // .appendField(new Blockly.FieldDropdown(pinDropdownOptions), "PIN");
@@ -83,6 +86,37 @@ Blockly.Blocks["breathing_spd_angle_cycle"] = {
 
     this.setPreviousStatement(true, 'Behavior');
     this.setNextStatement(true, 'Behavior');
+    // this.setTooltip();
+    // this.setHelpUrl();
+  },
+};
+
+Blockly.Blocks["breathing_preiod_angle_cycle"] = {
+  init: function () {
+    this.appendDummyInput().appendField("Preset Behavior: Breathe");
+
+    this.setInputsInline(false);
+
+    this.appendDummyInput().appendField(" ");
+
+    this.appendValueInput("PERIOD")
+      .appendField("Each breath takes")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .appendField("seconds");
+    // TODO: what is the boundary
+
+    this.appendValueInput("DEGREE")
+      .appendField("shallow (1) ~ deep (180)")
+      .setCheck(Blockly.Types.NUMBER.checkList);
+
+    this.appendValueInput("CYCLES")
+      .appendField("For")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .setAlign(Blockly.ALIGN_RIGHT);
+    this.appendDummyInput().appendField("times").setAlign(Blockly.ALIGN_RIGHT);
+
+    this.setPreviousStatement(true, 'Behavior'); // able to attech to a block before
+    this.setNextStatement(true, 'Behavior'); // able to attech a block after
     // this.setTooltip();
     // this.setHelpUrl();
   },

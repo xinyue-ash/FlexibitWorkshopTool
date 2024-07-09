@@ -116,6 +116,37 @@ public:
 
   }
 
+  // set angle and duration to that angle
+  void setAnglePeriod(int targetAngle, int period)
+  {
+    if (sequenceCount == 0)
+    {
+      Serial.println("No sequence started.");
+      return; // No sequence started
+    }
+    int sequenceIndex = sequenceCount - 1; // Current sequence index
+
+    Sequence &sequence = sequences[sequenceIndex];
+
+    int lastPos = (sequence.rear >= 0) ? queue[sequence.rear].angle : pos;
+    int angleChange = abs(targetAngle - lastPos);
+
+    // Calculate the speed (interval per degree movement) to complete the period in the given time
+    float speed = (float)period / angleChange;
+    // if (speed < 1)
+    // {
+    //   Serial.println("Calculated speed is too fast.");
+    //   return;
+    // }
+
+    sequence.rear = (sequence.rear + 1) % QUEUE_SIZE;   // Increment rear pointer
+    queue[sequence.rear] = {targetAngle, round(speed)}; // Set angle and rounded speed
+    sequence.totalSteps++;
+    sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
+  }
+
+  
+
   void SetRepeats(int repeats) {
     if (sequenceCount == 0) return; // No sequence started
     int sequenceIndex = sequenceCount - 1; // Current sequence index
@@ -142,8 +173,20 @@ Blockly.Arduino["set_servo_angle_speed"] = function (block) {
 };
 
 
+Blockly.Arduino["set_servo_angle_time"] = function (block) {
+
+  var angle = Blockly.Arduino.valueToCode(block, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+  var userTime = Blockly.Arduino.valueToCode(block, 'TIME', Blockly.Arduino.ORDER_ATOMIC);
+
+  var time = userTime * 1000;
+
+  var code = 'servo___SERVO_PIN__.setAnglePeriod(' + angle + ', ' + time + '); \n';
+  return code;
+};
+
+
 Blockly.Arduino['start_sequence_repeat'] = function (block) {
-  var number_repeats = Blockly.Arduino.valueToCode(block, 'REPEATS',Blockly.Arduino.ORDER_ATOMIC);
+  var number_repeats = Blockly.Arduino.valueToCode(block, 'REPEATS', Blockly.Arduino.ORDER_ATOMIC);
   var statements_do = Blockly.Arduino.statementToCode(block, 'DO');
   var code = 'servo___SERVO_PIN__.StartNewSequence();\n';
   code += statements_do;

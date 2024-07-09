@@ -26,7 +26,26 @@ Blockly.Blocks['set_servo_angle_speed'] = {
     this.setPreviousStatement(true, 'Custom');
     this.setNextStatement(true, 'Custom');
     this.setColour(120);
-    this.setTooltip("Move the servo to the specified angle at the specified speed.");
+    this.setTooltip("Move the servo to the angle at the specified speed.");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['set_servo_angle_time'] = {
+  init: function () {
+    this.appendValueInput("ANGLE")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .appendField("Move to angle (0-180):");
+    
+    
+    this.appendValueInput("TIME")
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .appendField("With time in seconds: ");
+
+    this.setPreviousStatement(true, 'Custom');
+    this.setNextStatement(true, 'Custom');
+    this.setColour(120);
+    this.setTooltip("Move the servo to the specified angle within specified seconds.");
     this.setHelpUrl("");
   }
 };
