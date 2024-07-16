@@ -267,9 +267,9 @@ Ardublockly.TOOLBOX_XML =
     '        <block type="math_number">' +
     '          <field name="NUM">5</field>' +
     '        </block>' +
-'      </value>' +
-'   </block > ' +
-    
+    '      </value>' +
+    '   </block > ' +
+
     ' <block type="breathing_preiod_angle_cycle">' +
     '       <value name="PERIOD">' +
     '             <block type="math_number">' +
@@ -306,28 +306,28 @@ Ardublockly.TOOLBOX_XML =
     '   </block > ' +
     '  </category>' +
 
-    //     '<category id="Transitions" name="Transitions">' +
-    //     '       <block type="time_delay">' +
-    //     '           <value name="DELAY_TIME_MILI">' +
-    //     '               <block type="math_number">' +
-    //     '                   <field name="NUM">5</field>' +
-    //     '               </block>' +
-    //     '           </value>' +
-    //     '       </block>' +
-    //     '       <block type="infinite_loop"/>' +
-    //     '       <block type="repeat_loop"/>' +
-    // '</category > ' +
+    '<category id="Transitions" name="Transitions">' +
+    '       <block type="delay_between_angle">' +
+    '           <value name="DELAY_TIME_MILI">' +
+    '               <block type="math_number">' +
+    '                   <field name="NUM">0.5</field>' +
+    '               </block>' +
+    '           </value>' +
+    '       </block>' +
+
+    '       <block type="delay_between_behavior">' +
+    '           <value name="DELAY_TIME_MILI">' +
+    '               <block type="math_number">' +
+    '                   <field name="NUM">1</field>' +
+    '               </block>' +
+    '           </value>' +
+    '       </block>' +
+    // '       <block type="infinite_loop"/>' +
+    // '       <block type="repeat_loop"/>' +
+    '</category > ' +
 
     // customization
     '   <category id="Customization" name="Customization">' +
-
-    // '       <block type="time_delay">' +
-    // '           <value name="DELAY_TIME_MILI">' +
-    // '               <block type="math_number">' +
-    // '                   <field name="NUM">5</field>' +
-    // '               </block>' +
-    // '           </value>' +
-    // '       </block>' +
     '   <block type=\"multi_servo_control\">' +
     '   </block>' +
     '   <block type=\"start_sequence_repeat\">' +
@@ -349,8 +349,8 @@ Ardublockly.TOOLBOX_XML =
     '               <field name="NUM">1</field> ' +
     '            </block>' +
     '       </value>' +
-'   </block>' +
-    
+    '   </block>' +
+
     '   <block type="set_servo_angle_time">' +
     '       <value name="ANGLE">' +
     '             <block type="math_number">' +
@@ -364,6 +364,6 @@ Ardublockly.TOOLBOX_XML =
     '       </value>' +
     '   </block>'
 
-    '</category > ' +
+'</category > ' +
 
     '</xml>';

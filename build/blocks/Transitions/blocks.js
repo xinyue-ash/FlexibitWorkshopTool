@@ -14,20 +14,38 @@ goog.require('Blockly.Types');
 goog.require('Blockly');
 
 
-Blockly.Blocks['time_delay'] = {
+Blockly.Blocks['delay_between_angle'] = {
   init: function() {
     this.appendValueInput('DELAY_TIME_MILI')
         .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField(Blockly.Msg.ARD_TIME_DELAY);
     this.appendDummyInput()
-        .appendField(" seconds");
+      .appendField(" seconds between angles");
+    
+    this.setPreviousStatement(true, 'Custom');
+    this.setNextStatement(true, 'Custom');
+    this.setColour(120);
     this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_TIME_DELAY_TIP);
   }
 }
 
+Blockly.Blocks['delay_between_behavior'] = {
+  init: function () {
+    this.appendValueInput('DELAY_TIME_MILI')
+      .setCheck(Blockly.Types.NUMBER.checkList)
+      .appendField(Blockly.Msg.ARD_TIME_DELAY);
+    this.appendDummyInput()
+      .appendField(" seconds between behaviors");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, 'Behavior');
+    this.setNextStatement(true, 'Behavior');
+    this.setTooltip(Blockly.Msg.ARD_TIME_DELAY_TIP);
+  }
+}
+
+
+// below not functioning
 Blockly.Blocks['infinite_loop'] = {
   /**
    * Waits forever, end of program.

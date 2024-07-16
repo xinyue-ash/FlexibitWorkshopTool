@@ -11,24 +11,31 @@
 goog.provide("Blockly.Arduino.Transition");
 goog.require("Blockly.Arduino");
 
-Blockly.Arduino["time_delay"] = function (block) {
+
+Blockly.Arduino["delay_between_angle"] = function (block) {
+  var delayTime =
+    Blockly.Arduino.valueToCode(block,
+      "DELAY_TIME_MILI", Blockly.Arduino.ORDER_ATOMIC) * 1000 || "1";
+  var code = 'servo___SERVO_PIN__.addDelayDuration(' + delayTime + '); \n';
+  return code;
+};
+
+Blockly.Arduino["delay_between_behavior"] = function (block) {
   var delayTime =
     Blockly.Arduino.valueToCode(
       block,
       "DELAY_TIME_MILI",
       Blockly.Arduino.ORDER_ATOMIC
-    ) * 1000 || "0";
-
-  var time_now = 0;
-
+    ) * 1000 || "1";
   var code =
-    "time_now = millis()\n\nwhile(millis() < time_now + " +
-    delayTime +
-    ") {\n" +
-    "}\n";
+    'servo___SERVO_PIN__.StartNewSequence();\n' +
+    'servo___SERVO_PIN__.addDelayDuration(' +  + delayTime + '); \n' +
+    'servo___SERVO_PIN__.SetRepeats(1); \n';
+  ;
   return code;
 };
 
+// below not functioning
 Blockly.Arduino["infinite_loop"] = function (block) {
   return "while(true);\n";
 };
