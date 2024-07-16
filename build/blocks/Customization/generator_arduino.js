@@ -15,13 +15,17 @@ goog.require("Blockly.Arduino");
 var setUpServoControlClass = `
 #include <Servo.h>
 #define MAX_SEQUENCES 10
-#define QUEUE_SIZE 100
+#define QUEUE_SIZE 50
 
+// target angle with speed or
 struct Target {
   int angle;
-  int speed; // updateInterval
+  int duration; // Duration to reach the target angle
+  int speed;  // millisec per degree step
+  bool useSpeed; // Flag to indicate whether to use speed or duration
 };
 
+// sequence of target angle & speed/time
 struct Sequence {
   int front; // start of the sequence in the queue
   int rear; // end of the sequence in the queue
@@ -32,64 +36,101 @@ struct Sequence {
 
 class ServoController {
   Servo servo;
-  int pos;
-  unsigned long lastUpdate;
   Target queue[QUEUE_SIZE];
   Sequence sequences[MAX_SEQUENCES];
   int currentSequenceIndex; // index of the current sequence being executed
   int sequenceCount;
   int repeatCount; // current repetition count for the current sequence
+  unsigned long lastUpdate;
+  unsigned long durationStartTime;
+  int pos;
 
 public:
-  ServoController() : pos(0), lastUpdate(0), currentSequenceIndex(0), sequenceCount(0), repeatCount(0) {
+  ServoController() : currentSequenceIndex(0), sequenceCount(0), repeatCount(0), lastUpdate(0), durationStartTime(0), pos(0) {
     for (int i = 0; i < MAX_SEQUENCES; i++) {
       sequences[i] = {0, 0, 0, 0, 0};
     }
   }
+
   void Attach(int pin) {
     servo.attach(pin);
-    pos = 0;
-    servo.write(pos);
+    servo.write(0); // Initialize servo position
   }
+
   void Update() {
     if (currentSequenceIndex < sequenceCount && sequences[currentSequenceIndex].remainingSteps > 0) {
       Sequence& sequence = sequences[currentSequenceIndex];
       Target& currentTarget = queue[sequence.front];
 
-      if ((millis() - lastUpdate) >= currentTarget.speed) {
-        lastUpdate = millis();
-        if (currentTarget.angle != pos) {
+      unsigned long currentMillis = millis();
+
+      // if setting the speed, then checking time with speed (AKA mills/degree)
+      if (currentTarget.useSpeed) {
+        if (currentMillis - lastUpdate >= currentTarget.speed) {
+          // if time exceeded -> update to next degree
+          lastUpdate = currentMillis;
           if (currentTarget.angle > pos) {
             pos++;
-          } else {
+          } else if (currentTarget.angle < pos) {
             pos--;
           }
           servo.write(pos);
-        } else {
-          // Move to the next angle/speed in the sequence
-          sequence.front = (sequence.front + 1) % QUEUE_SIZE; // Wrap around the front pointer
-          sequence.remainingSteps--;
-          if (sequence.remainingSteps == 0) { // Sequence completed
-            repeatCount++;
-            if (repeatCount < sequence.maxRepeats) {
-              ResetSequence(currentSequenceIndex); // repeat the sequence
-            } else if (currentSequenceIndex < sequenceCount - 1) {
-              currentSequenceIndex++; // move to the next sequence
-              repeatCount = 0; // reset repeat count for the new sequence
-              ResetSequence(currentSequenceIndex); // initialize the next sequence
-            } else {
-              Serial.println("All sequences completed.");
-              servo.detach();
-            }
+
+          if (pos == currentTarget.angle) {
+            sequence.front = (sequence.front + 1) % QUEUE_SIZE;
+            sequence.remainingSteps--;
           }
+        }
+      } else {
+        // Calculate the target position based on duration
+        unsigned long elapsedTime = currentMillis - durationStartTime;
+
+        if (elapsedTime >= currentTarget.duration) {
+          // if time exceeded -> go to next target struct
+          durationStartTime = currentMillis;
+          pos = currentTarget.angle;
+          servo.write(pos);
+          sequence.front = (sequence.front + 1) % QUEUE_SIZE;
+          sequence.remainingSteps--;
+        } else {
+          // using fraction to record the program of angle
+          float curAngleFraction = (float)elapsedTime / currentTarget.duration;
+          int targetPos = pos + (currentTarget.angle - pos) * curAngleFraction;
+          servo.write(targetPos);
+        }
+      }
+
+      // Comment out for now, for debuging
+      // Serial.print("currentMillis: ");
+      // Serial.print(currentMillis);
+      // Serial.print(", pos: ");
+      // Serial.print(pos);
+      // Serial.print(", target angle: ");
+      // Serial.print(currentTarget.angle);
+      // Serial.print(", remainingSteps: ");
+      // Serial.println(sequence.remainingSteps);
+
+      if (sequence.remainingSteps == 0) {
+         // Sequence completed
+        repeatCount++;
+        if (repeatCount < sequence.maxRepeats) {
+          ResetSequence(currentSequenceIndex); // repeat the sequence
+        } else if (currentSequenceIndex < sequenceCount - 1) {
+          // increment to next sequence
+          currentSequenceIndex++;
+          repeatCount = 0;
+          ResetSequence(currentSequenceIndex);
+        } else {
+          servo.detach();
+           Serial.print(millis());   // check if actual time used is lying
         }
       }
     }
   }
+
+  // initial a new queue for sequence
   void StartNewSequence() {
     if (sequenceCount < MAX_SEQUENCES) {
-      Serial.print("Starting new sequence: ");
-      Serial.println(sequenceCount);
       if (sequenceCount == 0) {
         sequences[sequenceCount].front = 0;
       } else {
@@ -102,63 +143,60 @@ public:
     }
   }
 
-  void setAngleSpeed(int angle, int userSpeed) {
-    if (sequenceCount == 0) return; // No sequence started
-    int sequenceIndex = sequenceCount - 1; // Current sequence index
-    if (sequenceIndex >= MAX_SEQUENCES || sequences[sequenceIndex].rear >= QUEUE_SIZE - 1) return;
-
-    int speed = map(userSpeed, 1, 10, 50, 5); // map user speed 1-10 to 500ms to 5ms
-    Sequence& sequence = sequences[sequenceIndex];
-    sequence.rear = (sequence.rear + 1) % QUEUE_SIZE; // Increment rear pointer
-    queue[sequence.rear] = {angle, speed};
-    sequence.totalSteps++;
-    sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
-
-  }
-
-  // set angle and duration to that angle
-  void setAnglePeriod(int targetAngle, int period)
-  {
-    if (sequenceCount == 0)
-    {
-      Serial.println("No sequence started.");
-      return; // No sequence started
-    }
-    int sequenceIndex = sequenceCount - 1; // Current sequence index
-
-    Sequence &sequence = sequences[sequenceIndex];
-
-    int lastPos = (sequence.rear >= 0) ? queue[sequence.rear].angle : pos;
-    int angleChange = abs(targetAngle - lastPos);
-
-    // Calculate the speed (interval per degree movement) to complete the period in the given time
-    float speed = (float)period / angleChange;
-    // if (speed < 1)
-    // {
-    //   Serial.println("Calculated speed is too fast.");
-    //   return;
-    // }
-
-    sequence.rear = (sequence.rear + 1) % QUEUE_SIZE;   // Increment rear pointer
-    queue[sequence.rear] = {targetAngle, round(speed)}; // Set angle and rounded speed
-    sequence.totalSteps++;
-    sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
-  }
-
-  
-
+  // helper to set num of time a sequence repeat
   void SetRepeats(int repeats) {
-    if (sequenceCount == 0) return; // No sequence started
+    if (sequenceCount == 0) return; //if No sequence started
     int sequenceIndex = sequenceCount - 1; // Current sequence index
     if (sequenceIndex >= MAX_SEQUENCES) return;
     sequences[sequenceIndex].maxRepeats = repeats;
   }
 
+  // repeat a SEQUENCE
   void ResetSequence(int sequenceIndex) {
     Sequence& sequence = sequences[sequenceIndex];
     sequence.front = (sequence.rear - sequence.totalSteps + QUEUE_SIZE + 1) % QUEUE_SIZE;
     sequence.remainingSteps = sequence.totalSteps;
+    durationStartTime = millis(); // Reset duration start time for the new sequence
   }
+
+  // set angle, and time move to that angle
+  void setAngleDuration(int targetAngle, int duration) {
+    addTargetToSequence(targetAngle, duration, 0, false);
+  }
+
+  // set angle and speed move to that angle
+  void setAngleSpeed(int targetAngle, int userSpeed) {
+    int mappedSpeed = map(userSpeed, 1, 10, 50, 5);
+    addTargetToSequence(targetAngle, 0, mappedSpeed, true);
+  }
+
+
+
+// helper function to added angle , speed or duration to the sequence
+private:
+  void addTargetToSequence(int targetAngle, int duration, int speed, bool useSpeed) {
+    if (sequenceCount == 0) return; // No sequence started
+    int sequenceIndex = sequenceCount - 1; // Current sequence index
+
+    Sequence& sequence = sequences[sequenceIndex];
+
+    sequence.rear = (sequence.rear + 1) % QUEUE_SIZE; // Increment rear pointer
+    queue[sequence.rear] = {targetAngle, duration, speed, useSpeed}; // Set angle, duration, and speed
+    sequence.totalSteps++;
+    sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
+
+    // Debug prints
+    // Serial.print("Added Target Angle: ");
+    // Serial.print(targetAngle);
+    // if (useSpeed) {
+    //   Serial.print(" Speed: ");
+    //   Serial.println(speed);
+    // } else {
+    //   Serial.print(" Duration: ");
+    //   Serial.println(duration);
+    // }
+  }
+
 };
 `;
 
@@ -180,7 +218,7 @@ Blockly.Arduino["set_servo_angle_time"] = function (block) {
 
   var time = userTime * 1000;
 
-  var code = 'servo___SERVO_PIN__.setAnglePeriod(' + angle + ', ' + time + '); \n';
+  var code = 'servo___SERVO_PIN__.setAngleDuration(' + angle + ', ' + time + '); \n';
   return code;
 };
 
@@ -209,6 +247,7 @@ Blockly.Arduino['multi_servo_control'] = function (block) {
   Blockly.Arduino.definitions_['servo_10'] = 'ServoController servo_10;';
   Blockly.Arduino.definitions_['servo_11'] = 'ServoController servo_11;';
 
+  Blockly.Arduino.setups_['serial_setup'] = 'Serial.begin(9600);';
   Blockly.Arduino.setups_['setup_servo_9'] = 'servo_9.Attach(9);';
   Blockly.Arduino.setups_['setup_servo_10'] = 'servo_10.Attach(10);';
   Blockly.Arduino.setups_['setup_servo_11'] = 'servo_11.Attach(11);';
