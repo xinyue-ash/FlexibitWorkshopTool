@@ -36,12 +36,9 @@ Blockly.Blocks['set_servo_angle_time'] = {
     this.appendValueInput("ANGLE")
       .setCheck(Blockly.Types.NUMBER.checkList)
       .appendField("Move to angle (0-180):");
-    
-    
     this.appendValueInput("TIME")
       .setCheck(Blockly.Types.NUMBER.checkList)
-      .appendField("With time in seconds: ");
-
+      .appendField("within time (in seconds): ");
     this.setPreviousStatement(true, 'Custom');
     this.setNextStatement(true, 'Custom');
     this.setColour(120);

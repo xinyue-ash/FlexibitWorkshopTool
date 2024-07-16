@@ -66,9 +66,8 @@ public:
     {
         if (currentSequenceIndex < sequenceCount && sequences[currentSequenceIndex].remainingSteps > 0)
         {
-            Sequence\& sequence = sequences[currentSequenceIndex];
-            Target\& currentTarget = queue[sequence.front];
-
+            Sequence &amp;sequence = sequences[currentSequenceIndex];
+            Target &amp;currentTarget = queue[sequence.front];
             unsigned long currentMillis = millis();
 
             // if setting the speed, then checking time with speed (AKA mills/degree)
@@ -186,7 +185,7 @@ public:
     // repeat a SEQUENCE
     void ResetSequence(int sequenceIndex)
     {
-        Sequence\& sequence = sequences[sequenceIndex];
+        Sequence &amp;sequence = sequences[sequenceIndex];
         sequence.front = (sequence.rear - sequence.totalSteps + QUEUE_SIZE + 1) % QUEUE_SIZE;
         sequence.remainingSteps = sequence.totalSteps;
         durationStartTime = millis(); // Reset duration start time for the new sequence
@@ -229,7 +228,7 @@ private:
             return;                            // No sequence started
         int sequenceIndex = sequenceCount - 1; // Current sequence index
 
-        Sequence\& sequence = sequences[sequenceIndex];
+        Sequence &amp;sequence = sequences[sequenceIndex];
 
         sequence.rear = (sequence.rear + 1) % QUEUE_SIZE;                // Increment rear pointer
         queue[sequence.rear] = {targetAngle, duration, speed, useSpeed}; // Set angle, duration, and speed

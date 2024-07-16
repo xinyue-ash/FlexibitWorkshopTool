@@ -236,13 +236,6 @@ Ardublockly.TOOLBOX_XML =
     '   <block type=\"multi_servo_control\">' +
     '   </block>' +
 
-    '   <block type =\"breathing_spd_angle\">' +
-    '      <value name="DURATION">' +
-    '        <block type="math_number">' +
-    '          <field name="NUM">60</field>' +
-    '        </block>' +
-    '      </value>' +
-    '   </block > ' +
 
     '   <block type=\"breathing_spd_angle_cycle\">' +
     '      <value name="CYCLES">' +
@@ -273,7 +266,7 @@ Ardublockly.TOOLBOX_XML =
     ' <block type="breathing_preiod_angle_cycle">' +
     '       <value name="PERIOD">' +
     '             <block type="math_number">' +
-    '               <field name="NUM">5</field> ' +
+    '               <field name="NUM">1</field> ' +
     '            </block>' +
     '       </value>' +
     '       <value name="DEGREE">' +
