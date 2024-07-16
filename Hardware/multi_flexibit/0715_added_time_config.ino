@@ -6,9 +6,9 @@
 struct Target
 {
     int angle;
-    int period;    // Duration to reach the target angle
+    int duration;  // Duration to reach the target angle
     int speed;     // millisec per degree step
-    bool useSpeed; // Flag to indicate whether to use speed or period
+    bool useSpeed; // Flag to indicate whether to use speed or duration
 };
 
 // sequence of target angle & speed/time
@@ -30,11 +30,11 @@ class ServoController
     int sequenceCount;
     int repeatCount; // current repetition count for the current sequence
     unsigned long lastUpdate;
-    unsigned long periodStartTime;
+    unsigned long durationStartTime;
     int pos;
 
 public:
-    ServoController() : currentSequenceIndex(0), sequenceCount(0), repeatCount(0), lastUpdate(0), periodStartTime(0), pos(0)
+    ServoController() : currentSequenceIndex(0), sequenceCount(0), repeatCount(0), lastUpdate(0), durationStartTime(0), pos(0)
     {
         for (int i = 0; i < MAX_SEQUENCES; i++)
         {
@@ -83,13 +83,13 @@ public:
             }
             else
             {
-                // Calculate the target position based on period
-                unsigned long elapsedTime = currentMillis - periodStartTime;
+                // Calculate the target position based on duration
+                unsigned long elapsedTime = currentMillis - durationStartTime;
 
-                if (elapsedTime >= currentTarget.period)
+                if (elapsedTime >= currentTarget.duration)
                 {
                     // if time exceeded -> go to next target struct
-                    periodStartTime = currentMillis;
+                    durationStartTime = currentMillis;
                     pos = currentTarget.angle;
                     servo.write(pos);
                     sequence.front = (sequence.front + 1) % QUEUE_SIZE;
@@ -98,7 +98,7 @@ public:
                 else
                 {
                     // using fraction to record the program of angle
-                    float curAngleFraction = (float)elapsedTime / currentTarget.period;
+                    float curAngleFraction = (float)elapsedTime / currentTarget.duration;
                     int targetPos = pos + (currentTarget.angle - pos) * curAngleFraction;
                     servo.write(targetPos);
                 }
@@ -175,24 +175,41 @@ public:
         Sequence &sequence = sequences[sequenceIndex];
         sequence.front = (sequence.rear - sequence.totalSteps + QUEUE_SIZE + 1) % QUEUE_SIZE;
         sequence.remainingSteps = sequence.totalSteps;
-        periodStartTime = millis(); // Reset period start time for the new sequence
+        durationStartTime = millis(); // Reset duration start time for the new sequence
     }
 
     // set angle, and time move to that angle
-    void setAnglePeriod(int targetAngle, int period)
+    void setAngleDuration(int targetAngle, int duration)
     {
-        addTargetToSequence(targetAngle, period, 0, false);
+        addTargetToSequence(targetAngle, duration, 0, false);
     }
 
     // set angle and speed move to that angle
-    void setAngleSpeed(int targetAngle, int speed)
+    void setAngleSpeed(int targetAngle, int userSpeed)
     {
-        addTargetToSequence(targetAngle, 0, speed, true);
+        int mappedSpeed = map(userSpeed, 1, 10, 50, 5);
+        addTargetToSequence(targetAngle, 0, mappedSpeed, true);
     }
 
-    // helper function to added angle , speed or period to the sequence
+    // cannot use pos
+    // because pos is only updated when Update() is called in loop(),
+    // however this function is called in setUp()
+    // for a new sequence : rear is = front -1
+    void addDelayDuration(int duration)
+    {
+        int sequenceIndex = sequenceCount - 1; // Current sequence index
+        Sequence curSequence = sequences[sequenceIndex];
+        // angle of last target or pos  (0) if rear is negative
+        int lastPos = (curSequence.rear >= 0) ? queue[curSequence.rear].angle : pos;
+
+        Serial.print(" lastPos: ");
+        Serial.println(lastPos);
+        addTargetToSequence(lastPos, duration, 0, false);
+    }
+
+    // helper function to add Target (angle , speed or duration )to the sequence
 private:
-    void addTargetToSequence(int targetAngle, int period, int speed, bool useSpeed)
+    void addTargetToSequence(int targetAngle, int duration, int speed, bool useSpeed)
     {
         if (sequenceCount == 0)
             return;                            // No sequence started
@@ -200,24 +217,21 @@ private:
 
         Sequence &sequence = sequences[sequenceIndex];
 
-        sequence.rear = (sequence.rear + 1) % QUEUE_SIZE;              // Increment rear pointer
-        queue[sequence.rear] = {targetAngle, period, speed, useSpeed}; // Set angle, period, and speed
+        sequence.rear = (sequence.rear + 1) % QUEUE_SIZE;                // Increment rear pointer
+        queue[sequence.rear] = {targetAngle, duration, speed, useSpeed}; // Set angle, duration, and speed
         sequence.totalSteps++;
         sequence.remainingSteps = sequence.totalSteps; // Initialize remaining steps for the new sequence
 
         // Debug prints
-        Serial.print("Added Target Angle: ");
-        Serial.print(targetAngle);
-        if (useSpeed)
-        {
-            Serial.print(" Speed: ");
-            Serial.println(speed);
-        }
-        else
-        {
-            Serial.print(" Period: ");
-            Serial.println(period);
-        }
+        // Serial.print("Added Target Angle: ");
+        // Serial.print(targetAngle);
+        // if (useSpeed) {
+        //   Serial.print(" Speed: ");
+        //   Serial.println(speed);
+        // } else {
+        //   Serial.print(" Duration: ");
+        //   Serial.println(duration);
+        // }
     }
 };
 
@@ -228,38 +242,53 @@ ServoController servo_11;
 void setup()
 {
     Serial.begin(9600);
-    // servo_9.Attach(9);
-    // servo_10.Attach(10);
-    servo_11.Attach(9);
-
-    servo_11.StartNewSequence();
-    servo_11.setAnglePeriod(170, 500);
-    servo_11.setAnglePeriod(90, 700);
-    servo_11.SetRepeats(5);
-
-    servo_11.StartNewSequence();
-    servo_11.setAnglePeriod(60, 500);
-    servo_11.setAnglePeriod(0, 400);
-    servo_11.SetRepeats(5);
-
-    // servo_11.StartNewSequence();
-    // servo_11.setAngleSpeed(40, 10);
-    // servo_11.setAngleSpeed(0, 10);
-    // servo_11.SetRepeats(5);
-
-    // servo_10.StartNewSequence();
-    // servo_10.setAnglePeriod(170, 1000);
-    // servo_10.setAnglePeriod(0, 1000);
-    // servo_10.SetRepeats(25);
-
+    servo_9.Attach(9);
+    servo_10.Attach(10);
+    servo_11.Attach(11);
     // servo_9.StartNewSequence();
-    // servo_9.setAnglePeriod(170, 5000);
-    // servo_9.setAnglePeriod(0, 5000);
-    // servo_9.SetRepeats(5);
+    // servo_9.setAngleDuration(60, 1000); // delay between target
+    // servo_9.addDelayDuration(2000);
+    // servo_9.setAngleDuration(120, 1000);
+    // // servo_9.addDelayDuration(2000);
+    //  servo_9.SetRepeats(5);
+
+    // test delay between sequence
+    servo_9.StartNewSequence();
+    servo_9.addDelayDuration(2000);
+    servo_9.SetRepeats(1);
+
+    // test delay between target
+    servo_9.StartNewSequence();
+    servo_9.setAngleDuration(60, 1000);
+    servo_9.addDelayDuration(2000);
+    servo_9.setAngleDuration(120, 1000);
+    servo_9.addDelayDuration(2000);
+    servo_9.SetRepeats(5);
+
+    // test setAngleSpeed
+    servo_9.StartNewSequence();
+    servo_9.setAngleSpeed(60, 1);
+    servo_9.setAngleSpeed(180, 10);
+    servo_9.SetRepeats(5);
+
+    // test delay between sequence
+    servo_9.StartNewSequence();
+    servo_9.addDelayDuration(1000);
+    servo_9.SetRepeats(1);
+
+    // test mix
+    servo_9.StartNewSequence();
+    servo_9.setAngleSpeed(60, 1);
+    servo_9.setAngleDuration(180, 1000);
+    servo_9.addDelayDuration(1000);
+    servo_9.setAngleSpeed(30, 7);
+
+    servo_9.SetRepeats(5);
 }
 
 void loop()
 {
+
     servo_9.Update();
     servo_10.Update();
     servo_11.Update();
