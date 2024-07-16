@@ -13,6 +13,9 @@ goog.require("Blockly.Arduino.servo");
 goog.require("Blockly.Arduino");
 
 var setUpServoControlClass = `
+#include <Servo.h>
+#define MAX_SEQUENCES 10
+#define QUEUE_SIZE 50
 // target angle with speed or
 struct Target
 {
@@ -63,8 +66,8 @@ public:
     {
         if (currentSequenceIndex < sequenceCount && sequences[currentSequenceIndex].remainingSteps > 0)
         {
-            Sequence &sequence = sequences[currentSequenceIndex];
-            Target &currentTarget = queue[sequence.front];
+            Sequence\& sequence = sequences[currentSequenceIndex];
+            Target\& currentTarget = queue[sequence.front];
 
             unsigned long currentMillis = millis();
 
@@ -183,7 +186,7 @@ public:
     // repeat a SEQUENCE
     void ResetSequence(int sequenceIndex)
     {
-        Sequence &sequence = sequences[sequenceIndex];
+        Sequence\& sequence = sequences[sequenceIndex];
         sequence.front = (sequence.rear - sequence.totalSteps + QUEUE_SIZE + 1) % QUEUE_SIZE;
         sequence.remainingSteps = sequence.totalSteps;
         durationStartTime = millis(); // Reset duration start time for the new sequence
@@ -226,7 +229,7 @@ private:
             return;                            // No sequence started
         int sequenceIndex = sequenceCount - 1; // Current sequence index
 
-        Sequence &sequence = sequences[sequenceIndex];
+        Sequence\& sequence = sequences[sequenceIndex];
 
         sequence.rear = (sequence.rear + 1) % QUEUE_SIZE;                // Increment rear pointer
         queue[sequence.rear] = {targetAngle, duration, speed, useSpeed}; // Set angle, duration, and speed
