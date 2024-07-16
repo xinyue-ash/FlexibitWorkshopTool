@@ -333,7 +333,7 @@ Ardublockly.TOOLBOX_XML =
     '   <block type=\"start_sequence_repeat\">' +
     '      <value name="REPEATS">' +
     '        <block type="math_number">' +
-    '          <field name="NUM">1</field>' +
+    '          <field name="NUM">5</field>' +
     '        </block>' +
     '       </value>' +
     '  </block>' +
@@ -359,7 +359,7 @@ Ardublockly.TOOLBOX_XML =
     '       </value>' +
     '       <value name="TIME">' +
     '             <block type="math_number">' +
-    '               <field name="NUM">2</field> ' +
+    '               <field name="NUM">0.5</field> ' +
     '            </block>' +
     '       </value>' +
     '   </block>'
