@@ -1,0 +1,309 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="multi_servo_control" id="4h{?!oR(TJD7U^@`F5V{" x="14" y="-3">
+    <statement name="FB1">
+      <block type="start_sequence_repeat" id="B%N^:sX=dK}DS(W(J#:u">
+        <statement name="DO">
+          <block type="set_servo_angle_time" id="Dhc:ZTSVO_m70VV=%T%L">
+            <value name="ANGLE">
+              <block type="math_number" id="=/G_h!Qgj-6]u%rpXu5L">
+                <field name="NUM">170</field>
+              </block>
+            </value>
+            <value name="TIME">
+              <block type="math_number" id="y;WAGYPk^OGpv#q)8z3O">
+                <field name="NUM">0.5</field>
+              </block>
+            </value>
+            <next>
+              <block type="set_servo_angle_time" id="*l!W:yYp;;dT|6V=Fr?D">
+                <value name="ANGLE">
+                  <block type="math_number" id="+n|-w[vtZXhtDCvg2[98">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="TIME">
+                  <block type="math_number" id="+Az-8/G*wnpH3qC!(e?d">
+                    <field name="NUM">0.5</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="set_servo_angle_time" id="9bKR4H}E|u0N(v}(lSwQ">
+                    <value name="ANGLE">
+                      <block type="math_number" id="X4ED@zoZj.5Cr.1u:Ati">
+                        <field name="NUM">170</field>
+                      </block>
+                    </value>
+                    <value name="TIME">
+                      <block type="math_number" id="t(Vfg]^N(EaTtfHN%BOK">
+                        <field name="NUM">0.5</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="set_servo_angle_time" id="Ooqx{j%lzffEp*npbbr#">
+                        <value name="ANGLE">
+                          <block type="math_number" id="=^8Ex/}q^C.G7-!If=^w">
+                            <field name="NUM">90</field>
+                          </block>
+                        </value>
+                        <value name="TIME">
+                          <block type="math_number" id="Uwnr*PC!gM#492ChlqRn">
+                            <field name="NUM">0.5</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="REPEATS">
+          <block type="math_number" id="`Js|sL3IlAR6toP0U}o0">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <next>
+          <block type="delay_between_behavior" id="i0nQ~Uly8D]2W~^5n58}">
+            <value name="DELAY_TIME_MILI">
+              <block type="math_number" id="wil1;j96#A[@UB0lVUk2">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+            <next>
+              <block type="start_sequence_repeat" id="Yapy4pu-0A2R*:.PB07j">
+                <statement name="DO">
+                  <block type="set_servo_angle_time" id="o+zpR]*_)SB[?Vb-4FO5">
+                    <value name="ANGLE">
+                      <block type="math_number" id="5qB[z@Uidw@32:tW_izn">
+                        <field name="NUM">170</field>
+                      </block>
+                    </value>
+                    <value name="TIME">
+                      <block type="math_number" id="P+V/#A;H%3i,HRn2e|bf">
+                        <field name="NUM">0.5</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="set_servo_angle_time" id="3yJkC5LecUJ!63qc:|f1">
+                        <value name="ANGLE">
+                          <block type="math_number" id="LOG+A,wK+%DESi7`w}Sv">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="TIME">
+                          <block type="math_number" id="szfY+np0/~H}n9XiIAeZ">
+                            <field name="NUM">0.5</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="set_servo_angle_time" id="GyRjE/zF6m]v.*wL4NKl">
+                            <value name="ANGLE">
+                              <block type="math_number" id="hhlHGMCAEf)Hj3TM[GX(">
+                                <field name="NUM">170</field>
+                              </block>
+                            </value>
+                            <value name="TIME">
+                              <block type="math_number" id="7:uifS#K,BQ[sTQ!uWDk">
+                                <field name="NUM">0.5</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="set_servo_angle_time" id="K`y[Yq4B4#`Hy:u(?2I~">
+                                <value name="ANGLE">
+                                  <block type="math_number" id="uBE)q`yTh)G-c)Lc;!xb">
+                                    <field name="NUM">90</field>
+                                  </block>
+                                </value>
+                                <value name="TIME">
+                                  <block type="math_number" id="}!!9pT2dlJEco/@prg-R">
+                                    <field name="NUM">0.5</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="REPEATS">
+                  <block type="math_number" id="m=kR}D=*`1i_TDWg7@`Z">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="FB2">
+      <block type="start_sequence_repeat" id="|.@/~W%}[TY_/[mJ(-i~">
+        <statement name="DO">
+          <block type="set_servo_angle_time" id="4iKHS?fh?pzAsWESxpx]">
+            <value name="ANGLE">
+              <block type="math_number" id="OyV73k*q~Y[1(-8#A=l=">
+                <field name="NUM">170</field>
+              </block>
+            </value>
+            <value name="TIME">
+              <block type="math_number" id="*bGYG4g8|-i_#a}ZrRz-">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="set_servo_angle_time" id="Wj7h-u,-:W=s|@{D9:^J">
+                <value name="ANGLE">
+                  <block type="math_number" id="H{,]|76rlF;[MGA~E6Ww">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="TIME">
+                  <block type="math_number" id="dqpw@1yP_;b]Ha8K83|-">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="REPEATS">
+          <block type="math_number" id="D{}2.o/=xG-%MdM`XS[z">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <next>
+          <block type="delay_between_behavior" id="(]2I{cHHH_MvY_l,_|=G">
+            <value name="DELAY_TIME_MILI">
+              <block type="math_number" id="Z#H]W.W#,-~AE?mtIxH?">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+            <next>
+              <block type="start_sequence_repeat" id="dG8CEo(ZT@+_{5vm-~Lw">
+                <statement name="DO">
+                  <block type="set_servo_angle_time" id="NfxlRZdgj)(nP8GIYsEK">
+                    <value name="ANGLE">
+                      <block type="math_number" id="RHhQnyEiA[;9+L4om?gy">
+                        <field name="NUM">170</field>
+                      </block>
+                    </value>
+                    <value name="TIME">
+                      <block type="math_number" id="Drjt23imIuE:59t1r4LW">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="set_servo_angle_time" id="}V6Z,fwU|XCElJn,k=Dr">
+                        <value name="ANGLE">
+                          <block type="math_number" id="5vv008UN)..wmc+5_OtU">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="TIME">
+                          <block type="math_number" id="u36VM?@W@)GRaH-=lCrv">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="REPEATS">
+                  <block type="math_number" id="5/+F*GFFCPWFV1Mbn_k4">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="FB3">
+      <block type="start_sequence_repeat" id="`!Q?TL5DS8^0V9vT!;XW">
+        <statement name="DO">
+          <block type="set_servo_angle_time" id="xg0/hXK,o,o!6=-D#SK]">
+            <value name="ANGLE">
+              <block type="math_number" id="/.4A+*@Lt.xn:o`O,Y1[">
+                <field name="NUM">170</field>
+              </block>
+            </value>
+            <value name="TIME">
+              <block type="math_number" id="#Xnlq|P}cC^YZ,^yviz?">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+            <next>
+              <block type="set_servo_angle_time" id="N9W[1zAj;LaF^nN??YFV">
+                <value name="ANGLE">
+                  <block type="math_number" id="O_Un]p0;)jC]mpstxU?1">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="TIME">
+                  <block type="math_number" id=";5hdn`^CKZB-NO}#bD[]">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="REPEATS">
+          <block type="math_number" id="Piq75({u/+q7J[EpC7Bm">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="delay_between_behavior" id="[IQ%d7zL#?]N3@Jws9hE">
+            <value name="DELAY_TIME_MILI">
+              <block type="math_number" id=";060[Q-:EubfA/ZMBpU8">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+            <next>
+              <block type="start_sequence_repeat" id="kgC9ChfPingyeJyMt3L=">
+                <statement name="DO">
+                  <block type="set_servo_angle_time" id="(t+5cIWu]O(W`qTOI4;i">
+                    <value name="ANGLE">
+                      <block type="math_number" id="f:3kV~tz(sng1`YIQ]IY">
+                        <field name="NUM">170</field>
+                      </block>
+                    </value>
+                    <value name="TIME">
+                      <block type="math_number" id="{~;u=nU948L{TF}k/.79">
+                        <field name="NUM">5</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="set_servo_angle_time" id="ih[yRCcXb]g(wOi{7,]h">
+                        <value name="ANGLE">
+                          <block type="math_number" id="7xUQ!Ry6m!y(0OdUXDF(">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="TIME">
+                          <block type="math_number" id="{-2+zcY(%LgMjHjvi9+g">
+                            <field name="NUM">5</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="REPEATS">
+                  <block type="math_number" id="%ib6/EHMMBQ:je~-,k+0">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
