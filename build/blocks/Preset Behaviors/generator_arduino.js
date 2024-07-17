@@ -71,8 +71,8 @@ Blockly.Arduino["breathing_preiod_angle_cycle"] = function (block) {
 
   var code =
     'servo___SERVO_PIN__.StartNewSequence();\n' +
-    'servo___SERVO_PIN__.setAnglePeriod(' + angle + ', ' + period + '); \n' +
-    'servo___SERVO_PIN__.setAnglePeriod(' + 0 + ', ' + period + '); \n' +
+    'servo___SERVO_PIN__.setAngleDuration(' + angle + ', ' + period + '); \n' +
+    'servo___SERVO_PIN__.setAngleDuration(' + 0 + ', ' + period + '); \n' +
     'servo___SERVO_PIN__.SetRepeats(' + cycles + '); \n';
   ;
   return code;
