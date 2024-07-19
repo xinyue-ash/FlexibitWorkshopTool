@@ -50,9 +50,29 @@ Blockly.Blocks["breathing_spd_angle"] = {
 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    // this.setTooltip();
+    this.setTooltip("Breathe for a specified number of seconds.");
     // this.setHelpUrl();
   },
+
+  onchange: function (event) {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+
+    const breathingDurationBlock = this.getInputTargetBlock("DURATION");
+
+    if (breathingDurationBlock && breathingDurationBlock.type === "math_number") {
+      const duration = parseFloat(breathingDurationBlock.getFieldValue("NUM"));
+      if (duration <= 0 || isNaN(duration)) {
+        this.setWarningText("Number must be greater than 0.");
+        this.setDisabled(true);
+      } else {
+        this.setWarningText(null);
+        this.setDisabled(false);
+      }
+    }
+  }
 };
 
 Blockly.Blocks["breathing_spd_angle_cycle"] = {
@@ -88,9 +108,29 @@ Blockly.Blocks["breathing_spd_angle_cycle"] = {
 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    // this.setTooltip();
+    this.setTooltip("Breathe a specified number of times.");
     // this.setHelpUrl();
   },
+
+  onchange: function (event) {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+
+    const breathingCyclesBlock = this.getInputTargetBlock("CYCLES");
+
+    if (breathingCyclesBlock && breathingCyclesBlock.type === "math_number") {
+      const numRepeats = parseFloat(breathingCyclesBlock.getFieldValue("NUM"));
+      if (numRepeats < 1 || isNaN(numRepeats)) {
+        this.setWarningText("Number must be greater than 0.");
+        this.setDisabled(true);
+      } else {
+        this.setWarningText(null);
+        this.setDisabled(false);
+      }
+    }
+  }
 };
 
 Blockly.Blocks["breathing_interval_angle_cycle"] = {
@@ -120,9 +160,53 @@ Blockly.Blocks["breathing_interval_angle_cycle"] = {
 
     this.setPreviousStatement(true, null); // able to attech to a block before
     this.setNextStatement(true, null); // able to attech a block after
-    // this.setTooltip();
+    this.setTooltip("Create a breathing motion with a specified interval, degree, and number of cycles.");
     // this.setHelpUrl();
   },
+
+  onchange: function (event) {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+
+    const customBreathingInterval = this.getInputTargetBlock("INTERVAL");
+    const customBreathingDepth = this.getInputTargetBlock("DEGREE");
+    const customBreathingCycle = this.getInputTargetBlock("CYCLES");
+
+    if (customBreathingInterval && customBreathingInterval.type === "math_number") {
+      const numIntervals = parseFloat(customBreathingInterval.getFieldValue("NUM"));
+      if (numIntervals < 1 || numIntervals > 10 || isNaN(numIntervals)) {
+        this.setWarningText("Number must be between 1 and 10.");
+        this.setDisabled(true);
+      } else {
+        this.setWarningText(null);
+        this.setDisabled(false);
+      }
+    }
+
+    if (customBreathingDepth && customBreathingDepth.type === "math_number") {
+      const depth = parseFloat(customBreathingDepth.getFieldValue("NUM"));
+      if (depth < 0 || depth > 180 || isNaN(depth)) {
+        this.setWarningText("Depth must be between 0 and 180 degrees.");
+        this.setDisabled(true);
+      } else {
+        this.setWarningText(null);
+        this.setDisabled(false);
+      }
+    }
+
+    if (customBreathingCycle && customBreathingCycle.type === "math_number") {
+      const numCycles = parseFloat(customBreathingCycle.getFieldValue("NUM"));
+      if (numCycles < 1 || isNaN(numCycles)) {
+        this.setWarningText("Number must be greater than 0.");
+        this.setDisabled(true);
+      } else {
+        this.setWarningText(null);
+        this.setDisabled(false);
+      }
+    }
+  }
 };
 
 Blockly.Blocks["shake"] = {
@@ -139,9 +223,29 @@ Blockly.Blocks["shake"] = {
     this.appendDummyInput().appendField("times").setAlign(Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true, null); // able to attech to a block before
     this.setNextStatement(true, null); // able to attech a block after
-    // this.setTooltip();
+    this.setTooltip("Shake for a specified number of times.");
     // this.setHelpUrl();
   },
+
+  onchange: function (event) {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+
+    const shakeBlock = this.getInputTargetBlock("CYCLES");
+
+    if (shakeBlock && shakeBlock.type === "math_number") {
+      const numCycles = parseFloat(shakeBlock.getFieldValue("NUM"));
+      if (numCycles < 1 || isNaN(numCycles)) {
+        this.setWarningText("Number must be greater than 0.");
+        this.setDisabled(true);
+      } else {
+        this.setWarningText(null);
+        this.setDisabled(false);
+      }
+    }
+  }
 };
 
 
@@ -166,7 +270,28 @@ Blockly.Blocks["heartbeat"] = {
     this.appendDummyInput().appendField("seconds");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
+    this.setTooltip("Heartbeat for a specified number of times.");
   },
+
+  onchange: function (event) {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+
+    const heartbeatBlock = this.getInputTargetBlock("DURATION");
+
+    if (heartbeatBlock && heartbeatBlock.type === "math_number") {
+      const duration = parseFloat(heartbeatBlock.getFieldValue("NUM"));
+      if (duration < 1 || isNaN(duration)) {
+        this.setWarningText("Duration must be greater than 0.");
+        this.setDisabled(true);
+      } else {
+        this.setWarningText(null);
+        this.setDisabled(false);
+      }
+    }
+  }
 };
 
 Blockly.Blocks['heartbeat_servo'] = {
