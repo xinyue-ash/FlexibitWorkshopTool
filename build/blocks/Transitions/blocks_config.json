@@ -8,10 +8,18 @@
     "toolbox": [
         "<category id=\"Transitions\" name=\"Transitions\">",
         
-        "<block type=\"time_delay\">",
+        "<block type=\"delay_between_angle\">",
         "   <value name=\"DELAY_TIME_MILLI\">",
         "       <block type=\"math_number\">",
-        "           <field name=\"NUM\">5</field>",
+        "           <field name=\"NUM\">0.5</field>",
+        "       </block>",
+        "   </value>",
+        "</block>",
+
+        "<block type=\"delay_between_behavior\">",
+        "   <value name=\"DELAY_TIME_MILLI\">",
+        "       <block type=\"math_number\">",
+        "           <field name=\"NUM\">1</field>",
         "       </block>",
         "   </value>",
         "</block>",

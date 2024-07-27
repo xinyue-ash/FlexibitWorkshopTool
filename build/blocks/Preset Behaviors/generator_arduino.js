@@ -12,28 +12,73 @@ goog.provide("Blockly.Arduino.Flexibit9");
 goog.require("Blockly.Arduino.servo");
 goog.require("Blockly.Arduino");
 
+// // take the time of EACH breath, angle and number of cycle
+Blockly.Arduino["breathing_preiod_angle_cycle"] = function (block) {
+  var userPreiod =
+    Blockly.Arduino.valueToCode(
+      block,
+      "PERIOD",
+      Blockly.Arduino.ORDER_ATOMIC
+    ) || "4";
 
-Blockly.Arduino["breathing_spd_angle"] = function (block) {
-  var speed = block.getFieldValue('SPEED');
-  var amplitude = block.getFieldValue('AMP');
-  var duration = Blockly.Arduino.valueToCode(block, "DURATION", Blockly.Arduino.ORDER_ATOMIC) || "90";
+  var period = userPreiod * 1000 / 2;
 
-  var delayTime = speed == "SLOW" ? 5 : 9; // 60 ms for slow, 30 ms for fast
-  var angle = amplitude == "DEEP" ? 170 : 90;
-  var cycles = Math.floor((duration * 1000) / (2 * angle * delayTime)); // calculate number of cycles
+  var angle =
+    Blockly.Arduino.valueToCode(
+      block,
+      "DEGREE",
+      Blockly.Arduino.ORDER_ATOMIC
+    ) || "90";
+  var cycles =
+    Blockly.Arduino.valueToCode(
+      block,
+      "CYCLES",
+      Blockly.Arduino.ORDER_ATOMIC
+    ) || "5";
 
-  // Use the servoPin placeholder directly
   var code =
-    'servo___SERVO_PIN__.StartNewSequence();\n' + 
-    'servo___SERVO_PIN__.setAngleSpeed(0,10); \n' +
-    'servo___SERVO_PIN__.setAngleSpeed(' + angle + ', ' + delayTime + '); \n' +
-    'servo___SERVO_PIN__.setAngleSpeed(' + 0 + ', ' + delayTime + '); \n' +
-    'servo___SERVO_PIN__.SetRepeats(' + cycles + '); \n'; 
+    'servo___SERVO_PIN__.StartNewSequence();\n' +
+    'servo___SERVO_PIN__.setAnglePeriod(' + angle + ', ' + period + '); \n' +
+    'servo___SERVO_PIN__.setAnglePeriod(' + 0 + ', ' + period + '); \n' +
+    'servo___SERVO_PIN__.SetRepeats(' + cycles + '); \n';
   ;
   return code;
-  
 };
 
+//take the time of EACH breath, angle and number of cycle
+Blockly.Arduino["breathing_preiod_angle_cycle"] = function (block) {
+  var userPreiod =
+    Blockly.Arduino.valueToCode(
+      block,
+      "PERIOD",
+      Blockly.Arduino.ORDER_ATOMIC
+    ) || "4";
+
+  var period = userPreiod * 1000 / 2;
+
+  var angle =
+    Blockly.Arduino.valueToCode(
+      block,
+      "DEGREE",
+      Blockly.Arduino.ORDER_ATOMIC
+    ) || "90";
+  var cycles =
+    Blockly.Arduino.valueToCode(
+      block,
+      "CYCLES",
+      Blockly.Arduino.ORDER_ATOMIC
+    ) || "5";
+
+  var code =
+    'servo___SERVO_PIN__.StartNewSequence();\n' +
+    'servo___SERVO_PIN__.setAngleDuration(' + angle + ', ' + period + '); \n' +
+    'servo___SERVO_PIN__.setAngleDuration(' + 0 + ', ' + period + '); \n' +
+    'servo___SERVO_PIN__.SetRepeats(' + cycles + '); \n';
+  ;
+  return code;
+};
+
+// preset speed
 Blockly.Arduino["breathing_spd_angle_cycle"] = function (block) {
   var speed = block.getFieldValue("SPEED");
   var apm = block.getFieldValue("AMP");
@@ -44,7 +89,7 @@ Blockly.Arduino["breathing_spd_angle_cycle"] = function (block) {
       Blockly.Arduino.ORDER_ATOMIC
     ) || "5";
 
-  var delayTime = speed === "SLOW" ? 5 : 9; 
+  var delayTime = speed === "SLOW" ? 5 : 9;
   var angle = apm == "DEEP" ? 170 : 90;
 
   var code =
@@ -57,6 +102,7 @@ Blockly.Arduino["breathing_spd_angle_cycle"] = function (block) {
   return code;
 };
 
+// takes breathing number of cycle, angle, and userinput speed (1-10)
 Blockly.Arduino["breathing_interval_angle_cycle"] = function (block) {
   // var dropdown_pin = block.getFieldValue('PIN');
   var delayTime =
@@ -96,7 +142,7 @@ Blockly.Arduino["shake"] = function (block) {
       "CYCLES",
       Blockly.Arduino.ORDER_ATOMIC
     ) || "5";
-  
+
   var code =
     'servo___SERVO_PIN__.StartNewSequence();\n' +
     'servo___SERVO_PIN__.setAngleSpeed(80,10); \n' +
@@ -120,7 +166,7 @@ Blockly.Arduino["heartbeat"] = function (block) {
   var code =
     'servo___SERVO_PIN__.StartNewSequence();\n' +
     'servo___SERVO_PIN__.setAngleSpeed(40,' + delayTime + '); \n' +
-    'servo___SERVO_PIN__.setAngleSpeed(20,' + delayTime/3 + '); \n' +
+    'servo___SERVO_PIN__.setAngleSpeed(20,' + delayTime / 3 + '); \n' +
     'servo___SERVO_PIN__.SetRepeats(' + repeat + '); \n';
   return code;
 };

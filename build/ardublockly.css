@@ -556,6 +556,26 @@ ul.side-nav li.side-menu-end {
   }
 }
 
+.modal {
+  border: 4px none !important;
+}
+
+.modal-content {
+  height: 350px !important;
+  border-radius: 4px;
+  border: none !important
+}
+
+.btn-flat {
+  transition: none !important;
+}
+
+.disabled-button {
+  color: #ccc !important;
+  cursor: not-allowed;
+}
+
+
 
 /*****************/
 /*  Sketch name  */

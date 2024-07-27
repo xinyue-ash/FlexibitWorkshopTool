@@ -1,21 +1,7 @@
-/**
- * @license Licensed under the Apache License, Version 2.0 (the "License"):
- *          http://www.apache.org/licenses/LICENSE-2.0
- */
-
-/**
- * @fileoverview Code generator for blocks that controls flexibit that conneted to board pin 9.
- */
-"use strict";
-
-goog.provide("Blockly.Arduino.Customize9");
-goog.require("Blockly.Arduino.servo");
-goog.require("Blockly.Arduino");
-
-var setUpServoControlClass = `
 #include <Servo.h>
 #define MAX_SEQUENCES 10
 #define QUEUE_SIZE 50
+
 // target angle with speed or
 struct Target
 {
@@ -66,8 +52,9 @@ public:
     {
         if (currentSequenceIndex < sequenceCount && sequences[currentSequenceIndex].remainingSteps > 0)
         {
-            Sequence &amp;sequence = sequences[currentSequenceIndex];
-            Target &amp;currentTarget = queue[sequence.front];
+            Sequence &sequence = sequences[currentSequenceIndex];
+            Target &currentTarget = queue[sequence.front];
+
             unsigned long currentMillis = millis();
 
             // if setting the speed, then checking time with speed (AKA mills/degree)
@@ -185,7 +172,7 @@ public:
     // repeat a SEQUENCE
     void ResetSequence(int sequenceIndex)
     {
-        Sequence &amp;sequence = sequences[sequenceIndex];
+        Sequence &sequence = sequences[sequenceIndex];
         sequence.front = (sequence.rear - sequence.totalSteps + QUEUE_SIZE + 1) % QUEUE_SIZE;
         sequence.remainingSteps = sequence.totalSteps;
         durationStartTime = millis(); // Reset duration start time for the new sequence
@@ -228,7 +215,7 @@ private:
             return;                            // No sequence started
         int sequenceIndex = sequenceCount - 1; // Current sequence index
 
-        Sequence &amp;sequence = sequences[sequenceIndex];
+        Sequence &sequence = sequences[sequenceIndex];
 
         sequence.rear = (sequence.rear + 1) % QUEUE_SIZE;                // Increment rear pointer
         queue[sequence.rear] = {targetAngle, duration, speed, useSpeed}; // Set angle, duration, and speed
@@ -247,80 +234,140 @@ private:
         // }
     }
 };
-`;
 
-// angle + speed block
-Blockly.Arduino["set_servo_angle_speed"] = function (block) {
+ServoController servo_9;
+ServoController servo_10;
+ServoController servo_11;
 
-  var angle = Blockly.Arduino.valueToCode(block, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
-  var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_ATOMIC);
+void setup()
+{
+    Serial.begin(9600);
+    servo_9.Attach(9);
+    servo_10.Attach(10);
+    servo_11.Attach(11);
 
-  var code = 'servo___SERVO_PIN__.setAngleSpeed(' + angle + ', ' + speed + '); \n';
-  return code;
-};
+    servo_10.StartNewSequence();
+    servo_10.setAngleDuration(60, 1000); // delay between target
+    servo_10.addDelayDuration(2000);
+    servo_10.setAngleDuration(120, 1000);
+    // servo_10.addDelayDuration(2000);
+    servo_10.SetRepeats(5);
 
+    servo_9.StartNewSequence();
+    servo_9.setAngleDuration(60, 1000); // delay between target
+    servo_9.addDelayDuration(2000);
+    servo_9.setAngleDuration(120, 1000);
+    // servo_9.addDelayDuration(2000);
+    servo_9.SetRepeats(5);
 
-Blockly.Arduino["set_servo_angle_time"] = function (block) {
+    servo_11.StartNewSequence();
+    servo_11.setAngleDuration(60, 1000); // delay between target
+    servo_11.addDelayDuration(2000);
+    servo_11.setAngleDuration(120, 1000);
+    // servo_11.addDelayDuration(2000);
+    servo_11.SetRepeats(5);
 
-  var angle = Blockly.Arduino.valueToCode(block, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
-  var userTime = Blockly.Arduino.valueToCode(block, 'TIME', Blockly.Arduino.ORDER_ATOMIC);
+    // test time sync + delay
+    // servo_11.StartNewSequence();
+    // servo_11.setAngleDuration(170, 500);
+    // servo_11.setAngleDuration(0, 500);
+    // servo_11.setAngleDuration(170, 500);
+    // servo_11.setAngleDuration(90, 500);
+    // servo_11.SetRepeats(5);
 
-  var time = userTime * 1000;
+    // servo_11.StartNewSequence();
+    // servo_11.addDelayDuration(2000);
+    // servo_11.SetRepeats(1);
 
-  var code = 'servo___SERVO_PIN__.setAngleDuration(' + angle + ', ' + time + '); \n';
-  return code;
-};
+    // servo_11.StartNewSequence();
+    // servo_11.setAngleDuration(170, 500);
+    // servo_11.setAngleDuration(0, 500);
+    // servo_11.setAngleDuration(170, 500);
+    // servo_11.setAngleDuration(90, 500);
+    // servo_11.SetRepeats(5);
 
+    // servo_10.StartNewSequence();
+    // servo_10.setAngleDuration(170, 1000);
+    // servo_10.setAngleDuration(0, 1000);
+    // servo_10.SetRepeats(5);
 
-Blockly.Arduino['start_sequence_repeat'] = function (block) {
-  var number_repeats = Blockly.Arduino.valueToCode(block, 'REPEATS', Blockly.Arduino.ORDER_ATOMIC);
-  var statements_do = Blockly.Arduino.statementToCode(block, 'DO');
-  var code = 'servo___SERVO_PIN__.StartNewSequence();\n';
-  code += statements_do;
+    // servo_10.StartNewSequence();
+    // servo_10.addDelayDuration(2000);
+    // servo_10.SetRepeats(1);
 
-  code += '   servo___SERVO_PIN__.SetRepeats(' + number_repeats + ');\n';
-  return code;
-};
+    // servo_10.StartNewSequence();
+    // servo_10.setAngleDuration(170, 1000);
+    // servo_10.setAngleDuration(0, 1000);
+    // servo_10.SetRepeats(5);
 
+    // servo_9.StartNewSequence();
+    // servo_9.setAngleDuration(170,5000);
+    // servo_9.setAngleDuration(0,5000);
+    // servo_9.SetRepeats(1);
+    // servo_9.StartNewSequence();
+    // servo_9.addDelayDuration(2000);
+    // servo_9.SetRepeats(1);
+    // servo_9.StartNewSequence();
+    // servo_9.setAngleDuration(170,5000);
+    // servo_9.setAngleDuration(0,5000);
+    // servo_9.SetRepeats(1);
 
+    // test time sync
+    // servo_11.StartNewSequence();
+    // servo_11.setAngleDuration(170, 500);
+    // servo_11.setAngleDuration(0, 500);
+    // servo_11.setAngleDuration(170, 500);
+    // servo_11.setAngleDuration(90, 500);
+    // servo_11.SetRepeats(25);
 
-// wrapper for multiple servo controll
-Blockly.Arduino['multi_servo_control'] = function (block) {
-  var statements_flexibit1 = Blockly.Arduino.statementToCode(block, 'FB1');
-  var statements_flexibit2 = Blockly.Arduino.statementToCode(block, 'FB2');
-  var statements_flexibit3 = Blockly.Arduino.statementToCode(block, 'FB3');
+    // servo_10.StartNewSequence();
+    // servo_10.setAngleDuration(170, 1000);
+    // servo_10.setAngleDuration(0, 1000);
+    // servo_10.SetRepeats(25);
 
-  Blockly.Arduino.definitions_['setUpServoControlClass'] = setUpServoControlClass;
+    // servo_9.StartNewSequence();
+    // servo_9.setAngleDuration(170,5000);
+    // servo_9.setAngleDuration(0,5000);
+    // servo_9.SetRepeats(5);
 
-  Blockly.Arduino.definitions_['servo_9'] = 'ServoController servo_9;';
-  Blockly.Arduino.definitions_['servo_10'] = 'ServoController servo_10;';
-  Blockly.Arduino.definitions_['servo_11'] = 'ServoController servo_11;';
+    // // test delay between sequence
+    // servo_9.StartNewSequence();
+    // servo_9.addDelayDuration(2000);
+    // servo_9.SetRepeats(1);
 
-  Blockly.Arduino.setups_['serial_setup'] = 'Serial.begin(9600);';
-  Blockly.Arduino.setups_['setup_servo_9'] = 'servo_9.Attach(9);';
-  Blockly.Arduino.setups_['setup_servo_10'] = 'servo_10.Attach(10);';
-  Blockly.Arduino.setups_['setup_servo_11'] = 'servo_11.Attach(11);';
+    // // test delay between target
+    // servo_9.StartNewSequence();
+    // servo_9.setAngleDuration(60, 1000);
+    // servo_9.addDelayDuration(2000);
+    // servo_9.setAngleDuration(120, 1000);
+    // servo_9.addDelayDuration(2000);
+    // servo_9.SetRepeats(5);
 
-  Blockly.Arduino.setups_['sevo_9_behabior'] = statements_flexibit1.replace(/__SERVO_PIN__/g, '9');
-  Blockly.Arduino.setups_['sevo_10_behabior'] = statements_flexibit2.replace(/__SERVO_PIN__/g, '10');
-  Blockly.Arduino.setups_['sevo_11_behabior'] = statements_flexibit3.replace(/__SERVO_PIN__/g, '11');
-  // need to change into only the block that is attached can be genreated by update
-  var code = `
+    // // test setAngleSpeed
+    // servo_9.StartNewSequence();
+    // servo_9.setAngleSpeed(60, 1);
+    // servo_9.setAngleSpeed(180, 10);
+    // servo_9.SetRepeats(5);
+
+    // // test delay between sequence
+    // servo_9.StartNewSequence();
+    // servo_9.addDelayDuration(1000);
+    // servo_9.SetRepeats(1);
+
+    // // test mix
+    // servo_9.StartNewSequence();
+    // servo_9.setAngleSpeed(60, 1);
+    // servo_9.setAngleDuration(180, 1000);
+    // servo_9.addDelayDuration(1000);
+    // servo_9.setAngleSpeed(30, 7);
+
+    // servo_9.SetRepeats(5);
+}
+
+void loop()
+{
+
     servo_9.Update();
     servo_10.Update();
     servo_11.Update();
-  `;
-  return code;
-};
-
-
-
-
-
-
-
-
-
-
-
-
+}
