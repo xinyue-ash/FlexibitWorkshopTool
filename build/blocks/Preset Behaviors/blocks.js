@@ -70,7 +70,7 @@ Blockly.Blocks["breathing_preiod_angle_cycle"] = {
 
     if (angleBlock && angleBlock.type === "math_number") {
       const angleValue = parseFloat(angleBlock.getFieldValue("NUM"));
-      if (angleValue < 0 || angleValue > 180 || isNaN(angleValue)) {
+      if (angleValue <= 0 || angleValue > 180 || isNaN(angleValue)) {
         invalidAngle = true;
         warnings.push("Degree must be between 0 and 180.");
       }
