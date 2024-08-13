@@ -1,0 +1,33 @@
+{
+    "categoryName": "Transitions",
+    "description": "Transition between block behavior ",
+    "languages": [
+        "en"
+    ],
+    "toolboxName": "Transitions",
+    "toolbox": [
+        "<category id=\"Transitions\" name=\"Transitions\">",
+        
+        "<block type=\"delay_between_angle\">",
+        "   <value name=\"DELAY_TIME_MILLI\">",
+        "       <block type=\"math_number\">",
+        "           <field name=\"NUM\">0.5</field>",
+        "       </block>",
+        "   </value>",
+        "</block>",
+
+        "<block type=\"delay_between_behavior\">",
+        "   <value name=\"DELAY_TIME_MILLI\">",
+        "       <block type=\"math_number\">",
+        "           <field name=\"NUM\">1</field>",
+        "       </block>",
+        "   </value>",
+        "</block>",
+        "<block type=\"infinite_loop\">",
+        "</block>",
+        "<block type=\"repeat_loop\">",
+        "</block>",
+
+        "</category>"
+    ]
+}

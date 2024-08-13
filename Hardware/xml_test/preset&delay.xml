@@ -1,0 +1,108 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="multi_servo_control" id="t9A._9t5x^D%}jm+_Fzu" x="76" y="158">
+    <statement name="FB1">
+      <block type="breathing_spd_angle_cycle" id="(g0Q1?I**5.9FEVw_1]2">
+        <field name="SPEED">SLOW</field>
+        <field name="AMP">DEEP</field>
+        <value name="CYCLES">
+          <block type="math_number" id="Ew*_/e9^Z(k(36}j~?Q_">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <next>
+          <block type="breathing_interval_angle_cycle" id="T[zJ:LwixGCDz8+VDMa9">
+            <value name="INTERVAL">
+              <block type="math_number" id="s=zC21ya0F8~fVk+]I9.">
+                <field name="NUM">9</field>
+              </block>
+            </value>
+            <value name="DEGREE">
+              <block type="math_number" id="H3ge;]`)Ae!@E4DxLYv6">
+                <field name="NUM">90</field>
+              </block>
+            </value>
+            <value name="CYCLES">
+              <block type="math_number" id="i~f.4cq}K8r@F#]:[+U7">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+            <next>
+              <block type="delay_between_behavior" id="7JBQ2X0rTl%tI(?v}kD~">
+                <value name="DELAY_TIME_MILI">
+                  <block type="math_number" id="+x,vdXEu=`7jUL*_6vFD">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="breathing_preiod_angle_cycle" id=",[_N|Zh6[Gin*Z`lo8}s">
+                    <value name="PERIOD">
+                      <block type="math_number" id="GL=V8|!,a?zX^_Ns[TvI">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="DEGREE">
+                      <block type="math_number" id="31Xo;ulDYiaq~IAqHL*w">
+                        <field name="NUM">180</field>
+                      </block>
+                    </value>
+                    <value name="CYCLES">
+                      <block type="math_number" id="B*9rPw@0a}zen@eb|p`T">
+                        <field name="NUM">5</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="FB2">
+      <block type="delay_between_behavior" id="Dm%MlA5=Kp7p%m.XB:n;">
+        <value name="DELAY_TIME_MILI">
+          <block type="math_number" id="/xYJ9FJt]S=*41Nwv_AD">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <next>
+          <block type="heartbeat" id="S{Tc_)OCNItlQgI~Aq[N">
+            <field name="heartrate">Slow</field>
+            <value name="DURATION">
+              <block type="math_number" id="[BdyQgQ4zLeqi`h:cF|2">
+                <field name="NUM">10</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="FB3">
+      <block type="shake" id="]Y^Ck=ZkHQ^l%GM)=c,i">
+        <value name="CYCLES">
+          <block type="math_number" id="5)GMRc]*jVhk7vA/ILV6">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <next>
+          <block type="delay_between_behavior" id="!z`:hDMjN8(36I9[qwjv">
+            <value name="DELAY_TIME_MILI">
+              <block type="math_number" id="B6*xZ.J}!]i0=.J!s.[L">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+            <next>
+              <block type="shake" id="0=ROal6v)l;!Gdo{#x7L">
+                <value name="CYCLES">
+                  <block type="math_number" id=":x;+Vz[:N:=W@fT3w@*p">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
