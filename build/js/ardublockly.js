@@ -780,10 +780,12 @@ Ardublockly.bindClick_ = function (el, func) {
 // download Ino sketch 
 function downloadIno() {
   const arduinoCode = Ardublockly.generateArduino();
-  // Create a blob with the Arduino code, create a file-like object of immutable raw data
+
+  const userInput = prompt("Please enter file name:");
+  const fileName = userInput ? `${userInput}_sketch.ino` : 'behavior_sketch.ino';
   const blob = new Blob([arduinoCode], { type: 'text/plain' });
   const link = document.createElement('a');
-  link.download = 'sketch.ino';
+  link.download = fileName;
   link.href = window.URL.createObjectURL(blob);
   document.body.appendChild(link);
   link.click();
