@@ -58,12 +58,12 @@ Ardublockly.bindDesignEventListeners = function() {
         Ardublockly.contentHeightToggle();
       });
   // Display/hide the additional IDE buttons when mouse over/out of play button
-  $('#button_ide_large').mouseenter(function() {
-      Ardublockly.showExtraIdeButtons(true);
-  });
-  $('#ide_buttons_wrapper').mouseleave(function() {
-      Ardublockly.showExtraIdeButtons(false);
-  });
+  // $('#button_ide_large').mouseenter(function() {
+  //     Ardublockly.showExtraIdeButtons(true);
+  // });
+  // $('#ide_buttons_wrapper').mouseleave(function() {
+  //     Ardublockly.showExtraIdeButtons(false);
+  // });
 };
 
 /**
