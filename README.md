@@ -3,15 +3,13 @@
 * Rendered link: [https://flexibitworkshoptool-28j3.onrender.com/](https://flexibitworkshoptool-28j3.onrender.com/) 
 * If want to run on local machine ( for tests during development)
     1. Clone from with following command
-       
-      ```shell
-        git clone https://github.com/xinyue-ash/FlexibitWorkshopTool.git 
-        cd ardublockly 
-        git submodule update --init --recursive
-
+       ```bash
+           git clone https://github.com/xinyue-ash/FlexibitWorkshopTool.git
+           cd ardublockly
+           git submodule update --init --recursive
        ```
   
-         ** (the last command will run for a while, please allow enough time for it to finish, so that the submodule will be download in “closure-libaray” folder) **
+* (the last command will run for a while, please allow enough time for it to finish, so that the submodule will be download in “closure-libaray” folder) 
     3. Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
 
 ## How to deploy to render
@@ -70,7 +68,8 @@
    <br>
       > :bulb: **Tip:** If a block definition already exists in another category, you only need to reference it in the toolbox.
    <br>
-      > :bulb: **Tip:** If a what to change a category name, you need to change the `categoryName, `toolboxName` and `<category>` `id` and `name`.
+      > :bulb:
+          **Tip:** If a what to change a category name, you need to change the `categoryName`, `toolboxName` field and `id` and `name` attribute in `\<category\>`.
       
       
 6. **Applying Changes**
