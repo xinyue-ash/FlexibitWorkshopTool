@@ -138,9 +138,7 @@ Blockly.Blocks["set_servo_angle_time"] = {
 Blockly.Blocks["start_sequence_repeat"] = {
   init: function () {
     this.appendDummyInput().appendField("Custom Behavior: ");
-
     this.appendStatementInput("DO").setCheck("Custom").appendField("DO");
-
     this.appendValueInput("REPEATS")
       .setCheck(Blockly.Types.NUMBER.checkList)
       .appendField("repeat for");

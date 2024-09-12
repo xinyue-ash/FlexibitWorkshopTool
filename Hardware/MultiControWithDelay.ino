@@ -258,7 +258,7 @@ void setup()
     servo_9.addDelayDuration(2000);
     servo_9.setAngleDuration(120, 1000);
     // servo_9.addDelayDuration(2000);
-    servo_9.SetRepeats(5);
+     servo_9.SetRepeats(5);
 
     servo_11.StartNewSequence();
     servo_11.setAngleDuration(60, 1000); // delay between target
@@ -268,67 +268,71 @@ void setup()
     servo_11.SetRepeats(5);
 
     // test time sync + delay
-    // servo_11.StartNewSequence();
-    // servo_11.setAngleDuration(170, 500);
-    // servo_11.setAngleDuration(0, 500);
-    // servo_11.setAngleDuration(170, 500);
-    // servo_11.setAngleDuration(90, 500);
-    // servo_11.SetRepeats(5);
+  // servo_11.StartNewSequence();
+  // servo_11.setAngleDuration(170, 500);
+  // servo_11.setAngleDuration(0, 500);
+  // servo_11.setAngleDuration(170, 500);
+  // servo_11.setAngleDuration(90, 500);
+  // servo_11.SetRepeats(5);
 
-    // servo_11.StartNewSequence();
-    // servo_11.addDelayDuration(2000);
-    // servo_11.SetRepeats(1);
+  // servo_11.StartNewSequence();
+  // servo_11.addDelayDuration(2000);
+  // servo_11.SetRepeats(1);
 
-    // servo_11.StartNewSequence();
-    // servo_11.setAngleDuration(170, 500);
-    // servo_11.setAngleDuration(0, 500);
-    // servo_11.setAngleDuration(170, 500);
-    // servo_11.setAngleDuration(90, 500);
-    // servo_11.SetRepeats(5);
+  // servo_11.StartNewSequence();
+  // servo_11.setAngleDuration(170, 500);
+  // servo_11.setAngleDuration(0, 500);
+  // servo_11.setAngleDuration(170, 500);
+  // servo_11.setAngleDuration(90, 500);
+  // servo_11.SetRepeats(5);
 
-    // servo_10.StartNewSequence();
-    // servo_10.setAngleDuration(170, 1000);
-    // servo_10.setAngleDuration(0, 1000);
-    // servo_10.SetRepeats(5);
+  // servo_10.StartNewSequence();
+  // servo_10.setAngleDuration(170, 1000);
+  // servo_10.setAngleDuration(0, 1000);
+  // servo_10.SetRepeats(5);
 
-    // servo_10.StartNewSequence();
-    // servo_10.addDelayDuration(2000);
-    // servo_10.SetRepeats(1);
+  // servo_10.StartNewSequence();
+  // servo_10.addDelayDuration(2000);
+  // servo_10.SetRepeats(1);
 
-    // servo_10.StartNewSequence();
-    // servo_10.setAngleDuration(170, 1000);
-    // servo_10.setAngleDuration(0, 1000);
-    // servo_10.SetRepeats(5);
+  // servo_10.StartNewSequence();
+  // servo_10.setAngleDuration(170, 1000);
+  // servo_10.setAngleDuration(0, 1000);
+  // servo_10.SetRepeats(5);
 
-    // servo_9.StartNewSequence();
-    // servo_9.setAngleDuration(170,5000);
-    // servo_9.setAngleDuration(0,5000);
-    // servo_9.SetRepeats(1);
-    // servo_9.StartNewSequence();
-    // servo_9.addDelayDuration(2000);
-    // servo_9.SetRepeats(1);
-    // servo_9.StartNewSequence();
-    // servo_9.setAngleDuration(170,5000);
-    // servo_9.setAngleDuration(0,5000);
-    // servo_9.SetRepeats(1);
+  // servo_9.StartNewSequence();
+  // servo_9.setAngleDuration(170,5000);
+  // servo_9.setAngleDuration(0,5000);
+  // servo_9.SetRepeats(1);
+  // servo_9.StartNewSequence();
+  // servo_9.addDelayDuration(2000);
+  // servo_9.SetRepeats(1);
+  // servo_9.StartNewSequence();
+  // servo_9.setAngleDuration(170,5000);
+  // servo_9.setAngleDuration(0,5000);
+  // servo_9.SetRepeats(1);
 
-    // test time sync
-    // servo_11.StartNewSequence();
-    // servo_11.setAngleDuration(170, 500);
-    // servo_11.setAngleDuration(0, 500);
-    // servo_11.setAngleDuration(170, 500);
-    // servo_11.setAngleDuration(90, 500);
-    // servo_11.SetRepeats(25);
+    
 
-    // servo_10.StartNewSequence();
-    // servo_10.setAngleDuration(170, 1000);
-    // servo_10.setAngleDuration(0, 1000);
-    // servo_10.SetRepeats(25);
+  
+// test time sync
+  // servo_11.StartNewSequence();
+  // servo_11.setAngleDuration(170, 500);
+  // servo_11.setAngleDuration(0, 500);
+  // servo_11.setAngleDuration(170, 500);
+  // servo_11.setAngleDuration(90, 500);
+  // servo_11.SetRepeats(25);
 
-    // servo_9.StartNewSequence();
-    // servo_9.setAngleDuration(170,5000);
-    // servo_9.setAngleDuration(0,5000);
-    // servo_9.SetRepeats(5);
+
+  // servo_10.StartNewSequence();
+  // servo_10.setAngleDuration(170, 1000);
+  // servo_10.setAngleDuration(0, 1000);
+  // servo_10.SetRepeats(25);
+
+  // servo_9.StartNewSequence();
+  // servo_9.setAngleDuration(170,5000);
+  // servo_9.setAngleDuration(0,5000);
+  // servo_9.SetRepeats(5);
 
     // // test delay between sequence
     // servo_9.StartNewSequence();
