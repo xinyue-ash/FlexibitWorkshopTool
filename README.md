@@ -1,17 +1,23 @@
 ## How to run the program 
 2 ways:
 * Rendered link: [https://flexibitworkshoptool-28j3.onrender.com/](https://flexibitworkshoptool-28j3.onrender.com/) 
-* If want to run on local machine
+* If want to run on local machine ( for tests during development)
     1. Clone from with following command
-      ```
-        git clone https://github.com/xinyue-ash/FlexibitWorkshopTool.git
-        cd ardublockly
+       
+      ```shell
+        git clone https://github.com/xinyue-ash/FlexibitWorkshopTool.git 
+        cd ardublockly 
         git submodule update --init --recursive
-      ```
-         -   **(the last command will run for a while, please allow enough time for it to finish, so that the submodule will be download in “closure-libaray” folder)**
-    2. Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
 
+       ```
+  
+         ** (the last command will run for a while, please allow enough time for it to finish, so that the submodule will be download in “closure-libaray” folder) **
+    3. Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
 
+## How to deploy to render
+* there are two branches that are up-to-date and very important
+    * flask: the deloyment branch, everything pushed into this branch will automatically deloyed to Render server.
+    * master : has all the up-to-data code, serve as a back-up branch for flask (deployment branch) 
 
 ## How to add Categories and Blocks in this project: 
   A nice example from the original repo _\build\blocks\groove_ or existing categories _\build\blocks\Customization_ etc
@@ -37,7 +43,7 @@
       * need to change parameters in `.appendField()`
     * Example:
   
-    ```
+    ```C++
         Blockly.Blocks["block_123"] = {
           init: function() {
             // Block definitions go here
@@ -49,7 +55,7 @@
   To generate Arduino code for your block:
   Go to \build\blocks<category>\generator_arduino.js. You can store [Arduino APIs](#arduino-apis) for this interface as variable and return those code.
   Example: code generation in for block in example 2d 
-   ```
+   ```C++
           Blockly.Arduino[“block_123”]= function (block){
            // add your code converter logic here 
           }
@@ -61,8 +67,11 @@
       * _\build\blocks<category>\blocks_config.json_
       * _\build\blocks\blocks_data.json_
       * _\Ardublockly\ardublockly_toolbox.js (as an XML string)._
-        
+   <br>
       > :bulb: **Tip:** If a block definition already exists in another category, you only need to reference it in the toolbox.
+   <br>
+      > :bulb: **Tip:** If a what to change a category name, you need to change the `categoryName, `toolboxName` and `<category>` `id` and `name`.
+      
       
 6. **Applying Changes**
 
