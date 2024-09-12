@@ -12,10 +12,14 @@
          
 2. **To define a block:**
       Go to \build\blocks<category>\blocks.js
-    * Reference the Google Blockly tutorials on block definition for guidance.[https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks](https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks) 
-    * For help creating blocks visually, use the Blockly Block Factory.[https://technologiescollege.github.io/Blockly-at-rduino/tools/factory/block_factory.html?lang=](https://technologiescollege.github.io/Blockly-at-rduino/tools/factory/block_factory.html?lang=) 
-    * Changing color: [https://developers.google.com/blockly/guides/create-custom-blocks/block-colour?_gl=1*jezlx1*_up*MQ..*_ga*MTE3NjI3MTcxNC4xNzI2](https://developers.google.com/blockly/guides/create-custom-blocks/block-colour?_gl=1*jezlx1*_up*MQ..*_ga*MTE3NjI3MTcxNC4xNzI2MDM0MTQz*_ga_R5G2Y6GLVC*MTcyNjAzNDE0Mi4xLjEuMTcyNjAzNDE0Mi4wLjAuMA) 
-    * Changing texts on the block need to change parameters in `.appendField()`
+    * Reference the Google Blockly tutorials on block definition for guidance.
+      * [https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks](https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks) 
+    * For help creating blocks visually, use the Blockly Block Factory.
+      * [https://technologiescollege.github.io/Blockly-at-rduino/tools/factory/block_factory.html?lang=](https://technologiescollege.github.io/Blockly-at-rduino/tools/factory/block_factory.html?lang=) 
+    * Changing color:
+      * [https://developers.google.com/blockly/guides/create-custom-blocks/block-colour?_gl=1*jezlx1*_up*MQ..*_ga*MTE3NjI3MTcxNC4xNzI2](https://developers.google.com/blockly/guides/create-custom-blocks/block-colour?_gl=1*jezlx1*_up*MQ..*_ga*MTE3NjI3MTcxNC4xNzI2MDM0MTQz*_ga_R5G2Y6GLVC*MTcyNjAzNDE0Mi4xLjEuMTcyNjAzNDE0Mi4wLjAuMA) 
+    * Changing texts on the block
+      * need to change parameters in `.appendField()`
     * Example:
   
     ```
@@ -81,7 +85,7 @@ Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
         
 ### Wrapper Block (Purple Block) ###
 
-    ![alt_text](images/image1.png "image_tooltip")
+    ![alt_text](images/purple_block.jpg "image_tooltip")
 
   * This block initializes Target, Sequence, ServoControllers, and Arduino’s setup() and loop() methods. It also instantiates three ServoControllers:
 
@@ -106,6 +110,8 @@ These helper functions can be encapsulate in servo behavior blocks in _generator
 `Set how many times the sequence will repeat (called after `setAngleDuration` or `setAngleSpeed`).
 5. `.addDelayDuration(int duration)
 `Stop the servo for a specified duration (ms).
+
+![alt_text](images/behavior_blocks_exp.jpg "image_tooltip")
 
 **Note:** The servo reference inside the block must use the pattern `servo__SERVO_PIN__` to allow the purple wrapper block to replace `__SERVO_PIN__` with the correct pin number.
 
