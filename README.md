@@ -47,7 +47,7 @@
     
 3. **Define Code generator:**
   To generate Arduino code for your block:
-  Go to \build\blocks<category>\generator_arduino.js.
+  Go to \build\blocks<category>\generator_arduino.js. You can store [Arduino APIs](#arduino-apis) for this interface as variable and return those code.
   Example: code generation in for block in example 2d 
    ```
           Blockly.Arduino[“block_123”]= function (block){
@@ -55,7 +55,7 @@
           }
    ```
    
-4. **Updating the Toolbox:**
+5. **Updating the Toolbox:**
 
     To add your blocks to the toolbox, update the following files with the necessary XML configurations:
       * _\build\blocks<category>\blocks_config.json_
@@ -64,7 +64,7 @@
         
       > :bulb: **Tip:** If a block definition already exists in another category, you only need to reference it in the toolbox.
       
-5. **Applying Changes**
+6. **Applying Changes**
 
     For your changes to take effect, perform a hard refresh:
     * Open the browser console with `F12`.
