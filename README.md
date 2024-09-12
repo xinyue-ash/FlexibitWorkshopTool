@@ -1,3 +1,18 @@
+## How to run the program 
+2 ways:
+* Rendered link: [https://flexibitworkshoptool-28j3.onrender.com/](https://flexibitworkshoptool-28j3.onrender.com/) 
+* If want to run on local machine
+    1. Clone from with following command
+      ```
+        git clone https://github.com/xinyue-ash/FlexibitWorkshopTool.git
+        cd ardublockly
+        git submodule update --init --recursive
+      ```
+         -   **(the last command will run for a while, please allow enough time for it to finish, so that the submodule will be download in “closure-libaray” folder)**
+    2. Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
+
+
+
 ## How to add Categories and Blocks in this project: 
   A nice example from the original repo _\build\blocks\groove_ or existing categories _\build\blocks\Customization_ etc
 
