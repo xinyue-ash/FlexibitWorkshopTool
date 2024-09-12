@@ -1,91 +1,138 @@
-# Ardublockly
-Ardublockly is a visual programming editor for Arduino. It is based on Google's [Blockly][1], which has been forked to generate [Arduino][15] code.
-
-The `ArdublocklyServer` Python package initialises a local server to be able to compile and load the Arduino code using the [Arduino IDE][2].
-
-This is all packaged in a self contained executable desktop application for Windows, Mac OS X, and Linux.
-
-![Ardublockly desktop program screenshot][desktop_screeshot]
-
-
-## Features
-* Generates Arduino code with visual drag-and-drop blocks
-* Uploads the code to an Arduino Board
-* Useful "code block warnings"
-* Compatible with a wide range of official Arduino Boards
-* Works on Windows / Linux / Mac OS X
-
-Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the [TODO.md][3] file.
-
-Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7.
+## How to run the program 
+2 ways:
+* Rendered link: [https://flexibitworkshoptool-28j3.onrender.com/](https://flexibitworkshoptool-28j3.onrender.com/) 
+* If want to run on local machine
+    1. Clone from with following command
+      ```
+        git clone https://github.com/xinyue-ash/FlexibitWorkshopTool.git
+        cd ardublockly
+        git submodule update --init --recursive
+      ```
+         -   **(the last command will run for a while, please allow enough time for it to finish, so that the submodule will be download in “closure-libaray” folder)**
+    2. Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
 
 
-## Cloning the repository
-Please note that there are submodules in the repository that need initialisation. So, to correctly clone the Ardublockly repository:
 
-```
-git clone https://github.com/carlosperate/ardublockly.git
-cd ardublockly
-git submodule update --init --recursive
-```
+## How to add Categories and Blocks in this project: 
+  A nice example from the original repo _\build\blocks\groove_ or existing categories _\build\blocks\Customization_ etc
 
+1. **Folder Setup for Categories**
+  To add a new category, follow these steps:
+    1) Create a Category Folder	Navigate to \build\blocks\ and create a folder named after your desired category. This category name will appear in the menu (e.g., “Customization” or “Preset Behaviors”).
 
-## Installing
-The desktop application is available for Windows/Mac/Linux and runs as a stand-alone executable that can be downloaded from the [Ardublockly repository releases page][4].
+    2) Inside the newly created category folder, include the following files:
+       * _blocks.js_ – Defines the blocks.
+       * _generator_arduino.js_ – Generates Arduino code for the blocks.
+       * _blocks_config.json_ – Stores block configurations.
+         
+2. **To define a block:**
+      Go to \build\blocks<category>\blocks.js
+    * Reference the Google Blockly tutorials on block definition for guidance.
+      * [https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks](https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks) 
+    * For help creating blocks visually, use the Blockly Block Factory.
+      * [https://technologiescollege.github.io/Blockly-at-rduino/tools/factory/block_factory.html?lang=](https://technologiescollege.github.io/Blockly-at-rduino/tools/factory/block_factory.html?lang=) 
+    * Changing color:
+      * [https://developers.google.com/blockly/guides/create-custom-blocks/block-colour?_gl=1*jezlx1*_up*MQ..*_ga*MTE3NjI3MTcxNC4xNzI2](https://developers.google.com/blockly/guides/create-custom-blocks/block-colour?_gl=1*jezlx1*_up*MQ..*_ga*MTE3NjI3MTcxNC4xNzI2MDM0MTQz*_ga_R5G2Y6GLVC*MTcyNjAzNDE0Mi4xLjEuMTcyNjAzNDE0Mi4wLjAuMA) 
+    * Changing texts on the block
+      * need to change parameters in `.appendField()`
+    * Example:
+  
+    ```
+        Blockly.Blocks["block_123"] = {
+          init: function() {
+            // Block definitions go here
+          }
+        };
+    ```
+    
+3. **Define Code generator:**
+  To generate Arduino code for your block:
+  Go to \build\blocks<category>\generator_arduino.js. You can store [Arduino APIs](#arduino-apis) for this interface as variable and return those code.
+  Example: code generation in for block in example 2d 
+   ```
+          Blockly.Arduino[“block_123”]= function (block){
+           // add your code converter logic here 
+          }
+   ```
+   
+5. **Updating the Toolbox:**
 
-You will also need the [Arduino IDE version 1.6.x or higher][2].
+    To add your blocks to the toolbox, update the following files with the necessary XML configurations:
+      * _\build\blocks<category>\blocks_config.json_
+      * _\build\blocks\blocks_data.json_
+      * _\Ardublockly\ardublockly_toolbox.js (as an XML string)._
+        
+      > :bulb: **Tip:** If a block definition already exists in another category, you only need to reference it in the toolbox.
+      
+6. **Applying Changes**
 
-#### Development builds
-You can also test __UNSTABLE__ development builds automatically generated every time an update is added to the GitHub repository:
+    For your changes to take effect, perform a hard refresh:
+    * Open the browser console with `F12`.
+    * Right-click the refresh button.
+    * Select "Empty Cache and Hard Reload."
 
-| Linux build         | Windows build       | Mac OS X build       |
-|:-------------------:|:-------------------:|:--------------------:|
-| [![Linux Build Status](https://circleci.com/gh/carlosperate/ardublockly/tree/master.svg?style=svg)](https://circleci.com/gh/carlosperate/ardublockly/tree/master) | [![Windows Build status](https://ci.appveyor.com/api/projects/status/t877g920hdiifc2i?svg=true)](https://ci.appveyor.com/project/carlosperate/ardublockly) | [![Mac Build Status](https://travis-ci.org/carlosperate/ardublockly.svg?branch=master)](https://travis-ci.org/carlosperate/ardublockly) |
-| [Download Link][12] | [Download Link][13] | [Download Link][14]  |
+## Arduino APIs 
 
-#### "Core version" (Python server only)
-If you prefer, the core software can be used by running only the Python server, which loads the web interface on your local browser (Chrome recommended).
+Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
 
-Full installation instructions for this version can be found in [this Github repository Wiki][5].
+### Data Structure ###
+  *  A `Target` struct stores the configuration a the atomic behavior. There are two kinds of configuration
+      * Angle, duration when useSpeed = false
+      * Angle, speed when useSpeed = true
+        
+  * A `Sequence` is a sequence of one or more atomic behavior that defined by corresponding  Target struct
+    
+  * `ServoController` Class
+    *  Manages behavior and states for each servo. Initialized with arrays of `Target`, `Sequence`, and `Servo` instances and other state variables
+         * **Main Methods:**
+            * `Attach()`
+            * `Update()`
+            * `StartNewSequence()`
+            * `SetRepeats()`
+            * `ResetSequence()`
+            * `setAngleDuration()`
+            * `setAngleSpeed()`
+            * `addDelayDuration()`
+        * **Private Helper:**
+            * `addTargetToSequence()`
+              
+        > :bulb: **Tip:** One ServoController is initialized for _EACH servo._
+        
+### Wrapper Block (Purple Block) ###
 
-The quick version: Clone this repository, initialise all submodules, and execute:
+![alt_text](image/purple_block.jpg)
 
-```
-python start.py
-```
+  * This block initializes Target, Sequence, ServoControllers, and Arduino’s setup() and loop() methods. It also instantiates three ServoControllers:
 
-This will work on Windows, Linux (including ARM) and Mac OS X, with Python >2.7 or >3.4
+    * Flexibit 1: servo_9 (pin 9)
+    * Flexibit 2: servo_10 (pin 10)
+    * Flexibit 3: servo_11 (pin 11)
 
+  * The conversion logic for this block is in: _\build\blocks\Customization\generator_arduino.js (under Blockly.Arduino['multi_servo_control'])_
+  * Note: The block replaces __SERVO_PIN__ with the actual pin number when a behavior block is placed in a Flexibit slot.
 
-## Running
-1. [Install Ardublockly][5].
-2. Install the [Arduino IDE][2] version 1.6.x or higher (latest version is always recommended).
-3. Run Ardublockly as defined in your installation method.
-3. Configure Ardublockly to locate the Arduino IDE [following these instructions][6].
+### **Atomic Behaviors**
 
+These helper functions can be encapsulate in servo behavior blocks in _generator_arduino.js_ :
 
-## Online Demos
-A demo of the latest release of Ardublockly main interface can be found in the following two links (to load the code into an Arduino it requires the full Ardublockly application to be downloaded and run on your computer):
+1. `.setAngleDuration(int angle, int duration)
+`Move the servo to a specified angle over a duration (ms).
+2. `.setAngleSpeed(int angle, int speed)
+`Move the servo to a specified angle at a speed (1 = slow, 10 = fast).
+3. `.StartNewSequence()
+`Start a behavior sequence (must be called before `setAngleDuration` or `setAngleSpeed`).
+4. `.SetRepeats(int repeatTime)
+`Set how many times the sequence will repeat (called after `setAngleDuration` or `setAngleSpeed`).
+5. `.addDelayDuration(int duration)
+`Stop the servo for a specified duration (ms).
 
-#### [Ardublockly][10]
-![WebApp screenshot responsive design][web_screenshot_responsive]
+![alt_text](image/behavior_code_exp.jpg)
 
-#### [Ardublockly classic][11]
-![WebApp screenshot][web_screenshot_classic]
+**Note:** The servo reference inside the block must use the pattern `servo__SERVO_PIN__` to allow the purple wrapper block to replace `__SERVO_PIN__` with the correct pin number.
 
-
-## Documentation
-The documentation, including installation instructions, configuration instructions, and developer information can be found in the [Ardublockly GitHub repository Wiki][7].
-
-To download the documentation you can git clone the wiki data:
-
-```
-git clone https://github.com/carlosperate/ardublockly.wiki.git
-```
-
-
+    
 ## Credit
-This project has been inspired by [BlocklyDuino][16].
+This project has been modified from https://github.com/carlosperate/ardublockly.
 
 Blockly original source is Copyright of Google Inc. [https://developers.google.com/blockly/][1]. A list of changes to the Blockly fork can be found in the [Blockly subdirectory README][17] file.
 
@@ -106,25 +153,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-
-[1]: https://developers.google.com/blockly/
-[2]: http://www.arduino.cc/en/main/software/
-[3]: TODO.md
-[4]: https://github.com/carlosperate/ardublockly/releases/
-[5]: https://github.com/carlosperate/ardublockly/wiki/Installing-Ardublockly
-[6]: https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly
-[7]: https://github.com/carlosperate/ardublockly/wiki
-[8]: https://github.com/carlosperate/ardublockly/compare/blockly-original...master
-[9]: https://github.com/carlosperate/ardublockly/blob/master/LICENSE
-[10]: http://ardublockly.embeddedlog.com/demo/index.html
-[11]: http://ardublockly.embeddedlog.com/demo/classic/index.html
-[12]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=linux/
-[13]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=windows/
-[14]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=mac/
-[15]: http://www.arduino.cc
-[16]: https://github.com/BlocklyDuino/BlocklyDuino
-[17]: blockly/README.md
-
-[desktop_screeshot]: http://carlosperate.github.io/ardublockly/images/screenshot_desktop_1.png
-[web_screenshot_responsive]: http://carlosperate.github.io/ardublockly/images/screenshot_material_all_small.jpg
-[web_screenshot_classic]: http://carlosperate.github.io/ardublockly/images/screenshot_1.png
