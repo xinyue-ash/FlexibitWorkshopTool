@@ -1,4 +1,8 @@
-## How to run the program 
+## Intro
+TODO
+
+
+## How to start the program 
 2 ways:
 * Rendered link: [https://flexibitworkshoptool-28j3.onrender.com/](https://flexibitworkshoptool-28j3.onrender.com/) 
 * If want to run on local machine ( for tests during development)
@@ -12,12 +16,8 @@
 * (the last command will run for a while, please allow enough time for it to finish, so that the submodule will be download in “closure-libaray” folder) 
     3. Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
 
-## How to deploy to render
-* there are two branches that are up-to-date and very important
-    * flask: the deloyment branch, everything pushed into this branch will automatically deloyed to Render server.
-    * master : has all the up-to-data code, serve as a back-up branch for flask (deployment branch) 
 
-## How to add Categories and Blocks in this project: 
+## How to add new Categories and Blocks: 
   A nice example from the original repo _\build\blocks\groove_ or existing categories _\build\blocks\Customization_ etc
 
 1. **Folder Setup for Categories**
@@ -52,33 +52,40 @@
 3. **Define Code generator:**
   To generate Arduino code for your block:
   Go to \build\blocks<category>\generator_arduino.js. You can store [Arduino APIs](#arduino-apis) for this interface as variable and return those code.
-  Example: code generation in for block in example 2d 
+  Example: code generation in for block in example 2d (block name (eg: `block_123`  should match the one in block defination) )
    ```C++
           Blockly.Arduino[“block_123”]= function (block){
            // add your code converter logic here 
           }
    ```
    
-5. **Updating the Toolbox:**
+4. **Add  blocks' XML defination the Toolbox:**
 
     To add your blocks to the toolbox, update the following files with the necessary XML configurations:
       * _\build\blocks<category>\blocks_config.json_
       * _\build\blocks\blocks_data.json_
       * _\Ardublockly\ardublockly_toolbox.js (as an XML string)._
-   <br>
-      > :bulb: **Tip:** If a block definition already exists in another category, you only need to reference it in the toolbox.
-   <br>
-      > :bulb:
-          **Tip:** If a what to change a category name, you need to change the `categoryName`, `toolboxName` field and `id` and `name` attribute in `\<category\>`.
+      
+        >💡 **If a block definition already exists in another category**  
+        > You only need to add XML in the toolbox, there is no need to add block defination and code generator for this block in current catogory.
+        >
+        > 💡 **If you want to change a Category name:**  
+        > If you want to change a category name, you need to change the `categoryName`, `toolboxName` field, and the `id` and `name` attributes in the `<category>` tag.
       
       
-6. **Applying Changes**
-
+6. **Test Changes:**
+    Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.
     For your changes to take effect, perform a hard refresh:
     * Open the browser console with `F12`.
     * Right-click the refresh button.
     * Select "Empty Cache and Hard Reload."
 
+## How to deploy to render
+* there are two branches that are up-to-date and very important
+    * `flask`: the deloyment branch, everything pushed into this branch will automatically deloyed to Render server.
+    * `master` : has all the up-to-data code, serve as a back-up branch for flask (deployment branch)
+ 
+      
 ## Arduino APIs 
 
 Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
@@ -88,7 +95,7 @@ Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
       * Angle, duration when useSpeed = false
       * Angle, speed when useSpeed = true
         
-  * A `Sequence` is a sequence of one or more atomic behavior that defined by corresponding  Target struct
+  * A `Sequence` is a sequence of one or more atomic behavior that defined by corresponding `Target` struct
     
   * `ServoController` Class
     *  Manages behavior and states for each servo. Initialized with arrays of `Target`, `Sequence`, and `Servo` instances and other state variables
@@ -116,8 +123,9 @@ Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
     * Flexibit 2: servo_10 (pin 10)
     * Flexibit 3: servo_11 (pin 11)
 
-  * The conversion logic for this block is in: _\build\blocks\Customization\generator_arduino.js (under Blockly.Arduino['multi_servo_control'])_
-  * Note: The block replaces __SERVO_PIN__ with the actual pin number when a behavior block is placed in a Flexibit slot.
+  * The conversion logic for this block is in: _\build\blocks\Customization\generator_arduino.js
+      * (under `Blockly.Arduino['multi_servo_control']` )_
+  * Note: The block replaces `__SERVO_PIN__` with the actual pin number when a behavior block is placed in a Flexibit slot.
 
 ### **Atomic Behaviors**
 
