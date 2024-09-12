@@ -85,7 +85,7 @@ Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
         
 ### Wrapper Block (Purple Block) ###
 
-    ![alt_text](images/purple_block.jpg "image_tooltip")
+![alt_text](image/purple_block.jpg)
 
   * This block initializes Target, Sequence, ServoControllers, and Arduino’s setup() and loop() methods. It also instantiates three ServoControllers:
 
@@ -111,7 +111,7 @@ These helper functions can be encapsulate in servo behavior blocks in _generator
 5. `.addDelayDuration(int duration)
 `Stop the servo for a specified duration (ms).
 
-![alt_text](images/behavior_blocks_exp.jpg "image_tooltip")
+![alt_text](image/behavior_code_exp.jpg)
 
 **Note:** The servo reference inside the block must use the pattern `servo__SERVO_PIN__` to allow the purple wrapper block to replace `__SERVO_PIN__` with the correct pin number.
 
