@@ -18,19 +18,19 @@ TODO
 
 
 ## How to add new Categories and Blocks: 
-  A nice example from the original repo _\build\blocks\groove_ or existing categories _\build\blocks\Customization_ etc
+  A nice example from the original repo `\build\blocks\groove` or existing categories `\build\blocks\Customization` etc
 
 1. **Folder Setup for Categories**
   To add a new category, follow these steps:
-    1) Create a Category Folder	Navigate to \build\blocks\ and create a folder named after your desired category. This category name will appear in the menu (e.g., “Customization” or “Preset Behaviors”).
+    1) Create a Category Folder	Navigate to `\build\blocks\` and create a folder named after your desired category. This category name will appear in the menu (e.g., “Customization” or “Preset Behaviors”).
 
-    2) Inside the newly created category folder, include the following files:
-       * _blocks.js_ – Defines the blocks.
-       * _generator_arduino.js_ – Generates Arduino code for the blocks.
-       * _blocks_config.json_ – Stores block configurations.
+    2) In `\build\blocks\<category>`, include the following files:
+       * `blocks.js` – Defines the blocks.
+       * `generator_arduino.js` – Generates Arduino code for the blocks.
+       * `blocks_config.json` – Stores block configurations.
          
 2. **To define a block:**
-      Go to \build\blocks<category>\blocks.js
+      Go to `\build\blocks\<category>\blocks.js`
     * Reference the Google Blockly tutorials on block definition for guidance.
       * [https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks](https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks) 
     * For help creating blocks visually, use the Blockly Block Factory.
@@ -51,8 +51,8 @@ TODO
     
 3. **Define Code generator:**
   To generate Arduino code for your block:
-  Go to \build\blocks<category>\generator_arduino.js. You can store [Arduino APIs](#arduino-apis) for this interface as variable and return those code.
-  Example: code generation in for block in example 2d (block name (eg: `block_123`  should match the one in block defination) )
+  Go to `\build\blocks\<category>\generator_arduino.js`. You can store [Arduino APIs](#arduino-apis) for this interface as variable and return those code.
+  Example: code generation in for block in example 2d (block name (eg: `block_123`  should match the one in block defination (block.js) )
    ```C++
           Blockly.Arduino[“block_123”]= function (block){
            // add your code converter logic here 
@@ -62,16 +62,21 @@ TODO
 4. **Add  blocks' XML defination the Toolbox:**
 
     To add your blocks to the toolbox, update the following files with the necessary XML configurations:
-      * _\build\blocks<category>\blocks_config.json_
-      * _\build\blocks\blocks_data.json_
-      * _\Ardublockly\ardublockly_toolbox.js (as an XML string)._
+      * `\build\blocks\<category>\blocks_config.json`
+      * `\build\blocks\blocks_data.json`
+      * `\build\ardublockly_toolbox.js`
       
-        >💡 **If a block definition already exists in another category**  
-        > You only need to add XML in the toolbox, there is no need to add block defination and code generator for this block in current catogory.
-        >
+        > 💡 **If a block definition already exists in another category**
+        > - let say if in category C2 I want to add a block "jump", but "jump" block ready have defination in category C1 (aka, has defined in all files `\build\blocks\C1\`)
+        > - Then, you only need to add XML defination of "jump" in `\build\ardublockly_toolbox.js` under category `C2` element tag , there is **no need** to add XML defination in `\build\blocks\<category>\blocks_config.json` and  `\build\blocks\blocks_data.json`
+   
+        
         > 💡 **If you want to change a Category name:**  
-        > If you want to change a category name, you need to change the `categoryName`, `toolboxName` field, and the `id` and `name` attributes in the `<category>` tag.
-      
+        > - you need to change the directory name `\build\blocks\<new_category_name>`
+        > - In `\build\blocks\<new_category_name>\block_config.json` and `\build\blocks\blocks_data.json` , need to change `categoryName`, `toolboxName` field, and the `id` and `name` attributes in the `<category>` tag in "toolbox" field to be the new category name.
+        > - In `\build\ardublockly_toolbox.js`, change the the `id` and `name` attributes in the `<category>` tag of this category
+
+Example: TODO
       
 6. **Test Changes:**
     Run `python ./start.py`. And go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser.
@@ -79,6 +84,7 @@ TODO
     * Open the browser console with `F12`.
     * Right-click the refresh button.
     * Select "Empty Cache and Hard Reload."
+
 
 ## How to deploy to render
 * there are two branches that are up-to-date and very important
@@ -89,6 +95,7 @@ TODO
 ## Arduino APIs 
 
 Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
+
 
 ### Data Structure ###
   *  A `Target` struct stores the configuration a the atomic behavior. There are two kinds of configuration
@@ -112,6 +119,7 @@ Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
             * `addTargetToSequence()`
               
         > :bulb: **Tip:** One ServoController is initialized for _EACH servo._
+
         
 ### Wrapper Block (Purple Block) ###
 
@@ -123,13 +131,13 @@ Sample Arduino Sketch is in **\Hardware\MultiControWithDelay.ino**
     * Flexibit 2: servo_10 (pin 10)
     * Flexibit 3: servo_11 (pin 11)
 
-  * The conversion logic for this block is in: _\build\blocks\Customization\generator_arduino.js
-      * (under `Blockly.Arduino['multi_servo_control']` )_
+  * The conversion logic for this block is in: `\build\blocks\Customization\generator_arduino.js`
+      * (under `Blockly.Arduino['multi_servo_control']` )
   * Note: The block replaces `__SERVO_PIN__` with the actual pin number when a behavior block is placed in a Flexibit slot.
 
 ### **Atomic Behaviors**
 
-These helper functions can be encapsulate in servo behavior blocks in _generator_arduino.js_ :
+These helper functions can be encapsulate in servo behavior blocks in `generator_arduino.js` :
 
 1. `.setAngleDuration(int angle, int duration)
 `Move the servo to a specified angle over a duration (ms).
