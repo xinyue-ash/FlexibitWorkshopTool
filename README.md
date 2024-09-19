@@ -156,7 +156,8 @@ These helper functions can be encapsulate in servo behavior blocks in `generator
 
     
 ## Credit
-This project has been modified from https://github.com/carlosperate/ardublockly.
+This project has been modified from https://github.com/carlosperate/ardublockly by https://github.com/xinyue-ash and https://github.com/jin-lee4 
+for research within UBC SPIN lab
 
 Blockly original source is Copyright of Google Inc. [https://developers.google.com/blockly/][1]. A list of changes to the Blockly fork can be found in the [Blockly subdirectory README][17] file.
 
