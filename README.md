@@ -1,3 +1,14 @@
+# Table of Contents
+1. [Intro](#Intro)
+2. [How to run the program](#How-to-run-the-program)
+3. [How to add new Categories and Blocks](#how-to-add-new-categories-and-blocks)
+4. [How to deploy to render](#how-to-deploy-to-render)
+5. [Arduino APIs](#arduino-apis)
+6. [Tooltip, input restriction, user instruction and block chaining policy](#tooltip-input-restriction-user-instruction-and-block-chaining-policy)
+7. [Credit](#credit)
+8. [License](#license) 
+
+
 ## Intro
 TODO
 
