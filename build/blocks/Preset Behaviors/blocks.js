@@ -43,7 +43,7 @@ Blockly.Blocks["breathing_preiod_angle_cycle"] = {
     this.setTooltip(
       "Create a breathing motion by specifying length and depth of each breath, and number of breaths."
     );
-    // this.setHelpUrl();
+
   },
   onchange: function (event) {
     let invalidPeriod = false;
@@ -101,7 +101,6 @@ Blockly.Blocks["breathing_preiod_angle_cycle"] = {
 // takes breathing number of cycle, angle, and preset speed
 Blockly.Blocks["breathing_spd_angle_cycle"] = {
   init: function () {
-    // .appendField(new Blockly.FieldDropdown(pinDropdownOptions), "PIN");
     this.appendDummyInput()
       .appendField("Preset Behavior: Breathe")
       .appendField(
@@ -132,7 +131,6 @@ Blockly.Blocks["breathing_spd_angle_cycle"] = {
     this.setPreviousStatement(true, "Behavior");
     this.setNextStatement(true, "Behavior");
     this.setTooltip("Breathe a specified number of times.");
-    // this.setHelpUrl();
   },
 
   onchange: function (event) {
@@ -261,7 +259,6 @@ Blockly.Blocks["shake"] = {
     this.setPreviousStatement(true, "Behavior"); // able to attech to a block before
     this.setNextStatement(true, "Behavior"); // able to attech a block after
     this.setTooltip("Shake for a specified number of times.");
-    // this.setHelpUrl();
   },
   onchange: function (event) {
     if (!this.workspace) {
@@ -327,21 +324,3 @@ Blockly.Blocks["heartbeat"] = {
     }
   },
 };
-
-// Blockly.Blocks['heartbeat_servo'] = {
-//   init: function() {
-//     this.appendDummyInput()
-//         .appendField("mimic heartbeat with servo")
-//         .appendField("BPM")
-//         .appendField(new Blockly.FieldNumber(60, 1, 300), "BPM")
-//         .appendField("duration (ms)")
-//         .appendField(new Blockly.FieldNumber(30000, 1000, 60000), "DURATION");
-//     this.setInputsInline(true);
-//     this.setPreviousStatement(true, null);
-//     this.setNextStatement(true, null);
-//     this.setColour(230);
-//     this.setTooltip("");
-//     this.setHelpUrl("");
-//   }
-
-// };
