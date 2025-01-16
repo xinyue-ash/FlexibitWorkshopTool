@@ -10,8 +10,8 @@
 var Ardublockly = Ardublockly || {};
 
 Ardublockly.TOOLBOX_XML =
-    '<xml>'
-    '<category id="Preset Behaviors" name="Preset Behaviors">' +
+    '<xml>' +
+'<category id="Preset Behaviors" name="Preset Behaviors">' +
     '   <block type=\"multi_servo_control\">' +
     '   </block>' +
 
